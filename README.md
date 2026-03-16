@@ -22,6 +22,7 @@
 Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, onde explicamos o fluxo principal de cadastro, autenticação e jornada de compra de ingressos.
 
 [![Screencast - Vem pra Arena](https://img.youtube.com/vi/bCbvHcg8d_c/0.jpg)](https://youtu.be/bCbvHcg8d_c)
+
 *Clique na imagem ou [aqui](https://youtu.be/bCbvHcg8d_c) para assistir ao vídeo no YouTube.*
 
 ## 👥 Integrantes da Equipe
@@ -32,5 +33,5 @@ Este projeto foi desenvolvido por:
 * Caliel Feijó
 * Elis Tenório
 * Eulália Albuquerque
-* Giulia Marianna
+* Giulia Ferreira
 * Sarah Cyrne
