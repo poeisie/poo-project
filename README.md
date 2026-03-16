@@ -15,7 +15,7 @@
 
 * **[Histórias de Usuário](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing):** Documento detalhado contendo os cartões, regras de negócio e cenários de validação (BDD) do projeto.
 
-* **[Visualização do Protótipo Lo-Fi](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing):** Acesso aos wireframes e fluxos de tela estruturados para a aplicação.
+* **[Visualização do Protótipo Lo-Fi](https://www.figma.com/proto/HFs8QUM9Nmq6a6zGCh67uC/Projeto-POO?node-id=0-1&t=OqRyrlnG93pjeCVs-1):** Acesso aos wireframes e fluxos de tela estruturados para a aplicação.
 
 ## 🎥 Screencast - Protótipo Lo-Fi
 
