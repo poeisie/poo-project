@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar sua conta</title>
+    <link rel="stylesheet" th:href="@{ }"/>
+</head>
+<body>
+    <div class="container">
+        <h1>Criar sua conta</h1>
+
+        <form th:action="@{/cadastro}" th:object="${usuario}" method="post">
+
+            <div class="form-grid">
+
+                <div class="coluna">
+                    <label>Insira seu nome completo</label>
+                    <input type="text" th:field="*{nomeCompleto}" placeholder="Nome Sobrenome"/>
+
+                    <label>Email</label>
+                    <input type="email" th:field="*{email}" placeholder="email@email.com"/>
+
+                    <label>Gênero</label>
+                    <div class="generos">
+                        <label><input type="checkbox" name="genero" value="Masculino"/>Masculino</label>
+                        <label><input type="checkbox" name="genero" value="Agênero"/>Agênero</label>
+                        <label><input type="checkbox" name="genero" value="Feminino"/>Feminino</label>
+                        <label><input type="checkbox" name="genero" value="Prefiro não dizer"/>Prefiro não dizer</label>
+                        <label><input type="checkbox" name="genero" value="Não Binário"/>Não Binário</label>
+                    </div>
+                </div>
+
+                <div class="coluna">
+                    <label>CPF</label>
+                    <input type="text" th:field="*{cpf}" placeholder="000.000.000-00"/>
+
+                    <label>Data de nascimento</label>
+                    <input type="date" th:field="*{dataNascimento}"/>
+
+                    <label>Senha<span>Crie uma senha forte</span></label>
+                    <input type="password" th:field="*{senha}" placeholder="••••••••"/>
+
+                    <ul class="dicas-senha">
+                        <li>Utilize letras maiúsculas e minúsculas (ex: A, b, C)</li>
+                        <li>Inclua números (ex: 1, 2, 3)</li>
+                        <li>Adicione caracteres especiais (ex: @, #, $, !, &)</li>
+                        <li>Tenha no mínimo 8 caracteres</li>
+                        <li>Evite informações pessoais como nome, data de nascimento</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <p th:if="${param.sucesso}" style="color: green">Conta criada com sucesso!</p>
+
+            <button type="submit">Criar Conta</button>
+
+        </form>
+    </div>
+</body>
+</html>
