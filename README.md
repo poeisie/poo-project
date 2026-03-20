@@ -15,13 +15,14 @@
 
 * **[Histórias de Usuário](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing):** Documento detalhado contendo os cartões, regras de negócio e cenários de validação (BDD) do projeto.
 
-* **[Visualização do Protótipo Lo-Fi](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing):** Acesso aos wireframes e fluxos de tela estruturados para a aplicação.
+* **[Visualização do Protótipo Lo-Fi](https://www.figma.com/proto/HFs8QUM9Nmq6a6zGCh67uC/Projeto-POO?node-id=0-1&t=OqRyrlnG93pjeCVs-1):** Acesso aos wireframes e fluxos de tela estruturados para a aplicação.
 
 ## 🎥 Screencast - Protótipo Lo-Fi
 
 Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, onde explicamos o fluxo principal de cadastro, autenticação e jornada de compra de ingressos.
 
 [![Screencast - Vem pra Arena](https://img.youtube.com/vi/bCbvHcg8d_c/0.jpg)](https://youtu.be/bCbvHcg8d_c)
+
 *Clique na imagem ou [aqui](https://youtu.be/bCbvHcg8d_c) para assistir ao vídeo no YouTube.*
 
 ## 👥 Integrantes da Equipe
@@ -32,5 +33,5 @@ Este projeto foi desenvolvido por:
 * Caliel Feijó
 * Elis Tenório
 * Eulália Albuquerque
-* Giulia Marianna
+* Giulia Ferreira
 * Sarah Cyrne
