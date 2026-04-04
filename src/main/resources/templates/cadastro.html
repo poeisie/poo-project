@@ -15,7 +15,7 @@
     <span th:text="${erroDuplicidade}"></span> <a th:href="@{/login}">Fazer login</a>
 </div>
 
-<form th:action="@{/cadastro}" th:object="${usuarioCadastroDTO}" method="post">
+<form th:action="@{/cadastro}" th:object="${usuarioDTO}" method="post">
     <div>
         <label>Nome:</label>
         <input type="text" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'input-error' : ''" />
@@ -45,7 +45,7 @@
 </form>
 
 <script>
-    // Cenário 2: Ícone de check verde dinâmico no frontend
+    
     function validarSenha() {
         const senha = document.getElementById('senha').value;
         const check = document.getElementById('checkSenha');
