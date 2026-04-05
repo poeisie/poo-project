@@ -1,0 +1,21 @@
+.login-page {
+    height: 100vh;
+    background-image: url("/images/estadio.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.login-container {
+    width: 350px;
+    margin-right: 80px;
+}
+
+.decor-square {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: rgba(40,100,180,0.7);
+    border-radius: 20px;
+}
