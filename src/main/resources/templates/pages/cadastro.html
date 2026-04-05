@@ -2,16 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Cadastro - Arena Pernambuco</title>
-    <style>
-        .error { color: red; font-size: 0.9em; }
-        .input-error { border: 1px solid red; }
-        .success-icon { color: green; display: none; }
-    </style>
 </head>
 <body>
 <h2>Criar Conta</h2>
 
-<div th:if="${erroDuplicidade}" style="color: red; margin-bottom: 15px;">
+<div th:if="${erroDuplicidade}">
     <span th:text="${erroDuplicidade}"></span> <a th:href="@{/login}">Fazer login</a>
 </div>
 

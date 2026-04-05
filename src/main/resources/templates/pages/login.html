@@ -6,9 +6,9 @@
 <body>
 <h2>Login</h2>
 
-<div th:if="${param.error}" style="color: red;">Usuário ou senha inválidos.</div>
-<div th:if="${param.logout}" style="color: green;">Você saiu com sucesso.</div>
-<div th:if="${param.cadastrado}" style="color: green;">Cadastro realizado! Faça login.</div>
+<div th:if="${param.error}">Usuário ou senha inválidos.</div>
+<div th:if="${param.logout}">Você saiu com sucesso.</div>
+<div th:if="${param.cadastrado}">Cadastro realizado! Faça login.</div>
 
 <form th:action="@{/login}" method="post">
     <div>
