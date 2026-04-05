@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Explorar Eventos - Arena Pernambuco</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding: 40px; }
+        .header { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: auto; margin-bottom: 30px; }
+        .btn-criar { background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .btn-criar:hover { background-color: #218838; }
+
+        /* Grid de cartões de eventos */
+        .grid-eventos { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
+
+        .card { background: white; border-radius: 10px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #0056b3; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+
+        .categoria-badge { background: #e9ecef; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; color: #495057; display: inline-block; margin-bottom: 15px; }
+        .titulo { font-size: 22px; margin: 0 0 15px 0; color: #333; }
+        .info-linha { color: #555; margin-bottom: 8px; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+        .data-destaque { color: #dc3545; font-weight: bold; }
+        .descricao { color: #666; font-size: 14px; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; line-height: 1.5; }
+
+        .empty-state { text-align: center; padding: 50px; background: white; border-radius: 10px; color: #666; max-width: 1000px; margin: auto; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🗓️ Eventos na Arena</h1>
+
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/novo}" class="btn-criar">+ Criar Evento</a>
+</div>
+
+<div class="grid-eventos">
+
+    <div class="card" th:each="evento : ${eventos}">
+        <span class="categoria-badge" th:text="${evento.categorias}">Categoria</span>
+        <h2 class="titulo" th:text="${evento.nome}">Título do Evento</h2>
+
+        <div class="info-linha data-destaque">
+            📅 <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span>
+            ⏰ <span th:text="${evento.horario}"></span>
+        </div>
+
+        <div class="info-linha">
+            🎟️ <strong>Vagas:</strong> <span th:text="${evento.capacidadeMaximaParticipantes}"></span> pessoas
+        </div>
+
+        <div class="descricao" th:text="${evento.descricao}">Descrição curtinha aqui...</div>
+    </div>
+
+</div>
+
+<div class="empty-state" th:if="${#lists.isEmpty(eventos)}">
+    <h2>Nenhum evento programado 😢</h2>
+    <p>Ainda não temos eventos confirmados. Fique de olho, em breve novidades!</p>
+</div>
+
+</body>
+</html>

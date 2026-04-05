@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastro - Arena Pernambuco</title>
+    <style>
+        .error { color: red; font-size: 0.9em; }
+        .input-error { border: 1px solid red; }
+        .success-icon { color: green; display: none; }
+    </style>
+</head>
+<body>
+<h2>Criar Conta</h2>
+
+<div th:if="${erroDuplicidade}" style="color: red; margin-bottom: 15px;">
+    <span th:text="${erroDuplicidade}"></span> <a th:href="@{/login}">Fazer login</a>
+</div>
+
+<form th:action="@{/cadastro}" th:object="${usuarioDTO}" method="post">
+    <div>
+        <label>Nome:</label>
+        <input type="text" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'input-error' : ''" />
+        <span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+    </div>
+
+    <div>
+        <label>E-mail:</label>
+        <input type="email" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'input-error' : ''" />
+        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    </div>
+
+    <div>
+        <label>CPF:</label>
+        <input type="text" th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')} ? 'input-error' : ''" />
+        <span class="error" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+    </div>
+
+    <div>
+        <label>Senha:</label>
+        <input type="password" id="senha" th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? 'input-error' : ''" oninput="validarSenha()" />
+        <span id="checkSenha" class="success-icon">✔️ Senha Forte</span>
+        <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    </div>
+
+    <button type="submit">Criar Conta</button>
+</form>
+
+<script>
+    
+    function validarSenha() {
+        const senha = document.getElementById('senha').value;
+        const check = document.getElementById('checkSenha');
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+        if (regex.test(senha)) {
+            check.style.display = 'inline';
+        } else {
+            check.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

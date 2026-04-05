@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Novo Evento - Arena Pernambuco</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 5px solid #28a745;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .erro-msg {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .voltar {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #6c757d;
+            text-decoration: none;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2 style="margin-top: 0;">Criar Novo Evento</h2>
+
+    <div class="erro-msg" th:if="${erroEvento}" th:text="${erroEvento}"></div>
+
+    <form th:action="@{/eventos/criar}" th:object="${EventoDTO}" method="post">
+
+        <div class="form-group">
+            <label for="nome">Nome do Evento:</label>
+            <input type="text" id="nome" th:field="*{nome}"
+                   placeholder="Ex: Campeonato de Valorant - Edição Arena" required />
+        </div>
+
+        <div class="form-group">
+            <label for="local">Local do Evento:</label>
+            <input type="text" id="local" th:field="*{local}"
+                   placeholder="Ex: Arena Pernambuco - Sala Principal" required />
+        </div>
+
+        <div style="display: flex; gap: 15px;">
+            <div class="form-group" style="flex: 1;">
+                <label for="data">Data do Evento:</label>
+                <input type="date" id="data" th:field="*{data}" required />
+            </div>
+
+            <div class="form-group" style="flex: 1;">
+                <label for="horario">Horário:</label>
+                <input type="time" id="horario" th:field="*{horario}" required />
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 15px;">
+            <div class="form-group" style="flex: 1;">
+                <label for="categorias">Categoria:</label>
+                <select id="categorias" th:field="*{categorias}">
+                    <option value="Tecnologia">Palestras de Tecnologia</option>
+                    <option value="E-sports">Torneio de E-sports</option>
+                    <option value="Workshop">Workshop Prático</option>
+                    <option value="Hackathon">Hackathon</option>
+                    <option value="Show">Show / Apresentação</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="flex: 1;">
+                <label for="capacidadeMaximaParticipantes">Capacidade (Vagas):</label>
+                <input type="number" id="capacidadeMaximaParticipantes"
+                       th:field="*{capacidadeMaximaParticipantes}"
+                       placeholder="Ex: 500" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição Completa:</label>
+            <textarea id="descricao" th:field="*{descricao}" rows="4"
+                      placeholder="Detalhes da programação, convidados, etc..." required></textarea>
+        </div>
+
+        <button type="submit">Publicar Evento Oficial</button>
+    </form>
+
+    <a th:href="@{/eventos/listar}" class="voltar">← Voltar para a lista de eventos</a>
+</div>
+
+</body>
+</html>
