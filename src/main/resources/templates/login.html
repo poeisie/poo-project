@@ -5,26 +5,40 @@
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/login.css">
-    <title>Arena Pernambuco - Login</title>
+    <title>Vem pra Arena!</title>
 </head>
-<body class="login-page">
-<h2>Login</h2>
+<body>
+    <div class="login-page">
+        <div class="login-container">
+            <h2 class="auth-title">ENTRAR NA SUA CONTA</h2>
 
-<div th:if="${param.error}" style="color: red;">Usuário ou senha inválidos.</div>
-<div th:if="${param.logout}" style="color: green;">Você saiu com sucesso.</div>
-<div th:if="${param.cadastrado}" style="color: green;">Cadastro realizado! Faça login.</div>
+            <div th:if="${param.error}" class="alert-error">Usuário ou senha inválidos.</div>
+            <div th:if="${param.logout}" class="alert-success">Você saiu com sucesso.</div>
+            <div th:if="${param.cadastrado}" class="alert-success">Cadastro realizado! Faça login.</div>
 
-<form th:action="@{/login}" method="post">
-    <div>
-        <label>E-Mail:</label>
-        <input type="text" name="username" required/>
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label>Nome de usuário ou e-mail</label>
+                    <input type="text" name="username" placeholder="Insira seu nome de usuário ou e-mail" required/>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" name="password" placeholder="******" required/>
+                </div>
+                <div class="form-row">
+                    <label class="checkbox-group">
+                        <input type="checkbox" name="lembrar" />
+                        Mantenha-me conectado
+                    </label>
+                    <a th:href="@{/esqueci-senha}" class="forgot-password">Esqueceu sua senha?</a>
+                </div>
+                <button type="submit" class="btn-primary">Entrar</button>
+            </form>
+            <p class="auth-footer">
+                Não possui uma conta?
+                <a th:href="@{/cadastro}">Crie a sua agora mesmo.</a>
+            </p>
+        </div>
     </div>
-    <div>
-        <label>Senha:</label>
-        <input type="password" name="password" required/>
-    </div>
-    <button type="submit">Entrar</button>
-</form>
-<a th:href="@{/cadastro}">Não tem uma conta? Cadastre-se</a>
 </body>
 </html>
