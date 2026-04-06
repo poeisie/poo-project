@@ -1,0 +1,119 @@
+.cadastro-page {
+    height: 100vh;
+    background-image: url("/images/estadio.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.cadastro-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.cadastro-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    background: var(--color-card, #ffffff);
+    border-radius: 16px;
+    padding: 40px 36px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.cadastro-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-primary, #333333);
+    margin: 0 0 24px 0;
+}
+
+
+.cadastro-container label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-secondary, #555555);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.cadastro-container input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.cadastro-container input:focus {
+    border-color: var(--color-primary, #007bff);
+    outline: none;
+}
+
+
+.cadastro-container button[type="submit"] {
+    background-color: var(--color-primary, #007bff);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cadastro-container button[type="submit"]:hover {
+    background-color: var(--color-primary-hover, #0056b3);
+}
+
+
+.error {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+
+.cadastro-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--color-text-muted, #777777);
+}
+
+.cadastro-footer a {
+    color: var(--color-primary, #007bff);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cadastro-footer a:hover {
+    text-decoration: underline;
+}
+
+
+.decor-square {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(40, 100, 180, 0.7);
+    border-radius: 16px;
+}

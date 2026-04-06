@@ -4,10 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Explorar Eventos - Arena Pernambuco</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/listar-eventos.css">
+=======
+    <link rel="stylesheet" th:href="@{/css/explorar.css}" />
+>>>>>>> f3d726755ea6ccf84c737059d74a4d7582c57def
 </head>
 <body class="events-page">
 <div class="events-container">
@@ -16,6 +20,7 @@
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/novo}" class="btn-primary btn-criar">+ Criar Evento</a>
     </div>
 
+<<<<<<< HEAD
     <div class="events-grid">
 
         <div class="card" th:each="evento : ${eventos}">
@@ -25,22 +30,154 @@
         <div class="info-linha data-destaque">
             📅 <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span>
             ⏰ <span th:text="${evento.horario}"></span>
+=======
+<aside class="sidebar">
+    <div class="sidebar-profile-wrapper">
+        <div class="sidebar-profile">
+            <div class="sidebar-avatar">👤</div>
+            <div class="sidebar-profile-info">
+                <div class="name" th:text="${#authentication?.name ?: 'Nome Sobrenome'}">Nome Sobrenome</div>
+                <div class="email">email@email.com</div>
+            </div>
+>>>>>>> f3d726755ea6ccf84c737059d74a4d7582c57def
         </div>
-
-        <div class="info-linha">
-            🎟️ <strong>Vagas:</strong> <span th:text="${evento.capacidadeMaximaParticipantes}"></span> pessoas
-        </div>
-
-        <div class="descricao" th:text="${evento.descricao}">Descrição curtinha aqui...</div>
+        <button class="sidebar-toggle-btn">‹</button>
     </div>
 
-</div>
+    <div class="sidebar-section">
+        <div class="sidebar-section-header" onclick="toggleSection(this)">
+            Funcionalidades <span class="arrow">▾</span>
+        </div>
+        <div class="sidebar-section-links">
+            <a th:href="@{/eventos}">Eventos</a>
+            <a th:href="@{/meus-ingressos}">Meus Ingressos</a>
+        </div>
+    </div>
 
-<div class="empty-state" th:if="${#lists.isEmpty(eventos)}">
-    <h2>Nenhum evento programado 😢</h2>
-    <p>Ainda não temos eventos confirmados. Fique de olho, em breve novidades!</p>
-</div>
+    <div class="sidebar-section">
+        <div class="sidebar-section-header" onclick="toggleSection(this)">
+            Configurações <span class="arrow">▾</span>
+        </div>
+        <div class="sidebar-section-links">
+            <a th:href="@{/conta}">Configurações da conta</a>
+            <a th:href="@{/notificacoes}">Notificações</a>
+        </div>
+    </div>
 
+<<<<<<< HEAD
 </div>
+=======
+    <div class="sidebar-section">
+        <div class="sidebar-section-header" onclick="toggleSection(this)">
+            Legal <span class="arrow">▾</span>
+        </div>
+        <div class="sidebar-section-links">
+            <a th:href="@{/termos}">Termos de uso</a>
+            <a th:href="@{/privacidade}">Política de privacidade</a>
+        </div>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-section-header" onclick="toggleSection(this)">
+            Suporte <span class="arrow">▾</span>
+        </div>
+        <div class="sidebar-section-links">
+            <a th:href="@{/faq}">Central de ajuda/FAQ</a>
+            <a th:href="@{/contato}">Fale Conosco</a>
+        </div>
+    </div>
+</aside>
+
+<main class="main">
+
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/novo}" class="btn-criar">+ Criar Evento</a>
+
+    <p class="secao-titulo">EXPLORE POR <span>#COLEÇÕES</span></p>
+    <div class="colecoes-wrapper">
+        <div class="colecoes-scroll">
+            <div class="colecao-item"><div class="icon">🎵</div><div class="label">Festas e Shows</div></div>
+            <div class="colecao-item"><div class="icon">🎭</div><div class="label">Teatros e Espetáculos</div></div>
+            <div class="colecao-item"><div class="icon">🎤</div><div class="label">Stand up Comedy</div></div>
+            <div class="colecao-item"><div class="icon">👟</div><div class="label">Esportes</div></div>
+            <div class="colecao-item"><div class="icon">🗺️</div><div class="label">Passeios e Tours</div></div>
+            <div class="colecao-item"><div class="icon">🎙️</div><div class="label">Congressos e Palestras</div></div>
+            <div class="colecao-item"><div class="icon">🧸</div><div class="label">Infantil</div></div>
+            <div class="colecao-item"><div class="icon">🛍️</div><div class="label">Eventos com loja</div></div>
+        </div>
+        <div class="colecoes-nav">›</div>
+    </div>
+
+    <div class="secao-eventos">
+        <p class="secao-titulo">EVENTOS <span>#ESSA SEMANA</span></p>
+
+        <div class="grid-eventos" th:if="${not #lists.isEmpty(eventosSemana)}">
+            <div class="card" th:each="evento : ${eventosSemana}">
+                <div class="card-img">
+                    <img th:if="${evento.imagemUrl != null}" th:src="${evento.imagemUrl}" th:alt="${evento.nome}" />
+                    <div class="card-img-placeholder" th:if="${evento.imagemUrl == null}">VEM<br>·PRA·<br>ARENA</div>
+                    <span class="badge-esgotando" th:if="${evento.ingressosEsgotando}">Ingressos esgotando</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
+                    <div class="card-badges">
+                        <span class="cat-badge"
+                              th:each="cat,i : ${evento.categorias}"
+                              th:classappend="'cat-' + ${(i.index % 5) + 1}"
+                              th:text="${cat}">Categoria</span>
+                    </div>
+                    <div class="card-info">
+                        <span th:text="${evento.endereco}">Rua endereço, bairro, Recife/PE</span><br>
+                        <span th:text="${#temporals.format(evento.data, 'dd de MMM. de yyyy')}">15 de Mar. de 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-state" th:if="${#lists.isEmpty(eventosSemana)}">
+            <p>Nenhum evento esta semana 😢</p>
+        </div>
+    </div>
+
+    <div class="secao-eventos">
+        <p class="secao-titulo">EVENTOS <span>#COM O SEU PERFIL</span></p>
+
+        <div class="grid-eventos" th:if="${not #lists.isEmpty(eventosRecomendados)}">
+            <div class="card" th:each="evento : ${eventosRecomendados}">
+                <div class="card-img">
+                    <img th:if="${evento.imagemUrl != null}" th:src="${evento.imagemUrl}" th:alt="${evento.nome}" />
+                    <div class="card-img-placeholder" th:if="${evento.imagemUrl == null}">VEM<br>·PRA·<br>ARENA</div>
+                    <span class="badge-esgotando" th:if="${evento.ingressosEsgotando}">Ingressos esgotando</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
+                    <div class="card-badges">
+                        <span class="cat-badge"
+                              th:each="cat,i : ${evento.categorias}"
+                              th:classappend="'cat-' + ${(i.index % 5) + 1}"
+                              th:text="${cat}">Categoria</span>
+                    </div>
+                    <div class="card-info">
+                        <span th:text="${evento.endereco}">Rua endereço, bairro, Recife/PE</span><br>
+                        <span th:text="${#temporals.format(evento.data, 'dd de MMM. de yyyy')}">15 de Mar. de 2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-state" th:if="${#lists.isEmpty(eventosRecomendados)}">
+            <p>Nenhum evento disponível ainda 😢</p>
+        </div>
+    </div>
+
+</main>
+
+<script>
+    function toggleSection(header) {
+        header.classList.toggle('collapsed');
+        const links = header.nextElementSibling;
+        links.style.display = links.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+>>>>>>> f3d726755ea6ccf84c737059d74a4d7582c57def
 </body>
 </html>
