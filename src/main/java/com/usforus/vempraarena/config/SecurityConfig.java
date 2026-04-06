@@ -17,7 +17,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         // 1. A MÁGICA ACONTECE AQUI: Liberando as rotas públicas
-                        .requestMatchers("/cadastro", "/css/**", "/js/**", "/images/**", "/error").permitAll()
+                        .requestMatchers("/login", "/cadastro", "/eventos/listar", "/css/**", "/js/**", "/images/**", "/error").permitAll()
 
                         // 2. Qualquer outra rota (como /home) vai exigir login
                         .anyRequest().authenticated()
