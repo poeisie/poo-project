@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class EventoController {
         this.eventoService = eventoService;
     }
 
-    @GetMapping("/criar")
+    @GetMapping({"/criar", "/novo"})
     public String mostrarFormularioCriacao(Model model) {
         model.addAttribute("EventoDTO", new EventoDTO());
         return "criar-evento";
@@ -45,7 +46,9 @@ public class EventoController {
     }
 
     @GetMapping("/listar")
-    public String listarEvento(Model model){
+    public String listarEvento(Model model, Authentication authentication) {
+    Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
+    model.addAttribute("nomeUsuario", usuario.getName());
         List<Evento> eventos = eventoService.listarEvento();
         model.addAttribute("eventos", eventos);
         return "listar-eventos";
