@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/register.css">
     <title>Cadastro - Arena Pernambuco</title>
     <style>
         .error { color: red; font-size: 0.9em; }
@@ -8,55 +12,90 @@
         .success-icon { color: green; display: none; }
     </style>
 </head>
-<body>
-<h2>Criar Conta</h2>
+<body class="register-page">
+    <div class="register-page__overlay"></div>
+    <div class="register-card">
+        <h2 class="auth-title">Crie sua conta</h2>
 
-<div th:if="${erroDuplicidade}" style="color: red; margin-bottom: 15px;">
-    <span th:text="${erroDuplicidade}"></span> <a th:href="@{/login}">Fazer login</a>
-</div>
+        <div th:if="${erroDuplicidade}" class="alert-error">
+            <span th:text="${erroDuplicidade}"></span>
+            <a th:href="@{/login}">Fazer login</a>
+        </div>
 
-<form th:action="@{/cadastro}" th:object="${usuarioCadastroDTO}" method="post">
-    <div>
-        <label>Nome:</label>
-        <input type="text" th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? 'input-error' : ''" />
-        <span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        <form th:action="@{/cadastro}" th:object="${usuarioCadastroDTO}" method="post">
+            <div class="form-group">
+                <label>Insira seu nome completo</label>
+                <input type="text" th:field="*{nome}" placeholder="Nome Sobrenome" th:classappend="${#fields.hasErrors('nome')} ? 'input-error' : ''" />
+                <span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+            </div>
+
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" th:field="*{email}" placeholder="seu@email.com" th:classappend="${#fields.hasErrors('email')} ? 'input-error' : ''" />
+                <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+
+            <div class="form-group">
+                <label>CPF</label>
+                <input type="text" th:field="*{cpf}" placeholder="•••.•••.•••-••" th:classappend="${#fields.hasErrors('cpf')} ? 'input-error' : ''" />
+                <span class="error" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Senha</label>
+                <span class="label-hint">Crie uma senha forte</span>
+                <input type="password" id="senha" th:field="*{password}" placeholder="••••••" th:classappend="${#fields.hasErrors('password')} ? 'input-error' : ''" oninput="validarSenha()" />
+                <span id="checkSenha" class="success-icon">✔️ Senha Forte</span>
+                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                <ul class="password-hints">
+                    <li>Utilize letras maiúsculas e minúsculas (ex: A, b, C).</li>
+                    <li>Inclua números (ex: 1, 2, 3).</li>
+                    <li>Adicione caracteres especiais (ex: @, #, $, !, &amp;).</li>
+                    <li>Tenha no mínimo 8 caracteres.</li>
+                    <li>Evite informações pessoais como nome, data de nascimento ou sequências óbvias (1234, senha).</li>
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <label>Confirmação de Senha</label>
+                <input type="password" id="confirmacaoSenha" placeholder="••••••" oninput="validarConfirmacao()" />
+                <span id="erroConfirmacao" class="error" style="display:none;">As senhas não coincidem.</span>
+            </div>
+
+            <button type="submit" class="btn-primary">Criar Conta</button>
+        </form>
+
+        <p class="auth-footer">
+            Já possui conta? <a th:href="@{/login}">Faça login</a>
+        </p>
     </div>
 
-    <div>
-        <label>E-mail:</label>
-        <input type="email" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'input-error' : ''" />
-        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-    </div>
-
-    <div>
-        <label>CPF:</label>
-        <input type="text" th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')} ? 'input-error' : ''" />
-        <span class="error" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
-    </div>
-
-    <div>
-        <label>Senha:</label>
-        <input type="password" id="senha" th:field="*{password}" th:classappend="${#fields.hasErrors('password')} ? 'input-error' : ''" oninput="validarSenha()" />
-        <span id="checkSenha" class="success-icon">✔️ Senha Forte</span>
-        <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-    </div>
-
-    <button type="submit">Criar Conta</button>
 </form>
 
-<script>
-    
-    function validarSenha() {
-        const senha = document.getElementById('senha').value;
-        const check = document.getElementById('checkSenha');
-        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    <script>
+        function validarSenha() {
+            const senha = document.getElementById('senha').value;
+            const check = document.getElementById('checkSenha');
+            const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$!&])[A-Za-z\d@#$!&]{8,}$/;
 
-        if (regex.test(senha)) {
-            check.style.display = 'inline';
-        } else {
-            check.style.display = 'none';
+            if (regex.test(senha)) {
+                check.style.display = 'inline';
+            } else {
+                check.style.display = 'none';
+            }
         }
-    }
-</script>
+
+        function validarConfirmacao() {
+            const senha = document.getElementById('senha').value;
+            const confirmacao = document.getElementById('confirmacaoSenha').value;
+            const erro = document.getElementById('erroConfirmacao');
+
+            if (confirmacao.length > 0 && senha !== confirmacao) {
+                erro.style.display = 'block';
+            } else {
+                erro.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

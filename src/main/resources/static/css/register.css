@@ -1,0 +1,100 @@
+.register-page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 80px;
+    background-image: url("/images/estadio.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.register-page__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 0;
+}
+
+.register-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 380px;
+    background: var(--color-card);
+    border-radius: var(--border-radius-lg);
+    padding: 40px 32px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-title {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-primary);
+    margin: 0 0 32px 0;
+}
+
+.register-card .form-group {
+    margin-bottom: 20px;
+}
+
+.password-hints {
+    margin: 12px 0 0;
+    padding-left: 20px;
+    color: var(--color-text-secondary);
+    list-style: disc;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.password-hints li {
+    margin-bottom: 6px;
+}
+
+.label-hint {
+    display: block;
+    margin: 8px 0 6px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+}
+
+.error {
+    display: block;
+    margin-top: 6px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.auth-footer a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.alert-error {
+    margin-bottom: 22px;
+}
+
+.register-card button {
+    margin-top: 12px;
+    width: 100%;
+}
+
