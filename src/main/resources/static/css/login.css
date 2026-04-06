@@ -1,9 +1,8 @@
 .login-page {
     height: 100vh;
-    background-image: url("/images/estadio.jpg");
+    background-image: url("/images/estadio2.gif");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     display: flex;
     justify-content: flex-end;
     align-items: center;
