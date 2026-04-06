@@ -4,14 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Explorar Eventos - Arena Pernambuco</title>
-<<<<<<< HEAD
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/components.css">
-    <link rel="stylesheet" href="/css/listar-eventos.css">
-=======
-    <link rel="stylesheet" th:href="@{/css/explorar.css}" />
->>>>>>> f3d726755ea6ccf84c737059d74a4d7582c57def
+    <link rel="stylesheet" th:href="@{/css/listar-eventos.css}" />
 </head>
 <body class="events-page">
 <div class="events-container">
@@ -20,17 +13,6 @@
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/novo}" class="btn-primary btn-criar">+ Criar Evento</a>
     </div>
 
-<<<<<<< HEAD
-    <div class="events-grid">
-
-        <div class="card" th:each="evento : ${eventos}">
-            <span class="categoria-badge" th:text="${evento.categorias}">Categoria</span>
-        <h2 class="titulo" th:text="${evento.nome}">Título do Evento</h2>
-
-        <div class="info-linha data-destaque">
-            📅 <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span>
-            ⏰ <span th:text="${evento.horario}"></span>
-=======
 <aside class="sidebar">
     <div class="sidebar-profile-wrapper">
         <div class="sidebar-profile">
@@ -39,7 +21,6 @@
                 <div class="name" th:text="${#authentication?.name ?: 'Nome Sobrenome'}">Nome Sobrenome</div>
                 <div class="email">email@email.com</div>
             </div>
->>>>>>> f3d726755ea6ccf84c737059d74a4d7582c57def
         </div>
         <button class="sidebar-toggle-btn">‹</button>
     </div>
@@ -64,9 +45,6 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-</div>
-=======
     <div class="sidebar-section">
         <div class="sidebar-section-header" onclick="toggleSection(this)">
             Legal <span class="arrow">▾</span>
@@ -178,6 +156,5 @@
         links.style.display = links.style.display === 'none' ? 'block' : 'none';
     }
 </script>
->>>>>>> f3d726755ea6ccf84c737059d74a4d7582c57def
 </body>
 </html>
