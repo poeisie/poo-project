@@ -25,6 +25,26 @@ Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, 
 
 *Clique na imagem ou [aqui](https://youtu.be/bCbvHcg8d_c) para assistir ao vídeo no YouTube.*
 
+# Entrega 2:
+
+* **[Screencast do uso do sistema](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing):** No vídeo é apresentado o uso do sistema com duas histórias implementadas, sendo elas as histórias "3. Visualização e Filtros de Eventos" e "9. Cadastro de Novos Eventos (Admin)" descritas na documentação anexada na entrega 1.
+
+* **[Issue/Bug Tracker](https://docs.google.com/spreadsheets/d/1F9LqVv9y9CrThgpUzaNE2ApuoM_dKlN1JgAWgZU_HiA/edit?usp=sharing):** Acesso ao bug tracker, onde é apresentado o levantamento de bugs do sistema com vinte itens documentados, sendo eles as ocorrências VPA-1 a VPA-20 descritas na planilha anexada.
+
+## 🎥 Screencast - Uso do Sistema
+
+Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, onde explicamos o fluxo principal de cadastro, autenticação e jornada de compra de ingressos.
+
+[![Screencast - Vem pra Arena](https://img.youtube.com/vi/bCbvHcg8d_c/0.jpg)](https://youtu.be/bCbvHcg8d_c)
+
+*Clique na imagem ou [aqui](https://youtu.be/bCbvHcg8d_c) para assistir ao vídeo no YouTube.*
+
+## 🎥 Issue/Bug Tracker
+
+Abaixo você encontra o uso do sistema com as histórias "3. Visualização e Filtros de Eventos" e "9. Cadastro de Novos Eventos (Admin)" implementadas.
+
+![Bug Tracker - VemPraArena - Projeto POO - Sheet1](https://github.com/user-attachments/assets/1bb7dd9e-9f2e-4543-825b-d49ba4b4cbf4)
+
 ## 👥 Integrantes da Equipe
 
 Este projeto foi desenvolvido por:
