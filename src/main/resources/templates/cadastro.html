@@ -29,14 +29,14 @@
 
                 <div>
                     <label for="cpf">CPF</label>
-                    <input type="text" id="cpf" th:field="*{cpf}" placeholder="•••.•••.•••-••" th:classappend="${#fields.hasErrors('cpf')} ? 'input-error' : ''" />
+                    <input type="text" id="cpf" th:field="*{cpf}" placeholder="***.***.***-**" th:classappend="${#fields.hasErrors('cpf')} ? 'input-error' : ''" />
                     <span class="error" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
                 </div>
 
                 <div>
                     <label for="senha">Senha</label>
                     <span class="label-hint">Crie uma senha forte</span>
-                    <input type="password" id="senha" th:field="*{password}" placeholder="••••••" th:classappend="${#fields.hasErrors('password')} ? 'input-error' : ''" oninput="validarSenha()" />
+                    <input type="password" id="senha" th:field="*{password}" placeholder="******" th:classappend="${#fields.hasErrors('password')} ? 'input-error' : ''" oninput="validarSenha()" />
                     <span id="checkSenha" class="success-icon">✔️ Senha Forte</span>
                     <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                     <ul class="password-hints">
