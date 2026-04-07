@@ -2,10 +2,10 @@ package com.usforus.vempraarena.controller;
 
 import com.usforus.vempraarena.dto.EventoDTO;
 import com.usforus.vempraarena.entities.Evento;
-import com.usforus.vempraarena.service.EventoService;
-import com.usforus.vempraarena.service.UsuarioService;
 import com.usforus.vempraarena.entities.Usuario;
 import com.usforus.vempraarena.repository.UsuarioRepository;
+import com.usforus.vempraarena.service.EventoService;
+import com.usforus.vempraarena.service.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,12 +53,8 @@ public class EventoController {
     public String listarEvento(Model model, Authentication authentication) {
         Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
         model.addAttribute("nomeUsuario", usuario.getName());
-        
-        List<Evento> todosEventos = eventoService.listarEvento();
-        
-        model.addAttribute("eventosSemana", todosEventos);
-        model.addAttribute("eventosRecomendados", todosEventos); 
-        
+        List<Evento> eventos = eventoService.listarEvento();
+        model.addAttribute("eventos", eventos);
         return "listar-eventos";
     }
 
