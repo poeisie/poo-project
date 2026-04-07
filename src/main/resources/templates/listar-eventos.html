@@ -9,6 +9,21 @@
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/listar-eventos.css">
 </head>
+<body class="events-page">
+<div class="events-container">
+    <div class="events-header">
+        <h1>🗓️ Eventos na Arena</h1>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/criar}" class="btn-primary btn-criar">+ Criar Evento</a>
+    </div>
+
+<aside class="sidebar">
+    <div class="sidebar-profile-wrapper">
+        <div class="sidebar-profile">
+            <div class="sidebar-avatar">👤</div>
+            <div class="sidebar-profile-info">
+                <div class="name" th:text="${nomeUsuario ?: 'Nome Sobrenome'}">Nome Sobrenome</div>
+                <div class="email">email@email.com</div>
+            </div>
 <body class="sidebar-page">
 
 <aside class="sidebar">
