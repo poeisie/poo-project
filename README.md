@@ -27,7 +27,7 @@ Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, 
 
 # Entrega 2:
 
-* **[Screencast do uso do sistema](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing):** No vídeo é apresentado o uso do sistema com duas histórias implementadas, sendo elas as histórias "3. Visualização e Filtros de Eventos" e "9. Cadastro de Novos Eventos (Admin)" descritas na documentação anexada na entrega 1.
+* **[Screencast do uso do sistema](https://youtu.be/-SNA-cdIQr8):** No vídeo é apresentado o uso do sistema com duas histórias implementadas, sendo elas as histórias "3. Visualização e Filtros de Eventos" e "9. Cadastro de Novos Eventos (Admin)" descritas na documentação anexada na entrega 1.
 
 * **[Issue/Bug Tracker](https://docs.google.com/spreadsheets/d/1F9LqVv9y9CrThgpUzaNE2ApuoM_dKlN1JgAWgZU_HiA/edit?usp=sharing):** Acesso ao bug tracker, onde é apresentado o levantamento de bugs do sistema com vinte itens documentados, sendo eles as ocorrências VPA-1 a VPA-20 descritas na planilha anexada.
 
@@ -35,9 +35,9 @@ Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, 
 
 Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, onde explicamos o fluxo principal de cadastro, autenticação e jornada de compra de ingressos.
 
-[![Screencast - Vem pra Arena](https://img.youtube.com/vi/bCbvHcg8d_c/0.jpg)](https://youtu.be/bCbvHcg8d_c)
+[![Screencast - Vem pra Arena]https://youtu.be/-SNA-cdIQr8)
 
-*Clique na imagem ou [aqui](https://youtu.be/bCbvHcg8d_c) para assistir ao vídeo no YouTube.*
+*Clique na imagem ou [aqui](https://youtu.be/-SNA-cdIQr8) para assistir ao vídeo no YouTube.*
 
 ## 🎥 Issue/Bug Tracker
 
