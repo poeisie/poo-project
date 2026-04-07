@@ -1,160 +1,146 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
-    <link rel="stylesheet" href="/css/global.css">
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/components.css">
-    <link rel="stylesheet" href="/css/criar-eventos.css">
     <meta charset="UTF-8">
     <title>Criar Novo Evento - Arena Pernambuco</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 5px solid #28a745;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .erro-msg {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .voltar {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #6c757d;
+            text-decoration: none;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-<body class="events-page">
+<body>
 
-<aside class="sidebar">
-    <button class="sidebar-toggle-btn">«</button>
+<div class="form-container">
+    <h2 style="margin-top: 0;">Criar Novo Evento</h2>
 
-    <div class="sidebar-profile-wrapper">
-        <div class="sidebar-profile">
-            <div class="sidebar-avatar">👤</div>
-            <div class="sidebar-profile-info">
-                <div class="name" th:text="${#authentication?.name ?: 'Nome Sobrenome'}">Nome Sobrenome</div>
-                <div class="email">email@email.com</div>
-            </div>
+    <div class="erro-msg" th:if="${erroEvento}" th:text="${erroEvento}"></div>
+
+    <form th:action="@{/eventos/criar}" th:object="${EventoDTO}" method="post">
+
+        <div class="form-group">
+            <label for="nome">Nome do Evento:</label>
+            <input type="text" id="nome" th:field="*{nome}"
+                   placeholder="Ex: Campeonato de Valorant - Edição Arena" required />
         </div>
-    </div>
 
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Funcionalidades <span class="arrow">▾</span>
+        <div class="form-group">
+            <label for="local">Local do Evento:</label>
+            <input type="text" id="local" th:field="*{local}"
+                   placeholder="Ex: Arena Pernambuco - Sala Principal" required />
         </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/eventos/listar}">Eventos</a>
-            <a th:href="@{/meus-ingressos}">Meus Ingressos</a>
-        </div>
-    </div>
 
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Configurações <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/conta}">Configurações da conta</a>
-            <a th:href="@{/notificacoes}">Notificações</a>
-        </div>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Legal <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/termos}">Termos de uso</a>
-            <a th:href="@{/privacidade}">Política de privacidade</a>
-        </div>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Suporte <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/faq}">Central de ajuda/FAQ</a>
-            <a th:href="@{/contato}">Fale Conosco</a>
-        </div>
-    </div>
-</aside>
-
-<main class="main">
-
-    <a th:href="@{/eventos/listar}" class="voltar-link">
-        <span class="voltar-arrow">«</span> Voltar para <strong>Tela Principal</strong>
-    </a>
-
-    <div class="form-container">
-        <h2>Criar Novo Evento</h2>
-
-        <div class="erro-msg" th:if="${erroEvento}" th:text="${erroEvento}"></div>
-
-        <form th:action="@{/eventos/criar}" th:object="${EventoDTO}" method="post">
-
-            <div class="form-group">
-                <label for="nome">Nome do Evento</label>
-                <input type="text" id="nome" th:field="*{nome}"
-                       placeholder="Ex: Nome do Evento - Primeira Edição" />
+        <div style="display: flex; gap: 15px;">
+            <div class="form-group" style="flex: 1;">
+                <label for="data">Data do Evento:</label>
+                <input type="date" id="data" th:field="*{data}" required />
             </div>
 
-            <div class="form-group">
-                <label for="local">Local do Evento</label>
-                <select id="local" th:field="*{local}">
-                    <option value="">Arena Pernambuco - Sala 001</option>
-                    <option value="sala2">Arena Pernambuco - Sala 002</option>
-                    <option value="sala3">Arena Pernambuco - Sala 003</option>
-                    <option value="auditorio">Arena Pernambuco - Auditório Principal</option>
+            <div class="form-group" style="flex: 1;">
+                <label for="horario">Horário:</label>
+                <input type="time" id="horario" th:field="*{horario}" required />
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 15px;">
+            <div class="form-group" style="flex: 1;">
+                <label for="categorias">Categoria:</label>
+                <select id="categorias" th:field="*{categorias}">
+                    <option value="Tecnologia">Palestras de Tecnologia</option>
+                    <option value="E-sports">Torneio de E-sports</option>
+                    <option value="Workshop">Workshop Prático</option>
+                    <option value="Hackathon">Hackathon</option>
+                    <option value="Show">Show / Apresentação</option>
                 </select>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="data">Data do Evento</label>
-                    <input type="date" id="data" th:field="*{data}" />
-                </div>
-                <div class="form-group">
-                    <label for="horario">Horário</label>
-                    <input type="time" id="horario" th:field="*{horario}" />
-                </div>
+            <div class="form-group" style="flex: 1;">
+                <label for="capacidadeMaximaParticipantes">Capacidade (Vagas):</label>
+                <input type="number" id="capacidadeMaximaParticipantes"
+                       th:field="*{capacidadeMaximaParticipantes}"
+                       placeholder="Ex: 500" required />
             </div>
+        </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="categorias">Categorias</label>
-                    <div class="categorias-input-wrapper">
-                        <span class="cat-tag verde">Palestra</span>
-                        <span class="cat-tag azul">Tecnologia</span>
-                        <select id="categorias" th:field="*{categorias}">
-                            <option value="Tecnologia">Tecnologia</option>
-                            <option value="E-sports">E-sports</option>
-                            <option value="Workshop">Workshop</option>
-                            <option value="Hackathon">Hackathon</option>
-                            <option value="Show">Show</option>
-                            <option value="Palestra">Palestra</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="capacidadeMaximaParticipantes">Capacidade</label>
-                    <input type="number" id="capacidadeMaximaParticipantes"
-                           th:field="*{capacidadeMaximaParticipantes}"
-                           placeholder="0" />
-                </div>
-            </div>
+        <div class="form-group">
+            <label for="descricao">Descrição Completa:</label>
+            <textarea id="descricao" th:field="*{descricao}" rows="4"
+                      placeholder="Detalhes da programação, convidados, etc..." required></textarea>
+        </div>
 
-            <div class="form-group">
-                <label for="descricao">Descrição Completa</label>
-                <textarea id="descricao" th:field="*{descricao}" rows="6" maxlength="2000"
-                          placeholder="Descreva seu evento com detalhes para compreensão do público..."
-                          oninput="updateCounter(this)"></textarea>
-                <div class="textarea-counter">Máx.: 2000/<span id="char-count">0</span></div>
-            </div>
+        <button type="submit">Publicar Evento Oficial</button>
+    </form>
 
-            <button type="submit" class="btn-submit">Criar novo evento</button>
-
-        </form>
-    </div>
-
-</main>
-
-<script>
-    function toggleSection(header) {
-        header.classList.toggle('collapsed');
-        const links = header.nextElementSibling;
-        links.style.display = links.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function updateCounter(textarea) {
-        document.getElementById('char-count').textContent = textarea.value.length;
-    }
-</script>
+    <a th:href="@{/eventos/listar}" class="voltar">← Voltar para a lista de eventos</a>
+</div>
 
 </body>
 </html>
