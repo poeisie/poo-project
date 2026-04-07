@@ -35,7 +35,7 @@ Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, 
 
 Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, onde explicamos o fluxo principal de cadastro, autenticação e jornada de compra de ingressos.
 
-[![Screencast - Vem pra Arena]https://youtu.be/-SNA-cdIQr8)
+[![Screencast Segunda Entrega - Vem Pra Arena](https://img.youtube.com/vi/-SNA-cdIQr8/0.jpg)](https://youtu.be/-SNA-cdIQr8)
 
 *Clique na imagem ou [aqui](https://youtu.be/-SNA-cdIQr8) para assistir ao vídeo no YouTube.*
 
