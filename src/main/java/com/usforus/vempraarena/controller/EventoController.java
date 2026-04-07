@@ -4,8 +4,6 @@ import com.usforus.vempraarena.dto.EventoDTO;
 import com.usforus.vempraarena.entities.Evento;
 import com.usforus.vempraarena.service.EventoService;
 import com.usforus.vempraarena.service.UsuarioService;
-import com.usforus.vempraarena.entities.Usuario;
-import com.usforus.vempraarena.repository.UsuarioRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -22,14 +19,12 @@ import java.util.List;
 public class EventoController {
 
     private final EventoService eventoService;
-    private final UsuarioRepository usuarioRepository;
 
-    public EventoController(EventoService eventoService, UsuarioRepository usuarioRepository) {
+    public EventoController(EventoService eventoService) {
         this.eventoService = eventoService;
-        this.usuarioRepository = usuarioRepository;
     }
 
-    @GetMapping({"/criar", "/novo"})
+    @GetMapping("/criar")
     public String mostrarFormularioCriacao(Model model) {
         model.addAttribute("EventoDTO", new EventoDTO());
         return "criar-evento";
@@ -50,15 +45,9 @@ public class EventoController {
     }
 
     @GetMapping("/listar")
-    public String listarEvento(Model model, Authentication authentication) {
-        Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
-        model.addAttribute("nomeUsuario", usuario.getName());
-        
-        List<Evento> todosEventos = eventoService.listarEvento();
-        
-        model.addAttribute("eventosSemana", todosEventos);
-        model.addAttribute("eventosRecomendados", todosEventos); 
-        
+    public String listarEvento(Model model){
+        List<Evento> eventos = eventoService.listarEvento();
+        model.addAttribute("eventos", eventos);
         return "listar-eventos";
     }
 
