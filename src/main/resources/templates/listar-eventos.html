@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Explorar Eventos - Arena Pernambuco</title>
-    <link rel="stylesheet" th:href="@{/css/listar-eventos.css}" />
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/listar-eventos.css">
 </head>
 <body class="events-page">
 <div class="events-container">
@@ -21,47 +24,63 @@
                 <div class="name" th:text="${nomeUsuario ?: 'Nome Sobrenome'}">Nome Sobrenome</div>
                 <div class="email">email@email.com</div>
             </div>
+<body class="sidebar-page">
+
+<aside class="sidebar">
+    <div class="profile-area">
+        <div class="avatar">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+            </svg>
         </div>
-        <button class="sidebar-toggle-btn">‹</button>
+        <div>
+            <span class="profile-name" th:text="${#authentication?.name ?: 'Nome Sobrenome'}">Nome Sobrenome</span>
+            <span class="profile-email">email@email.com</span>
+        </div>
+        <button class="collapse-btn">«</button>
     </div>
 
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Funcionalidades <span class="arrow">▾</span>
+    <div class="menu-group">
+        <div class="group-header" onclick="toggleSection(this)">
+            Funcionalidades
+            <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/eventos}">Eventos</a>
-            <a th:href="@{/meus-ingressos}">Meus Ingressos</a>
-        </div>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Configurações <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/conta}">Configurações da conta</a>
-            <a th:href="@{/notificacoes}">Notificações</a>
-        </div>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Legal <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/termos}">Termos de uso</a>
-            <a th:href="@{/privacidade}">Política de privacidade</a>
+        <div class="menu-links">
+            <a class="menu-item" th:href="@{/eventos}">Eventos</a>
+            <a class="menu-item" th:href="@{/meus-ingressos}">Meus Ingressos</a>
         </div>
     </div>
 
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Suporte <span class="arrow">▾</span>
+    <div class="menu-group">
+        <div class="group-header" onclick="toggleSection(this)">
+            Configurações
+            <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
         </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/faq}">Central de ajuda/FAQ</a>
-            <a th:href="@{/contato}">Fale Conosco</a>
+        <div class="menu-links">
+            <a class="menu-item" th:href="@{/conta}">Configurações da conta</a>
+            <a class="menu-item" th:href="@{/notificacoes}">Notificações</a>
+        </div>
+    </div>
+
+    <div class="menu-group">
+        <div class="group-header" onclick="toggleSection(this)">
+            Legal
+            <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+        <div class="menu-links">
+            <a class="menu-item" th:href="@{/termos}">Termos de uso</a>
+            <a class="menu-item" th:href="@{/privacidade}">Política de privacidade</a>
+        </div>
+    </div>
+
+    <div class="menu-group">
+        <div class="group-header" onclick="toggleSection(this)">
+            Suporte
+            <svg class="chevron-icon" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </div>
+        <div class="menu-links">
+            <a class="menu-item" th:href="@{/faq}">Central de ajuda/FAQ</a>
+            <a class="menu-item last" th:href="@{/contato}">Fale Conosco</a>
         </div>
     </div>
 </aside>
@@ -153,7 +172,7 @@
     function toggleSection(header) {
         header.classList.toggle('collapsed');
         const links = header.nextElementSibling;
-        links.style.display = links.style.display === 'none' ? 'block' : 'none';
+        links.style.display = links.style.display === 'none' ? 'flex' : 'none';
     }
 </script>
 </body>
