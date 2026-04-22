@@ -90,22 +90,19 @@
 
             <div class="grid-eventos" th:if="${not #lists.isEmpty(eventosSemana)}">
                 <div class="card" th:each="evento : ${eventosSemana}">
-                    <div class="card-img">
-                        <img th:if="${evento.imagemUrl != null}" th:src="${evento.imagemUrl}" th:alt="${evento.nome}" />
-                        <div class="card-img-placeholder" th:if="${evento.imagemUrl == null}">VEM<br>·PRA·<br>ARENA</div>
-                        <span class="badge-esgotando" th:if="${evento.ingressosEsgotando}">Ingressos esgotando</span>
-                    </div>
                     <div class="card-body">
                         <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
+
                         <div class="card-badges">
-                        <span class="cat-badge"
-                              th:each="cat,i : ${evento.categorias}"
-                              th:classappend="'cat-' + ${(i.index % 5) + 1}"
-                              th:text="${cat}">Categoria</span>
+                            <span class="cat-badge" th:text="${evento.categorias}">Categoria</span>
                         </div>
+
                         <div class="card-info">
-                            <span th:text="${evento.endereco}">Rua endereço, bairro, Recife/PE</span><br>
-                            <span th:text="${#temporals.format(evento.data, 'dd de MMM. de yyyy')}">15 de Mar. de 2026</span>
+                            <p><strong>Local:</strong> <span th:text="${evento.local}">Local do evento</span></p>
+                            <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
+                            <p><strong>Horário:</strong> <span th:text="${#temporals.format(evento.horario, 'HH:mm')}">20:00</span></p>
+                            <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
+                            <p><strong>Capacidade máxima:</strong> <span th:text="${evento.capacidadeMaximaParticipantes}">1000</span></p>
                         </div>
                     </div>
                 </div>
@@ -121,22 +118,19 @@
 
             <div class="grid-eventos" th:if="${not #lists.isEmpty(eventosRecomendados)}">
                 <div class="card" th:each="evento : ${eventosRecomendados}">
-                    <div class="card-img">
-                        <img th:if="${evento.imagemUrl != null}" th:src="${evento.imagemUrl}" th:alt="${evento.nome}" />
-                        <div class="card-img-placeholder" th:if="${evento.imagemUrl == null}">VEM<br>·PRA·<br>ARENA</div>
-                        <span class="badge-esgotando" th:if="${evento.ingressosEsgotando}">Ingressos esgotando</span>
-                    </div>
                     <div class="card-body">
                         <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
+
                         <div class="card-badges">
-                        <span class="cat-badge"
-                              th:each="cat,i : ${evento.categorias}"
-                              th:classappend="'cat-' + ${(i.index % 5) + 1}"
-                              th:text="${cat}">Categoria</span>
+                            <span class="cat-badge" th:text="${evento.categorias}">Categoria</span>
                         </div>
+
                         <div class="card-info">
-                            <span th:text="${evento.endereco}">Rua endereço, bairro, Recife/PE</span><br>
-                            <span th:text="${#temporals.format(evento.data, 'dd de MMM. de yyyy')}">15 de Mar. de 2026</span>
+                            <p><strong>Local:</strong> <span th:text="${evento.local}">Local do evento</span></p>
+                            <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
+                            <p><strong>Horário:</strong> <span th:text="${#temporals.format(evento.horario, 'HH:mm')}">20:00</span></p>
+                            <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
+                            <p><strong>Capacidade máxima:</strong> <span th:text="${evento.capacidadeMaximaParticipantes}">1000</span></p>
                         </div>
                     </div>
                 </div>
@@ -156,5 +150,6 @@
             links.style.display = links.style.display === 'none' ? 'block' : 'none';
         }
     </script>
+</div>
 </body>
 </html>

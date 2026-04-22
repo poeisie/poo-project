@@ -51,10 +51,17 @@ public class EventoController {
 
     @GetMapping("/listar")
     public String listarEvento(Model model, Authentication authentication) {
+
         Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
         model.addAttribute("nomeUsuario", usuario.getName());
+
         List<Evento> eventos = eventoService.listarEvento();
+        List<Evento> eventosSemana = eventoService.listarEventosSemana();
+
         model.addAttribute("eventos", eventos);
+        model.addAttribute("eventosSemana", eventosSemana);
+        model.addAttribute("eventosRecomendados", eventos); // temporário
+
         return "listar-eventos";
     }
 

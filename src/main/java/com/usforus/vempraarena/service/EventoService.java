@@ -6,6 +6,7 @@ import com.usforus.vempraarena.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.DayOfWeek;
 import java.util.List;
 
 @Service
@@ -19,6 +20,13 @@ public class EventoService {
 
     public List<Evento> listarEvento(){
         return repository.findByDataGreaterThanEqualOrderByDataAsc(LocalDate.now());
+    }
+
+    public List<Evento> listarEventosSemana(){
+        LocalDate hoje = LocalDate.now();
+        LocalDate inicioSemana = hoje.with(DayOfWeek.MONDAY);
+        LocalDate fimSemana = hoje.with(DayOfWeek.SUNDAY);
+        return repository.findByDataBetweenOrderByDataAsc(inicioSemana, fimSemana);
     }
 
     // ver como lista todos os eventos(até os que passaram) pra admin

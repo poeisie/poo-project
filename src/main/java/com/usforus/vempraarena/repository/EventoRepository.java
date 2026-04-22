@@ -10,5 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Long> {
 
+
     List<Evento> findByDataGreaterThanEqualOrderByDataAsc(LocalDate dataAtual);
+
+    List<Evento> findByDataBetweenOrderByDataAsc(LocalDate inicioSemana, LocalDate fimSemana);
+
 }
