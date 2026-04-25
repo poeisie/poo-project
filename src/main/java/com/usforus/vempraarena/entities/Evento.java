@@ -34,6 +34,16 @@ public class Evento {
     @Column(nullable = false)
     private int capacidadeMaximaParticipantes;
 
+    @Column(nullable = false)
+    private Integer precoIngresso = 0;
+
+    @Column(nullable = false)
+    private Integer ingressosVendidos = 0;
+
+
+    public Integer getIngressosDisponiveis(){
+        return capacidadeMaximaParticipantes - ingressosVendidos;
+    }
 
     public Long getId(){
         return id;
@@ -97,6 +107,22 @@ public class Evento {
 
     public void setCapacidadeMaximaParticipantes(int capacidadeMaximaParticipantes) {
         this.capacidadeMaximaParticipantes = capacidadeMaximaParticipantes;
+    }
+
+    public Integer getPrecoIngresso() {
+        return precoIngresso;
+    }
+
+    public void setPrecoIngresso(Integer precoIngresso) {
+        this.precoIngresso = precoIngresso;
+    }
+
+    public Integer getIngressosVendidos() {
+        return ingressosVendidos;
+    }
+
+    public void setIngressosVendidos(Integer ingressosVendidos) {
+        this.ingressosVendidos = ingressosVendidos;
     }
 }
 
