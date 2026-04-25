@@ -13,11 +13,11 @@ public class Ingresso {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuarioId")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "evento_id")
+    @JoinColumn(name = "eventoId")
     private Evento evento;
 
     @Column(nullable = false)
