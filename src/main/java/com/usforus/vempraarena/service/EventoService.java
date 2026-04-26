@@ -60,32 +60,10 @@ public class EventoService {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Evento buscarPorId(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Evento não encontrado com o ID: " + id));
+    }
 
 }
 

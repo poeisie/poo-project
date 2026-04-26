@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprar Ingresso - Arena</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; padding: 40px; }
+        .card { background: white; padding: 30px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .erro { color: #721c24; background: #f8d7da; padding: 10px; border-radius: 5px; margin-bottom: 15px;}
+        .saldo-box { background: #e2e3e5; padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 20px; font-weight: bold; }
+        .saldo-positivo { color: #28a745; }
+        input[type="number"], select { width: 100%; box-sizing: border-box; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #0056b3; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;}
+        button:hover { background: #004494; }
+        .resumo { margin-top: 20px; padding-top: 15px; border-top: 2px dashed #eee; font-size: 18px; text-align: right; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 style="margin-top: 0;">Finalizar Compra</h2>
+
+    <div class="erro" th:if="${erroCompra}" th:text="${erroCompra}"></div>
+
+    <div class="saldo-box">
+        Seu saldo atual: <span class="saldo-positivo" th:text="${usuario.saldoMoedas} + ' moedas'"></span>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <h3 th:text="${evento.nome}" style="margin-bottom: 5px;">Nome do Evento</h3>
+        <p style="margin: 0; color: #666;"><span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span> às <span th:text="${evento.horario}"></span></p>
+        <p style="color: #0056b3; font-weight: bold;">Preço Base: <span id="precoUnitario" th:text="${evento.precoIngresso}"></span> moedas</p>
+    </div>
+
+    <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
+        <input type="hidden" th:field="*{eventoId}" />
+
+        <label><strong>Tipo de Ingresso:</strong></label>
+        <select id="tipoIngresso" th:field="*{tipoIngresso}" onchange="atualizarTotal()">
+            <option value="INTEIRA">Inteira (100% do valor)</option>
+            <option value="MEIA">Meia Entrada Estudante (50% do valor)</option>
+        </select>
+
+        <label><strong>Quantidade:</strong></label>
+        <input type="number" id="qtd" th:field="*{quantidade}" min="1" th:max="${evento.ingressosDisponiveis}" value="1" oninput="atualizarTotal()" required />
+
+        <div class="resumo">
+            Total a descontar: <strong style="color: #dc3545;"><span id="valorTotal" th:text="${evento.precoIngresso}"></span> moedas</strong>
+        </div>
+
+        <button type="submit" style="margin-top: 20px;">Confirmar Pagamento</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 15px;">
+        <a th:href="@{/eventos}" style="color: #666; text-decoration: none;">Cancelar</a>
+    </div>
+</div>
+
+<script>
+    function atualizarTotal() {
+        let precoBase = parseInt(document.getElementById('precoUnitario').innerText);
+        let qtd = parseInt(document.getElementById('qtd').value);
+        let tipo = document.getElementById('tipoIngresso').value;
+
+        if(!isNaN(precoBase) && !isNaN(qtd)) {
+            let precoReal = precoBase;
+            if (tipo === 'MEIA') {
+                precoReal = Math.floor(precoBase / 2);
+            }
+            document.getElementById('valorTotal').innerText = precoReal * qtd;
+        }
+    }
+</script>
+
+</body>
+</html>

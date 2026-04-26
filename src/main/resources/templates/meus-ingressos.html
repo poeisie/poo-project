@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Meus Ingressos</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; padding: 40px; }
+        .container { max-width: 800px; margin: auto; }
+        .sucesso { background: #d4edda; color: #155724; padding: 15px; border-radius: 5px; margin-bottom: 20px; border-left: 5px solid #28a745;}
+        .ingresso-card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; border-left: 6px solid #0056b3;}
+        .evento-nome { font-size: 20px; font-weight: bold; margin: 0 0 5px 0; color: #333; }
+        .detalhes { color: #666; font-size: 14px; }
+        .qr-code-box { background: #f8f9fa; border: 1px dashed #ccc; padding: 15px; text-align: center; border-radius: 5px; font-weight: bold; color: #555;}
+        .empty-state { text-align: center; padding: 50px; background: white; border-radius: 8px; color: #666; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h2>🎟️ Meus Ingressos</h2>
+        <a th:href="@{/eventos}" style="text-decoration: none; color: #0056b3; font-weight: bold;">Explorar Eventos</a>
+    </div>
+
+    <div class="sucesso" th:if="${sucesso}" th:text="${sucesso}"></div>
+
+    <div th:if="${#lists.isEmpty(ingressos)}" class="empty-state">
+        <h3>Você ainda não comprou nenhum ingresso.</h3>
+        <p>Vá até a aba de eventos e garanta o seu lugar!</p>
+    </div>
+
+    <div class="ingresso-card" th:each="ingresso : ${ingressos}">
+        <div>
+            <h3 class="evento-nome" th:text="${ingresso.evento.nome}">Nome do Evento</h3>
+            <div class="detalhes">
+                <p style="margin: 5px 0;">📅 Data: <span th:text="${#temporals.format(ingresso.evento.data, 'dd/MM/yyyy')}"></span> às <span th:text="${ingresso.evento.horario}"></span></p>
+                <p style="margin: 5px 0;">📍 Local: <span th:text="${ingresso.evento.local}"></span></p>
+                <p style="margin: 5px 0;">🎫 Quantidade: <strong th:text="${ingresso.quantidade}"></strong> ingresso(s)</p>
+                <p style="margin: 5px 0;">🎟️ Tipo: <strong th:text="${ingresso.tipoIngresso}"></strong></p>
+                <p style="margin: 5px 0; color: #28a745;">💰 Total Pago: <span th:text="${ingresso.precoTotal}"></span> moedas</p>
+            </div>
+        </div>
+
+        <div class="qr-code-box">
+            Ingresso Válido <br>
+            <span style="font-size: 12px; font-weight: normal;">ID da Compra: #<span th:text="${ingresso.id}"></span></span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
