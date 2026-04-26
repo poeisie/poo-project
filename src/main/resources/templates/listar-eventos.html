@@ -102,7 +102,7 @@
                             <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
                             <p><strong>Horário:</strong> <span th:text="${#temporals.format(evento.horario, 'HH:mm')}">20:00</span></p>
                             <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
-                            <p><strong>Capacidade máxima:</strong> <span th:text="${evento.capacidadeMaximaParticipantes}">1000</span></p>
+                            <p><strong>Ingressos disponíveis:</strong> <span th:text="${evento.totalIngressosDisponiveis}">0</span> ingressos</p>
                         </div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                             <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
                             <p><strong>Horário:</strong> <span th:text="${#temporals.format(evento.horario, 'HH:mm')}">20:00</span></p>
                             <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
-                            <p><strong>Capacidade máxima:</strong> <span th:text="${evento.capacidadeMaximaParticipantes}">1000</span></p>
+                            <p><strong>Ingressos disponíveis:</strong> <span th:text="${evento.totalIngressosDisponiveis}">0</span> ingressos</p>
                         </div>
                     </div>
                 </div>

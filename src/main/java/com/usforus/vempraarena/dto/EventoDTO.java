@@ -1,8 +1,11 @@
 package com.usforus.vempraarena.dto;
 
+import com.usforus.vempraarena.entities.TipoIngresso;
 import jakarta.validation.constraints.NotBlank;
-import java.time.LocalTime;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Map;
 
 public class EventoDTO {
 
@@ -15,18 +18,16 @@ public class EventoDTO {
     @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
     private String descricao;
 
-    @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
+    @NotNull(message = "Por favor, preencha todos os campos obrigatórios.")
     private LocalDate data;
 
-    @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
+    @NotNull(message = "Por favor, preencha todos os campos obrigatórios.")
     private LocalTime horario;
-
-    @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
-    private int capacidadeMaximaParticipantes;
 
     @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
     private String categorias;
 
+    private Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo;
 
     public String getNome() {
         return nome;
@@ -60,14 +61,6 @@ public class EventoDTO {
         this.horario = horario;
     }
 
-    public int getCapacidadeMaximaParticipantes() {
-        return capacidadeMaximaParticipantes;
-    }
-
-    public void setCapacidadeMaximaParticipantes(int capacidadeMaximaParticipantes) {
-        this.capacidadeMaximaParticipantes = capacidadeMaximaParticipantes;
-    }
-
     public String getLocal() {
         return local;
     }
@@ -84,4 +77,11 @@ public class EventoDTO {
         this.categorias = categorias;
     }
 
+    public Map<TipoIngresso, Integer> getIngressosDisponiveisPorTipo() {
+        return ingressosDisponiveisPorTipo;
+    }
+
+    public void setIngressosDisponiveisPorTipo(Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo) {
+        this.ingressosDisponiveisPorTipo = ingressosDisponiveisPorTipo;
+    }
 }

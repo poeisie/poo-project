@@ -121,11 +121,17 @@
                         </select>
                     </div>
                 </div>
+            </div>
+
+            <!-- 🔥 NOVOS CAMPOS DE INGRESSOS POR TIPO (substituem a antiga "Capacidade") -->
+            <div class="form-row">
                 <div class="form-group">
-                    <label for="capacidadeMaximaParticipantes">Capacidade</label>
-                    <input type="number" id="capacidadeMaximaParticipantes"
-                           th:field="*{capacidadeMaximaParticipantes}"
-                           placeholder="0" />
+                    <label for="capacidadeInteira">Ingressos disponíveis - Inteira</label>
+                    <input type="number" id="capacidadeInteira" name="ingressosDisponiveisPorTipo['INTEIRA']" class="form-control" required min="0" />
+                </div>
+                <div class="form-group">
+                    <label for="capacidadeMeia">Ingressos disponíveis - Meia-entrada</label>
+                    <input type="number" id="capacidadeMeia" name="ingressosDisponiveisPorTipo['MEIA_ENTRADA']" class="form-control" required min="0" />
                 </div>
             </div>
 

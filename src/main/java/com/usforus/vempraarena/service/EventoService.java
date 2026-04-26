@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EventoService {
@@ -29,20 +32,12 @@ public class EventoService {
         return repository.findByDataBetweenOrderByDataAsc(inicioSemana, fimSemana);
     }
 
-    // ver como lista todos os eventos(até os que passaram) pra admin
-
     public void criarEvento(EventoDTO dto) throws Exception{
-
         if(dto.getData().isBefore(LocalDate.now())){
             throw new Exception("A data do evento não pode ser anterior à data atual.");
         }
-
-        if(dto.getHorario().isBefore(java.time.LocalTime.now()) && dto.getData().isEqual(LocalDate.now())){
+        if(dto.getHorario().isBefore(LocalTime.now()) && dto.getData().isEqual(LocalDate.now())){
             throw new Exception("O horário do evento não pode ser anterior ao horário atual.");
-        }
-
-        if(dto.getCapacidadeMaximaParticipantes() <= 0){
-            throw new Exception("A capacidade máxima de participantes deve ser um número positivo.");
         }
 
         Evento novoEvento = new Evento();
@@ -51,19 +46,19 @@ public class EventoService {
         novoEvento.setLocal(dto.getLocal());
         novoEvento.setData(dto.getData());
         novoEvento.setHorario(dto.getHorario());
-        novoEvento.setCapacidadeMaximaParticipantes(dto.getCapacidadeMaximaParticipantes());
         novoEvento.setCategorias(dto.getCategorias());
 
+        Map<com.usforus.vempraarena.entities.TipoIngresso, Integer> ingressos = dto.getIngressosDisponiveisPorTipo();
+        if (ingressos == null) {
+            ingressos = new HashMap<>();
+        }
+        novoEvento.setIngressosDisponiveisPorTipo(ingressos);
+
         repository.save(novoEvento);
-
-
-
     }
 
     public Evento buscarPorId(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Evento não encontrado com o ID: " + id));
     }
-
 }
-

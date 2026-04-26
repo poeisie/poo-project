@@ -38,16 +38,19 @@ public class IngressoService {
             throw new Exception("A quantidade deve ser de pelo menos 1 ingresso.");
         }
 
-        if (dto.getQuantidade() > evento.getIngressosDisponiveis()) {
-            throw new Exception("Estoque insuficiente!");
+        TipoIngresso tipo = dto.getTipoIngresso();
+        int quantidade = dto.getQuantidade();
+        int disponivel = evento.getQuantidadeDisponivelPorTipo(tipo);
+        if (quantidade > disponivel) {
+            throw new Exception("Estoque insuficiente para o tipo " + tipo + "! Disponível: " + disponivel);
         }
 
         int precoUnitarioCobrado = evento.getPrecoIngresso();
-        if (dto.getTipoIngresso() == TipoIngresso.MEIA) {
+        if (tipo == TipoIngresso.MEIA) {
             precoUnitarioCobrado = evento.getPrecoIngresso() / 2;
         }
 
-        int precoTotalCompra = dto.getQuantidade() * precoUnitarioCobrado;
+        int precoTotalCompra = quantidade * precoUnitarioCobrado;
 
         if (usuario.getSaldoMoedas() < precoTotalCompra) {
             throw new Exception("Saldo insuficiente! A compra custa " + precoTotalCompra + " moedas, mas você tem " + usuario.getSaldoMoedas() + ".");
@@ -55,15 +58,17 @@ public class IngressoService {
         usuario.setSaldoMoedas(usuario.getSaldoMoedas() - precoTotalCompra);
         usuarioRepository.save(usuario);
 
-        Ingresso novoIngresso = new Ingresso(usuario, evento, dto.getQuantidade(), precoUnitarioCobrado, dto.getTipoIngresso());
+        Ingresso novoIngresso = new Ingresso(usuario, evento, quantidade, precoUnitarioCobrado, tipo);
         ingressoRepository.save(novoIngresso);
 
-        evento.setIngressosVendidos(evento.getIngressosVendidos() + dto.getQuantidade());
+        boolean atualizou = evento.reduzirEstoque(tipo, quantidade);
+        if (!atualizou) {
+            throw new Exception("Erro ao atualizar o estoque do evento.");
+        }
         eventoRepository.save(evento);
     }
 
     public List<Ingresso> listarPorUsuario(Long usuarioId){
         return ingressoRepository.findByUsuarioId(usuarioId);
     }
-
 }

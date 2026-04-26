@@ -1,9 +1,10 @@
 package com.usforus.vempraarena.entities;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "eventos")
@@ -31,21 +32,38 @@ public class Evento {
     @Column(nullable = false)
     private String categorias;
 
-    @Column(nullable = false)
-    private int capacidadeMaximaParticipantes;
+    @ElementCollection
+    @CollectionTable(name = "evento_ingressos_disponiveis",
+                     joinColumns = @JoinColumn(name = "evento_id"))
+    @MapKeyEnumerated(EnumType.STRING)
+    @Column(name = "quantidade")
+    private Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo = new HashMap<>();
 
     @Column(nullable = false)
     private Integer precoIngresso = 0;
 
-    @Column(nullable = false)
-    private Integer ingressosVendidos = 0;
-
-
-    public Integer getIngressosDisponiveis(){
-        return capacidadeMaximaParticipantes - ingressosVendidos;
+    public Map<TipoIngresso, Integer> getIngressosDisponiveisPorTipo() {
+        return ingressosDisponiveisPorTipo;
     }
 
-    public Long getId(){
+    public void setIngressosDisponiveisPorTipo(Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo) {
+        this.ingressosDisponiveisPorTipo = ingressosDisponiveisPorTipo;
+    }
+
+    public int getQuantidadeDisponivelPorTipo(TipoIngresso tipo) {
+        return ingressosDisponiveisPorTipo.getOrDefault(tipo, 0);
+    }
+
+    public boolean reduzirEstoque(TipoIngresso tipo, int quantidade) {
+        Integer disponivel = ingressosDisponiveisPorTipo.get(tipo);
+        if (disponivel != null && disponivel >= quantidade) {
+            ingressosDisponiveisPorTipo.put(tipo, disponivel - quantidade);
+            return true;
+        }
+        return false;
+    }
+
+    public Long getId() {
         return id;
     }
 
@@ -53,7 +71,7 @@ public class Evento {
         this.id = id;
     }
 
-    public String getNome(){
+    public String getNome() {
         return nome;
     }
 
@@ -101,28 +119,12 @@ public class Evento {
         this.categorias = categorias;
     }
 
-    public int getCapacidadeMaximaParticipantes() {
-        return capacidadeMaximaParticipantes;
-    }
-
-    public void setCapacidadeMaximaParticipantes(int capacidadeMaximaParticipantes) {
-        this.capacidadeMaximaParticipantes = capacidadeMaximaParticipantes;
-    }
-
     public Integer getPrecoIngresso() {
         return precoIngresso;
     }
 
     public void setPrecoIngresso(Integer precoIngresso) {
         this.precoIngresso = precoIngresso;
-    }
-
-    public Integer getIngressosVendidos() {
-        return ingressosVendidos;
-    }
-
-    public void setIngressosVendidos(Integer ingressosVendidos) {
-        this.ingressosVendidos = ingressosVendidos;
     }
 }
 
