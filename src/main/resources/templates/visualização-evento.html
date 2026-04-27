@@ -25,7 +25,7 @@
         <h1 th:text="${evento.nome}"></h1>
 
         <div class="evento-meta">
-          <span th:text="${#temporals.format(evento.data, 'dd de MMMM de yyyy')}"></span>
+          <span th:text="${#temporals.format(evento.data, 'dd ''de'' MMMM ''de'' yyyy')}"></span>
           <span th:text="${evento.horario}"></span>
           <span th:text="${evento.local}"></span>
         </div>
