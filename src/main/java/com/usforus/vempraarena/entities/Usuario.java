@@ -4,7 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -31,14 +31,6 @@ public class Usuario implements UserDetails {
 
     private String role = "USER";
 
-    @Column(name = "tentativas_falhas")
-    private int tentativasFalhas = 0;
-
-    @Column(name = "conta_nao_bloqueada")
-    private boolean contaNaoBloqueada = true;
-
-    @Column(name = "tempo_bloqueio")
-    private java.time.LocalDateTime tempoBloqueio;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -51,18 +43,24 @@ public class Usuario implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() { return true; }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return this.contaNaoBloqueada;
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
     @Override
-    public boolean isCredentialsNonExpired() { return true; }
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
     @Override
-    public boolean isEnabled() { return true; }
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 
     public Long getId() {
@@ -118,27 +116,4 @@ public class Usuario implements UserDetails {
         return password;
     }
 
-    public int getTentativasFalhas() {
-        return tentativasFalhas;
-    }
-
-    public void setTentativasFalhas(int tentativasFalhas) {
-        this.tentativasFalhas = tentativasFalhas;
-    }
-
-    public boolean isContaNaoBloqueada() {
-        return contaNaoBloqueada;
-    }
-
-    public void setContaNaoBloqueada(boolean contaNaoBloqueada) {
-        this.contaNaoBloqueada = contaNaoBloqueada;
-    }
-
-    public LocalDateTime getTempoBloqueio() {
-        return tempoBloqueio;
-    }
-
-    public void setTempoBloqueio(LocalDateTime tempoBloqueio) {
-        this.tempoBloqueio = tempoBloqueio;
-    }
 }
