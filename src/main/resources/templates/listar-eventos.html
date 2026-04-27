@@ -4,20 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Explorar Eventos - Arena Pernambuco</title>
-    <link rel="stylesheet" th:href="@{/css/listar-eventos.css}" />
+    <link rel="stylesheet" href="/css/listar-eventos.css"/>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
 </head>
 <body class="events-page">
+
 <div class="events-container">
-    <div class="events-header">
-        <h1>🗓️ Eventos na Arena</h1>
-        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/novo}" class="btn-primary btn-criar">+ Criar Evento</a>
-    </div>
 
     <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
 
     <main class="main">
 
-        <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/novo}" class="btn-criar">+ Criar Evento</a>
+        <div class="events-header">
+            <h1>🗓️ Eventos na Arena</h1>
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/novo}" class="btn-primary btn-criar">+ Criar Evento</a>
+        </div>
 
         <p class="secao-titulo">EXPLORE POR <span>#COLEÇÕES</span></p>
         <div class="colecoes-wrapper">
@@ -41,11 +44,9 @@
                 <div class="card" th:each="evento : ${eventosSemana}">
                     <div class="card-body">
                         <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
-
                         <div class="card-badges">
                             <span class="cat-badge" th:text="${evento.categorias}">Categoria</span>
                         </div>
-
                         <div class="card-info">
                             <p><strong>Local:</strong> <span th:text="${evento.local}">Local do evento</span></p>
                             <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
@@ -53,20 +54,16 @@
                             <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
                             <p><strong>Ingressos disponíveis:</strong> <span th:text="${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}">0</span> ingressos</p>
                         </div>
-
                         <div th:with="totalDisponivel=${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}" style="margin-top: 15px;">
-
                             <a th:if="${totalDisponivel > 0}"
                                th:href="@{/ingressos/comprar/{id}(id=${evento.id})}"
                                style="display: block; text-align: center; background: #0056b3; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s;">
                                 Comprar Ingresso
                             </a>
-
                             <div th:unless="${totalDisponivel > 0}"
                                  style="text-align: center; color: #dc3545; font-weight: bold; padding: 10px; border: 1px dashed #dc3545; border-radius: 5px; background: #fff5f5;">
                                 ESGOTADO
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -84,11 +81,9 @@
                 <div class="card" th:each="evento : ${eventosRecomendados}">
                     <div class="card-body">
                         <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
-
                         <div class="card-badges">
                             <span class="cat-badge" th:text="${evento.categorias}">Categoria</span>
                         </div>
-
                         <div class="card-info">
                             <p><strong>Local:</strong> <span th:text="${evento.local}">Local do evento</span></p>
                             <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
@@ -96,20 +91,16 @@
                             <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
                             <p><strong>Ingressos disponíveis:</strong> <span th:text="${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}">0</span> ingressos</p>
                         </div>
-
                         <div th:with="totalDisponivel=${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}" style="margin-top: 15px;">
-
                             <a th:if="${totalDisponivel > 0}"
                                th:href="@{/ingressos/comprar/{id}(id=${evento.id})}"
                                style="display: block; text-align: center; background: #0056b3; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background 0.3s;">
                                 Comprar Ingresso
                             </a>
-
                             <div th:unless="${totalDisponivel > 0}"
                                  style="text-align: center; color: #dc3545; font-weight: bold; padding: 10px; border: 1px dashed #dc3545; border-radius: 5px; background: #fff5f5;">
                                 ESGOTADO
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -122,13 +113,15 @@
 
     </main>
 
-    <script>
-        function toggleSection(header) {
-            header.classList.toggle('collapsed');
-            const links = header.nextElementSibling;
-            links.style.display = links.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
 </div>
+
+<script>
+    function toggleSection(header) {
+        header.classList.toggle('collapsed');
+        const links = header.nextElementSibling;
+        links.style.display = links.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+
 </body>
 </html>

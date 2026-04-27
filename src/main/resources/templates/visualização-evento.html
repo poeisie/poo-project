@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${evento.nome}">Evento - Arena</title>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/visualização-evento.css" />
+</head>
+<body class="events-page">
+
+<div class="events-container">
+
+  <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
+
+  <main class="main">
+
+    <div class="evento-container">
+
+      <div class="evento-detalhes">
+
+        <div class="evento-banner">
+          <img th:src="${evento.bannerUrl}" th:if="${evento.bannerUrl}" alt="Banner do evento" />
+        </div>
+
+        <h1 th:text="${evento.nome}"></h1>
+
+        <div class="evento-meta">
+          <span th:text="${#temporals.format(evento.data, 'dd \'de\' MMMM \'de\' yyyy')}"></span>
+          <span th:text="${evento.horario}"></span>
+          <span th:text="${evento.local}"></span>
+        </div>
+
+        <p th:text="${evento.descricao}"></p>
+
+        <h2>Sobre o Produtor</h2>
+        <p th:text="${evento.descricaoProdutor}"></p>
+
+        <h2>Localização</h2>
+        <div class="evento-mapa">
+          <iframe
+            th:src="'https://maps.google.com/maps?q=' + ${#strings.replace(evento.local, ' ', '+')} + '&output=embed'"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+
+      <div class="evento-compra">
+
+        <div id="precoUnitario" th:text="${evento.precoIngresso}" style="display:none;"></div>
+
+        <div class="ingresso-lista">
+          <div class="ingresso-item" th:each="entry : ${evento.ingressosDisponiveisPorTipo}">
+            <div class="ingresso-info">
+              <p class="ingresso-tipo"
+                 th:text="${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? 'Inteira' : 'Meia Entrada'">
+              </p>
+              <p class="ingresso-preco"
+                 th:text="'R$ ' + (${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? ${evento.precoIngresso} : ${evento.precoIngresso / 2})">
+              </p>
+              <p class="ingresso-desc" th:text="${entry.value} + ' disponíveis'"></p>
+            </div>
+            <div class="ingresso-qtd">
+              <button type="button" onclick="alterarQtd(this, -1)">−</button>
+              <input type="number"
+                     th:data-tipo="${entry.key}"
+                     th:data-preco="${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? ${evento.precoIngresso} : ${evento.precoIngresso / 2}"
+                     th:max="${entry.value}"
+                     min="0" value="0"
+                     oninput="sincronizarForm(this)" />
+              <button type="button" onclick="alterarQtd(this, 1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
+          <input type="hidden" th:field="*{eventoId}" />
+          <input type="hidden" id="tipoInput" th:field="*{tipoIngresso}" value="" />
+          <input type="hidden" id="qtdInput" th:field="*{quantidade}" value="0" />
+          <button type="submit" id="btnComprar" disabled>Comprar Ingressos</button>
+        </form>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+  function alterarQtd(btn, delta) {
+    const input = btn.parentElement.querySelector('input[type=number]');
+    const max = parseInt(input.max) || 99;
+    input.value = Math.max(0, Math.min(max, (parseInt(input.value) || 0) + delta));
+    sincronizarForm(input);
+  }
+
+  function sincronizarForm(inputAtivo) {
+    const inputs = document.querySelectorAll('.ingresso-qtd input[type=number]');
+
+    if (parseInt(inputAtivo.value) > 0) {
+      inputs.forEach(i => { if (i !== inputAtivo) i.value = 0; });
+    }
+
+    let tipoSelecionado = '';
+    let qtdSelecionada = 0;
+    inputs.forEach(i => {
+      const qtd = parseInt(i.value) || 0;
+      if (qtd > 0) {
+        tipoSelecionado = i.dataset.tipo;
+        qtdSelecionada = qtd;
+      }
+    });
+
+    document.getElementById('tipoInput').value = tipoSelecionado;
+    document.getElementById('qtdInput').value = qtdSelecionada;
+    document.getElementById('btnComprar').disabled = qtdSelecionada === 0;
+  }
+</script>
+
+</body>
+</html>

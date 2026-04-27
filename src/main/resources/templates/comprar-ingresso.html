@@ -1,77 +1,155 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Comprar Ingresso - Arena</title>
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #f8f9fa; padding: 40px; }
-        .card { background: white; padding: 30px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .erro { color: #721c24; background: #f8d7da; padding: 10px; border-radius: 5px; margin-bottom: 15px;}
-        .saldo-box { background: #e2e3e5; padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 20px; font-weight: bold; }
-        .saldo-positivo { color: #28a745; }
-        input[type="number"], select { width: 100%; box-sizing: border-box; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #0056b3; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; font-weight: bold;}
-        button:hover { background: #004494; }
-        .resumo { margin-top: 20px; padding-top: 15px; border-top: 2px dashed #eee; font-size: 18px; text-align: right; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Resumo da Compra - Arena</title>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/resumo-compra.css" />
 </head>
-<body>
+<body class="events-page">
 
-<div class="card">
-    <h2 style="margin-top: 0;">Finalizar Compra</h2>
+<div class="events-container">
 
-    <div class="erro" th:if="${erroCompra}" th:text="${erroCompra}"></div>
+  <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
 
-    <div class="saldo-box">
-        Seu saldo atual: <span class="saldo-positivo" th:text="${usuario.saldoMoedas} + ' moedas'"></span>
-    </div>
+  <main class="main">
 
-    <div style="margin-bottom: 20px;">
-        <h3 th:text="${evento.nome}" style="margin-bottom: 5px;">Nome do Evento</h3>
-        <p style="margin: 0; color: #666;"><span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span> às <span th:text="${evento.horario}"></span></p>
-        <p style="color: #0056b3; font-weight: bold;">Preço Base: <span id="precoUnitario" th:text="${evento.precoIngresso}"></span> moedas</p>
-    </div>
+    <div class="compra-container">
 
-    <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
-        <input type="hidden" th:field="*{eventoId}" />
+      <div class="compra-resumo">
 
-        <label><strong>Tipo de Ingresso:</strong></label>
-        <label for="tipoIngresso"></label><select id="tipoIngresso" th:field="*{tipoIngresso}" onchange="atualizarTotal()">
-            <option value="INTEIRA">Inteira (100% do valor)</option>
-            <option value="MEIA">Meia Entrada Estudante (50% do valor)</option>
-        </select>
+        <h1>Resumo da Compra</h1>
 
-        <label><strong>Quantidade:</strong></label>
-        <label for="qtd"><strong>Quantidade de Ingressos:</strong></label>
-        <input type="number" id="qtd" th:field="*{quantidade}" min="1"
-               th:max="${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}"
-               value="1" oninput="atualizarTotal()" required />
-        <div class="resumo">
-            Total a descontar: <strong style="color: #dc3545;"><span id="valorTotal" th:text="${evento.precoIngresso}"></span> moedas</strong>
+        <div class="resumo-evento">
+          <h2 th:text="${evento.nome}">Nome do Evento</h2>
+          <p>Dia: <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span></p>
+          <p>Horário: <span th:text="${evento.horario}"></span></p>
+          <p>Local: <span th:text="${evento.local}"></span></p>
         </div>
 
-        <button type="submit" style="margin-top: 20px;">Confirmar Pagamento</button>
-    </form>
+        <div class="resumo-ingressos">
+          <h2>Ingressos</h2>
 
-    <div style="text-align: center; margin-top: 15px;">
-        <a th:href="@{/eventos}" style="color: #666; text-decoration: none;">Cancelar</a>
+          <div class="erro" th:if="${erroCompra}" th:text="${erroCompra}"></div>
+
+          <div class="resumo-item" th:each="entry : ${evento.ingressosDisponiveisPorTipo}">
+            <div class="resumo-item-info">
+              <p class="resumo-item-tipo"
+                 th:text="${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? 'Inteira' : 'Meia Entrada'">
+              </p>
+              <p class="resumo-item-preco"
+                 th:text="'R$ ' + (${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? ${evento.precoIngresso} : ${evento.precoIngresso / 2})">
+              </p>
+              <p class="resumo-item-desc" th:text="${entry.value} + ' disponíveis'"></p>
+            </div>
+            <div class="resumo-item-qtd">
+              <span th:text="${compraDto.quantidade}">1</span>
+            </div>
+          </div>
+
+          <div class="resumo-total">
+            <div class="resumo-item-info">
+              <p class="resumo-item-tipo">Total</p>
+              <p class="resumo-item-preco" id="valorTotal" th:text="'R$ ' + ${evento.precoIngresso}"></p>
+            </div>
+            <div class="resumo-item-qtd">
+              <span th:text="${compraDto.quantidade}">1</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="compra-pagamento">
+
+        <h1>Formas de Pagamento</h1>
+
+        <div class="saldo-box">
+          Seu saldo atual: <span class="saldo-positivo" th:text="${usuario.saldoMoedas} + ' moedas'"></span>
+        </div>
+
+        <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
+          <input type="hidden" th:field="*{eventoId}" />
+          <input type="hidden" th:field="*{tipoIngresso}" />
+          <input type="hidden" th:field="*{quantidade}" />
+
+          <div class="pagamento-secao">
+            <h3>Pré-Cadastradas</h3>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Cartão Principal</p>
+                <p class="pagamento-detalhe">Cartão Crédito Mastercard 0555</p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="CARTAO_PRINCIPAL" />
+            </label>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Cartão Apelido</p>
+                <p class="pagamento-detalhe">Cartão Débito Visa 1097</p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="CARTAO_APELIDO" />
+            </label>
+
+            <a href="#" class="pagamento-novo">+ Cadastrar Novo Cartão</a>
+          </div>
+
+          <div class="pagamento-secao">
+            <h3>Outras formas</h3>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Pix</p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="PIX" />
+            </label>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Boleto</p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="BOLETO" />
+            </label>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Arena Coin</p>
+                <p class="pagamento-detalhe saldo-positivo" th:text="'R$ ' + ${usuario.saldoMoedas}"></p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="ARENA_COIN" />
+            </label>
+          </div>
+
+          <button type="submit">Finalizar Compra</button>
+
+        </form>
+
+        <div style="text-align: center; margin-top: 15px;">
+          <a th:href="@{/eventos}">Cancelar</a>
+        </div>
+
+      </div>
+
     </div>
+
+  </main>
+
 </div>
 
 <script>
-    function atualizarTotal() {
-        let precoBase = parseInt(document.getElementById('precoUnitario').innerText);
-        let qtd = parseInt(document.getElementById('qtd').value);
-        let tipo = document.getElementById('tipoIngresso').value;
-
-        if(!isNaN(precoBase) && !isNaN(qtd)) {
-            let precoReal = precoBase;
-            if (tipo === 'MEIA') {
-                precoReal = Math.floor(precoBase / 2);
-            }
-            document.getElementById('valorTotal').innerText = (precoReal * qtd).toString();
-        }
+  function atualizarTotal() {
+    let precoBase = parseInt(document.getElementById('precoUnitario').innerText);
+    let qtd = parseInt(document.getElementById('qtd').value);
+    let tipo = document.getElementById('tipoIngresso').value;
+    if (!isNaN(precoBase) && !isNaN(qtd)) {
+      let precoReal = tipo === 'MEIA' ? Math.floor(precoBase / 2) : precoBase;
+      document.getElementById('valorTotal').innerText = 'R$ ' + (precoReal * qtd).toString();
     }
+  }
 </script>
 
 </body>
