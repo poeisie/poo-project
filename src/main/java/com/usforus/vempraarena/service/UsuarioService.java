@@ -61,14 +61,10 @@ public class UsuarioService implements UserDetailsService {
             segurancaLoginService.destravarSeTempoExpirou(usuario);
         }
 
-        return new org.springframework.security.core.userdetails.User(
-                usuario.getEmail(),
-                usuario.getPassword(),
-                true, // enabled (conta ativa?)
-                true, // accountNonExpired (conta não expirou?)
-                true, // credentialsNonExpired (senha não expirou?)
-                usuario.isAccountNonLocked(), // 🚨 AGORA O SPRING LÊ O BLOQUEIO DO BANCO!
-                List.of(new SimpleGrantedAuthority(usuario.getRole()))
-        );
+        return User.builder()
+                .username(usuario.getEmail())
+                .password(usuario.getPassword())
+                .roles(usuario.getRole())
+                .build();
     }
 }
