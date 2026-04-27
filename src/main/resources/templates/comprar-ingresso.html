@@ -38,10 +38,10 @@
           <div class="resumo-item" th:each="entry : ${evento.ingressosDisponiveisPorTipo}">
             <div class="resumo-item-info">
               <p class="resumo-item-tipo"
-                 th:text="${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? 'Inteira' : 'Meia Entrada'">
+                 th:text="${entry.key.name() == 'INTEIRA' ? 'Inteira' : 'Meia Entrada'}">
               </p>
               <p class="resumo-item-preco"
-                 th:text="'R$ ' + (${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? ${evento.precoIngresso} : ${evento.precoIngresso / 2})">
+                 th:text="${'R$ ' + (entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2)}">
               </p>
               <p class="resumo-item-desc" th:text="${entry.value} + ' disponíveis'"></p>
             </div>

@@ -55,10 +55,10 @@
           <div class="ingresso-item" th:each="entry : ${evento.ingressosDisponiveisPorTipo}">
             <div class="ingresso-info">
               <p class="ingresso-tipo"
-                 th:text="${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? 'Inteira' : 'Meia Entrada'">
+                 th:text="${entry.key.name() == 'INTEIRA' ? 'Inteira' : 'Meia Entrada'}">
               </p>
               <p class="ingresso-preco"
-                 th:text="'R$ ' + (${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? ${evento.precoIngresso} : ${evento.precoIngresso / 2})">
+                 th:text="${'R$ ' + (entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2)}">
               </p>
               <p class="ingresso-desc" th:text="${entry.value} + ' disponíveis'"></p>
             </div>
@@ -66,7 +66,7 @@
               <button type="button" onclick="alterarQtd(this, -1)">−</button>
               <input type="number"
                      th:data-tipo="${entry.key.name()}"
-                     th:data-preco="${entry.key == T(com.usforus.vempraarena.entities.TipoIngresso).INTEIRA} ? ${evento.precoIngresso} : ${evento.precoIngresso / 2}"
+                     th:data-preco="${entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2}"
                      th:max="${entry.value}"
                      min="0" value="0"
                      oninput="sincronizarForm(this)" />
