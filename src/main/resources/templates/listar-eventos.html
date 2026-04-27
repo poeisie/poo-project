@@ -13,58 +13,7 @@
         <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/eventos/novo}" class="btn-primary btn-criar">+ Criar Evento</a>
     </div>
 
-    <aside class="sidebar">
-        <div class="sidebar-profile-wrapper">
-            <div class="sidebar-profile">
-                <div class="sidebar-avatar">👤</div>
-                <div class="sidebar-profile-info">
-                    <div class="name" th:text="${nomeUsuario ?: 'Nome Sobrenome'}">Nome Sobrenome</div>
-                    <div class="email">email@email.com</div>
-                </div>
-            </div>
-            <button class="sidebar-toggle-btn">‹</button>
-        </div>
-
-        <div class="sidebar-section">
-            <div class="sidebar-section-header" onclick="toggleSection(this)">
-                Funcionalidades <span class="arrow">▾</span>
-            </div>
-            <div class="sidebar-section-links">
-                <a th:href="@{/eventos}">Eventos</a>
-                <a th:href="@{/ingressos/meus}">Meus Ingressos</a>
-            </div>
-        </div>
-
-        <div class="sidebar-section">
-            <div class="sidebar-section-header" onclick="toggleSection(this)">
-                Configurações <span class="arrow">▾</span>
-            </div>
-            <div class="sidebar-section-links">
-                <a th:href="@{/conta}">Configurações da conta</a>
-                <a th:href="@{/notificacoes}">Notificações</a>
-            </div>
-        </div>
-
-        <div class="sidebar-section">
-            <div class="sidebar-section-header" onclick="toggleSection(this)">
-                Legal <span class="arrow">▾</span>
-            </div>
-            <div class="sidebar-section-links">
-                <a th:href="@{/termos}">Termos de uso</a>
-                <a th:href="@{/privacidade}">Política de privacidade</a>
-            </div>
-        </div>
-
-        <div class="sidebar-section">
-            <div class="sidebar-section-header" onclick="toggleSection(this)">
-                Suporte <span class="arrow">▾</span>
-            </div>
-            <div class="sidebar-section-links">
-                <a th:href="@{/faq}">Central de ajuda/FAQ</a>
-                <a th:href="@{/contato}">Fale Conosco</a>
-            </div>
-        </div>
-    </aside>
+    <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
 
     <main class="main">
 
