@@ -1,0 +1,219 @@
+.evento-container {
+  display: flex;
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  align-items: flex-start;
+}
+
+.evento-detalhes {
+  flex: 2;
+  min-width: 0;
+}
+
+.evento-banner {
+  width: 100%;
+  height: 200px;
+  background-color: var(--color-input-border);
+  border-radius: var(--border-radius-md);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.evento-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.evento-detalhes h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.evento-produtor {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 12px;
+}
+
+.evento-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--color-primary);
+  margin-bottom: 16px;
+}
+
+.evento-detalhes p {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.evento-detalhes h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 10px;
+  margin-top: 8px;
+}
+
+.evento-mapa {
+  width: 100%;
+  height: 200px;
+  background-color: var(--color-input-border);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+
+.evento-compra {
+  flex: 1;
+  min-width: 260px;
+  max-width: 320px;
+  position: sticky;
+  top: 24px;
+}
+
+/* ── Painel de ingressos ── */
+.ingresso-lista {
+  background-color: var(--color-card);
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* ── Card de cada ingresso ── */
+.ingresso-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-input-border);
+}
+
+.ingresso-item:last-child {
+  border-bottom: none;
+}
+
+.ingresso-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ingresso-tipo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.ingresso-preco {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.ingresso-desc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.ingresso-qtd {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ingresso-qtd button {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--color-input-border);
+  background-color: var(--color-card);
+  border-radius: var(--border-radius-md);
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.ingresso-qtd button:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-input-border-focus);
+  color: var(--color-primary);
+}
+
+.ingresso-qtd input[type=number] {
+  width: 36px;
+  height: 26px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.ingresso-qtd input[type=number]::-webkit-inner-spin-button,
+.ingresso-qtd input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+form {
+  margin-top: 0;
+}
+
+#btnComprar {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+  box-shadow: var(--shadow-card);
+}
+
+#btnComprar:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+#btnComprar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Responsivo ── */
+@media (max-width: 700px) {
+  .evento-container {
+    flex-direction: column;
+  }
+
+  .evento-compra {
+    max-width: 100%;
+    width: 100%;
+    position: static;
+  }
+}

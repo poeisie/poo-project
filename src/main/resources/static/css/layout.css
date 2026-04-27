@@ -55,3 +55,23 @@
 .auth-card__footer a:hover {
     text-decoration: underline;
 }
+
+.events-page {
+  min-height: 100vh;
+  background-image: url('/images/estadio.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.events-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+  background: rgba(240, 242, 245, 0.92);
+}
