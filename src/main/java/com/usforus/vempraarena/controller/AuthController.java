@@ -53,4 +53,9 @@ public class AuthController {
     public String home(){
         return "redirect:/eventos/listar";
     }
+
+    @GetMapping("/")
+    public String paginaInicial() {
+        return "redirect:/eventos/listar";
+    }
 }
