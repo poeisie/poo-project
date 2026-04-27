@@ -21,9 +21,6 @@
 
       <div class="evento-detalhes">
 
-        <div class="evento-banner">
-          <img th:src="${evento.bannerUrl}" th:if="${evento.bannerUrl}" alt="Banner do evento" />
-        </div>
 
         <h1 th:text="${evento.nome}"></h1>
 
@@ -35,8 +32,6 @@
 
         <p th:text="${evento.descricao}"></p>
 
-        <h2>Sobre o Produtor</h2>
-        <p th:text="${evento.descricaoProdutor}"></p>
 
         <h2>Localização</h2>
         <div class="evento-mapa">

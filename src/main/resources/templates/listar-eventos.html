@@ -43,17 +43,19 @@
             <div class="grid-eventos" th:if="${not #lists.isEmpty(eventosSemana)}">
                 <div class="card" th:each="evento : ${eventosSemana}">
                     <div class="card-body">
-                        <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
-                        <div class="card-badges">
-                            <span class="cat-badge" th:text="${evento.categorias}">Categoria</span>
-                        </div>
-                        <div class="card-info">
-                            <p><strong>Local:</strong> <span th:text="${evento.local}">Local do evento</span></p>
-                            <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
-                            <p><strong>Horário:</strong> <span th:text="${#temporals.format(evento.horario, 'HH:mm')}">20:00</span></p>
-                            <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
-                            <p><strong>Ingressos disponíveis:</strong> <span th:text="${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}">0</span> ingressos</p>
-                        </div>
+                        <a th:href="@{/eventos/{id}(id=${evento.id})}" style="text-decoration: none; color: inherit;">
+                            <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
+                            <div class="card-badges">
+                                <span class="cat-badge" th:text="${evento.categorias}">Categoria</span>
+                            </div>
+                            <div class="card-info">
+                                <p><strong>Local:</strong> <span th:text="${evento.local}">Local do evento</span></p>
+                                <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
+                                <p><strong>Horário:</strong> <span th:text="${#temporals.format(evento.horario, 'HH:mm')}">20:00</span></p>
+                                <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
+                                <p><strong>Ingressos disponíveis:</strong> <span th:text="${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}">0</span> ingressos</p>
+                            </div>
+                        </a>
                         <div th:with="totalDisponivel=${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}" style="margin-top: 15px;">
                             <a th:if="${totalDisponivel > 0}"
                                th:href="@{/ingressos/comprar/{id}(id=${evento.id})}"
@@ -80,17 +82,19 @@
             <div class="grid-eventos" th:if="${not #lists.isEmpty(eventosRecomendados)}">
                 <div class="card" th:each="evento : ${eventosRecomendados}">
                     <div class="card-body">
-                        <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
-                        <div class="card-badges">
-                            <span class="cat-badge" th:text="${evento.categorias}">Categoria</span>
-                        </div>
-                        <div class="card-info">
-                            <p><strong>Local:</strong> <span th:text="${evento.local}">Local do evento</span></p>
-                            <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
-                            <p><strong>Horário:</strong> <span th:text="${#temporals.format(evento.horario, 'HH:mm')}">20:00</span></p>
-                            <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
-                            <p><strong>Ingressos disponíveis:</strong> <span th:text="${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}">0</span> ingressos</p>
-                        </div>
+                        <a th:href="@{/eventos/{id}(id=${evento.id})}" style="text-decoration: none; color: inherit;">
+                            <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
+                            <div class="card-badges">
+                                <span class="cat-badge" th:text="${evento.categorias}">Categoria</span>
+                            </div>
+                            <div class="card-info">
+                                <p><strong>Local:</strong> <span th:text="${evento.local}">Local do evento</span></p>
+                                <p><strong>Data:</strong> <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">15/03/2026</span></p>
+                                <p><strong>Horário:</strong> <span th:text="${#temporals.format(evento.horario, 'HH:mm')}">20:00</span></p>
+                                <p><strong>Descrição:</strong> <span th:text="${evento.descricao}">Descrição do evento</span></p>
+                                <p><strong>Ingressos disponíveis:</strong> <span th:text="${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}">0</span> ingressos</p>
+                            </div>
+                        </a>
                         <div th:with="totalDisponivel=${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}" style="margin-top: 15px;">
                             <a th:if="${totalDisponivel > 0}"
                                th:href="@{/ingressos/comprar/{id}(id=${evento.id})}"
