@@ -47,7 +47,7 @@
 | Recurso | Link |
 |---------|------|
 | Screencast do Sistema | [Assistir no YouTube](https://www.youtube.com/watch?v=bCbvHcg8d_c) |
-| Issue / Bug Tracker | [Planilha com bugs VPA-1 a VPA-20](https://docs.google.com/spreadsheets/d/1F9LqVv9y9CrThgpUzaNE2ApuoM_dKlN1JgAWgZU_HiA/edit?usp=sharing) |
+| Issue / Bug Tracker | [Planilha com bugs VPA-1 a VPA-19](https://docs.google.com/spreadsheets/d/1F9LqVv9y9CrThgpUzaNE2ApuoM_dKlN1JgAWgZU_HiA/edit?usp=sharing) |
 
 ### Screencast – Uso do Sistema (2ª entrega)
 
@@ -80,7 +80,7 @@ Foram implementadas **três novas histórias** com foco na jornada do usuário c
 
 > [!NOTE]
 > O Bug Tracker foi migrado para o **próprio GitHub** (Issues + Projects).  
-> As ocorrências **VPA-1 a VPA-20** tiveram seus status atualizados.
+> As ocorrências **VPA-1 a VPA-19** tiveram seus status atualizados.
 
 ---
 
