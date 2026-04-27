@@ -4,6 +4,7 @@ import com.usforus.vempraarena.dto.CompraIngressoDTO;
 import com.usforus.vempraarena.entities.Evento;
 import com.usforus.vempraarena.entities.Ingresso;
 import com.usforus.vempraarena.entities.Usuario;
+import com.usforus.vempraarena.entities.TipoIngresso;
 import com.usforus.vempraarena.repository.UsuarioRepository;
 import com.usforus.vempraarena.service.EventoService;
 import com.usforus.vempraarena.service.IngressoService;
@@ -31,12 +32,31 @@ public class IngressoController {
     }
 
     @GetMapping("/comprar/{eventoId}")
-    public String telaCompra(@PathVariable Long eventoId, Authentication authentication, Model model) {
+    public String telaCompra(@PathVariable Long eventoId, 
+                             @RequestParam(required = false) String tipo,
+                             @RequestParam(required = false) String quantidade,
+                             Authentication authentication, Model model) {
         Evento evento = eventoService.buscarPorId(eventoId);
         Usuario usuarioLogado = usuarioRepository.findByEmail(authentication.getName());
 
         CompraIngressoDTO dto = new CompraIngressoDTO();
         dto.setEventoId(evento.getId());
+        
+        if (tipo != null && !tipo.isEmpty()) {
+            try {
+                dto.setTipoIngresso(TipoIngresso.valueOf(tipo.toUpperCase()));
+            } catch (IllegalArgumentException e) {
+                System.err.println("Tipo de ingresso inválido recebido: " + tipo);
+            }
+        }
+        
+        if (quantidade != null && !quantidade.isEmpty()) {
+            try {
+                dto.setQuantidade(Integer.parseInt(quantidade));
+            } catch (NumberFormatException e) {
+                dto.setQuantidade(1);
+            }
+        }
 
         model.addAttribute("evento", evento);
         model.addAttribute("usuario", usuarioLogado);
@@ -46,12 +66,15 @@ public class IngressoController {
     }
 
     @PostMapping("/comprar")
-    public String processarCompra(@ModelAttribute("compraDto") CompraIngressoDTO dto, Authentication authentication, Model model, RedirectAttributes attributes) {
+    public String processarCompra(@ModelAttribute("compraDto") CompraIngressoDTO dto, 
+                                 Authentication authentication, 
+                                 Model model, 
+                                 RedirectAttributes attributes) {
         String emailLogado = authentication.getName();
 
         try {
             ingressoService.realizarCompra(dto, emailLogado);
-            attributes.addFlashAttribute("sucesso", "Compra realizada com sucesso! Valor descontado da sua carteira.");
+            attributes.addFlashAttribute("sucesso", "Compra realizada com sucesso!");
             return "redirect:/ingressos/meus";
 
         } catch (Exception e) {
