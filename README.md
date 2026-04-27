@@ -46,7 +46,7 @@
 
 | Recurso | Link |
 |---------|------|
-| Screencast do Sistema | [Assistir no YouTube](https://youtu.be/-SNA-cdIQr8) |
+| Screencast do Sistema | [Assistir no YouTube](https://www.youtube.com/watch?v=bCbvHcg8d_c) |
 | Issue / Bug Tracker | [Planilha com bugs VPA-1 a VPA-20](https://docs.google.com/spreadsheets/d/1F9LqVv9y9CrThgpUzaNE2ApuoM_dKlN1JgAWgZU_HiA/edit?usp=sharing) |
 
 ### Screencast – Uso do Sistema (2ª entrega)
