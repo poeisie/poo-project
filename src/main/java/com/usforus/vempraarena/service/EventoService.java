@@ -54,6 +54,9 @@ public class EventoService {
         }
         novoEvento.setIngressosDisponiveisPorTipo(ingressos);
 
+        novoEvento.setIngressosDisponiveisPorTipo(dto.getIngressosDisponiveisPorTipo());
+        novoEvento.setPrecoIngresso(dto.getPrecoIngresso());
+
         repository.save(novoEvento);
     }
 

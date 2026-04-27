@@ -29,6 +29,8 @@ public class EventoDTO {
 
     private Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo;
 
+    private Integer precoIngresso;
+
     public String getNome() {
         return nome;
     }
@@ -84,4 +86,7 @@ public class EventoDTO {
     public void setIngressosDisponiveisPorTipo(Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo) {
         this.ingressosDisponiveisPorTipo = ingressosDisponiveisPorTipo;
     }
+
+    public Integer getPrecoIngresso() { return precoIngresso; }
+    public void setPrecoIngresso(Integer precoIngresso) { this.precoIngresso = precoIngresso; }
 }

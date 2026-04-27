@@ -50,10 +50,7 @@ public class AuthController {
     }
 
     @GetMapping("/home")
-    public String home(Principal principal, Model model){
-        Usuario usuario = usuarioService.buscarPorEmail(principal.getName());
-        model.addAttribute("nome", usuario.getName());
-        model.addAttribute("saldo", usuario.getSaldoMoedas());
-        return "home";
+    public String home(){
+        return "redirect:/eventos/listar";
     }
 }

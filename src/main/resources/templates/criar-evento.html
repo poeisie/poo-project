@@ -124,16 +124,28 @@
             </div>
 
             <!-- 🔥 NOVOS CAMPOS DE INGRESSOS POR TIPO (substituem a antiga "Capacidade") -->
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="capacidadeInteira">Ingressos disponíveis - Inteira</label>
-                    <input type="number" id="capacidadeInteira" name="ingressosDisponiveisPorTipo['INTEIRA']" class="form-control" required min="0" />
+            <div style="display: flex; gap: 15px;">
+                <div class="form-group" style="flex: 1;">
+                    <label>Carga de ingressos INTEIRA:</label>
+                    <input type="number" th:field="*{ingressosDisponiveisPorTipo['INTEIRA']}" placeholder="Ex: 600" required />
                 </div>
+
+                <div class="form-group" style="flex: 1;">
+                    <label>Carga de ingressos MEIA:</label>
+                    <input type="number" th:field="*{ingressosDisponiveisPorTipo['MEIA']}" placeholder="Ex: 400" required />
+                </div>
+
                 <div class="form-group">
-                    <label for="capacidadeMeia">Ingressos disponíveis - Meia-entrada</label>
-                    <input type="number" id="capacidadeMeia" name="ingressosDisponiveisPorTipo['MEIA_ENTRADA']" class="form-control" required min="0" />
+                    <label for="preco">Preço do Ingresso (Inteira):</label>
+                    <div class="input-group">
+                        <span class="input-prefix">M$</span>
+                        <input type="number" id="preco" th:field="*{precoIngresso}"
+                               placeholder="Ex: 100" min="0" required />
+                    </div>
+                    <small>A meia-entrada será calculada automaticamente como 50% deste valor.</small>
                 </div>
             </div>
+
 
             <div class="form-group">
                 <label for="descricao">Descrição Completa</label>

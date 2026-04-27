@@ -36,14 +36,16 @@
         <input type="hidden" th:field="*{eventoId}" />
 
         <label><strong>Tipo de Ingresso:</strong></label>
-        <select id="tipoIngresso" th:field="*{tipoIngresso}" onchange="atualizarTotal()">
+        <label for="tipoIngresso"></label><select id="tipoIngresso" th:field="*{tipoIngresso}" onchange="atualizarTotal()">
             <option value="INTEIRA">Inteira (100% do valor)</option>
             <option value="MEIA">Meia Entrada Estudante (50% do valor)</option>
         </select>
 
         <label><strong>Quantidade:</strong></label>
-        <input type="number" id="qtd" th:field="*{quantidade}" min="1" th:max="${evento.ingressosDisponiveis}" value="1" oninput="atualizarTotal()" required />
-
+        <label for="qtd"><strong>Quantidade de Ingressos:</strong></label>
+        <input type="number" id="qtd" th:field="*{quantidade}" min="1"
+               th:max="${#aggregates.sum(evento.ingressosDisponiveisPorTipo.values()) ?: 0}"
+               value="1" oninput="atualizarTotal()" required />
         <div class="resumo">
             Total a descontar: <strong style="color: #dc3545;"><span id="valorTotal" th:text="${evento.precoIngresso}"></span> moedas</strong>
         </div>
@@ -67,7 +69,7 @@
             if (tipo === 'MEIA') {
                 precoReal = Math.floor(precoBase / 2);
             }
-            document.getElementById('valorTotal').innerText = precoReal * qtd;
+            document.getElementById('valorTotal').innerText = (precoReal * qtd).toString();
         }
     }
 </script>
