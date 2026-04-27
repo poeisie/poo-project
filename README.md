@@ -82,6 +82,10 @@ Foram implementadas **três novas histórias** com foco na jornada do usuário c
 > O Bug Tracker foi migrado para o **próprio GitHub** (Issues + Projects).  
 > As ocorrências **VPA-1 a VPA-19** tiveram seus status atualizados.
 
+### Bug Tracker (visualização)
+
+colocar aqui o print do atual bug tracker atualizado
+
 ---
 
 ## Equipe
