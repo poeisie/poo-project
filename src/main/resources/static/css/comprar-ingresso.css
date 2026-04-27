@@ -1,0 +1,243 @@
+.compra-container {
+  display: flex;
+  gap: 48px;
+  padding: 24px 32px;
+  align-items: flex-start;
+}
+
+.compra-resumo h1,
+.compra-pagamento h1 {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-primary);
+  margin-bottom: 24px;
+}
+
+.compra-resumo {
+  flex: 1.2;
+  min-width: 0;
+}
+
+.resumo-evento {
+  margin-bottom: 28px;
+}
+
+.resumo-evento h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.resumo-evento p {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+  line-height: 1.6;
+}
+
+.resumo-ingressos h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+/* ── Erro ── */
+.erro {
+  background-color: #fdecea;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  border-radius: var(--border-radius-md);
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.resumo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-input-border);
+}
+
+.resumo-item-info {
+  flex: 1;
+}
+
+.resumo-item-tipo {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.resumo-item-preco {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 2px;
+}
+
+.resumo-item-desc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.resumo-item-qtd {
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.resumo-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 4px;
+}
+
+.resumo-total .resumo-item-tipo {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.resumo-total .resumo-item-preco {
+  font-size: 14px;
+}
+
+.compra-pagamento {
+  flex: 1;
+  min-width: 260px;
+  position: sticky;
+  top: 24px;
+}
+
+.saldo-box {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+
+.saldo-positivo {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.pagamento-secao {
+  margin-bottom: 24px;
+}
+
+.pagamento-secao h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.pagamento-opcao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-input-border);
+  cursor: pointer;
+}
+
+.pagamento-opcao:last-of-type {
+  border-bottom: none;
+}
+
+.pagamento-info {
+  flex: 1;
+}
+
+.pagamento-nome {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 1px;
+}
+
+.pagamento-detalhe {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.pagamento-opcao input[type=radio] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.pagamento-novo {
+  display: block;
+  font-size: 12px;
+  color: var(--color-primary);
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.pagamento-novo:hover {
+  text-decoration: underline;
+}
+
+form button[type=submit] {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+form button[type=submit]:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* ── Link cancelar ── */
+.compra-pagamento > div > a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.compra-pagamento > div > a:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsivo ── */
+@media (max-width: 700px) {
+  .compra-container {
+    flex-direction: column;
+    padding: 16px;
+    gap: 24px;
+  }
+
+  .compra-pagamento {
+    width: 100%;
+    position: static;
+  }
+}

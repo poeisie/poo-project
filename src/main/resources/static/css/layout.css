@@ -1,77 +1,85 @@
+/* ── Auth ── */
 .auth-page {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url('/images/estadio.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 24px;
-}
-
-.auth-page::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    z-index: 0;
-}
-
-.auth-card {
-    position: relative;
-    z-index: 1;
-    background: var(--color-card);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-card);
-    padding: 40px 36px;
-    width: 100%;
-    max-width: 440px;
-}
-
-.auth-card__title {
-    font-size: 22px;
-    font-weight: 700;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--color-text-primary);
-    margin-bottom: 32px;
-}
-
-.auth-card__footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: var(--color-text-muted);
-}
-
-.auth-card__footer a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.auth-card__footer a:hover {
-    text-decoration: underline;
-}
-
-.events-page {
   min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-image: url('/images/estadio.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  padding: 24px;
+}
+
+.auth-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+  background: var(--color-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 440px;
+}
+
+.auth-card__title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-primary);
+  margin-bottom: 32px;
+}
+
+.auth-card__footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.auth-card__footer a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-card__footer a:hover {
+  text-decoration: underline;
+}
+
+/* ── Events layout ── */
+.events-page {
+  min-height: 100vh;
+  background-image: url('/images/fundotela.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 14px;
+  color: #1a1a2e;
 }
 
 .events-container {
   display: flex;
   min-height: 100vh;
+  width: 100%;
 }
 
 .main {
   flex: 1;
   min-width: 0;
   padding: 24px;
-  background: rgba(240, 242, 245, 0.92);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
