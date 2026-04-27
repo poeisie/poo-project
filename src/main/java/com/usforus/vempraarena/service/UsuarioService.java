@@ -2,6 +2,8 @@ package com.usforus.vempraarena.service;
 import com.usforus.vempraarena.dto.UsuarioCadastroDTO;
 import com.usforus.vempraarena.entities.Usuario;
 import com.usforus.vempraarena.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,11 +11,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService implements UserDetailsService {
 
     private final UsuarioRepository repository;
     private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    SegurancaLoginService segurancaLoginService;
 
     public UsuarioService(UsuarioRepository repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
@@ -49,10 +56,19 @@ public class UsuarioService implements UserDetailsService {
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuário não encontrado!");
         }
-        return User.builder()
-                .username(usuario.getEmail())
-                .password(usuario.getPassword())
-                .roles(usuario.getRole())
-                .build();
+
+        if (!usuario.isAccountNonLocked()) {
+            segurancaLoginService.destravarSeTempoExpirou(usuario);
+        }
+
+        return new org.springframework.security.core.userdetails.User(
+                usuario.getEmail(),
+                usuario.getPassword(),
+                true, // enabled (conta ativa?)
+                true, // accountNonExpired (conta não expirou?)
+                true, // credentialsNonExpired (senha não expirou?)
+                usuario.isAccountNonLocked(), // 🚨 AGORA O SPRING LÊ O BLOQUEIO DO BANCO!
+                List.of(new SimpleGrantedAuthority(usuario.getRole()))
+        );
     }
 }
