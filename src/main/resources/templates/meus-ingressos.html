@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Meus Ingressos</title>
@@ -34,8 +33,7 @@
     <div class="ingresso-card" th:each="ingresso : ${ingressos}">
 
       <div class="ingresso-banner">
-        <img th:src="${ingresso.evento.bannerUrl}" th:if="${ingresso.evento.bannerUrl}" alt="Banner do evento" />
-        <div class="ingresso-banner-placeholder" th:unless="${ingresso.evento.bannerUrl}">
+        <div class="ingresso-banner-placeholder">
           <span>VEM<br>·PRA·<br>ARENA</span>
         </div>
       </div>
@@ -68,12 +66,6 @@
           </div>
         </div>
 
-        <div class="ingresso-qr">
-          <img th:if="${ingresso.qrCodeUrl}"
-               th:src="${ingresso.qrCodeUrl}"
-               alt="QR Code do ingresso" />
-          <div class="ingresso-qr-placeholder" th:unless="${ingresso.qrCodeUrl}"></div>
-        </div>
 
       </div>
 
