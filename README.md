@@ -71,7 +71,7 @@ Neste vídeo são apresentadas as histórias **"3. Visualização e Filtros de E
 
 | Recurso | Link |
 |---------|------|
-| Screencast do Sistema | [Assistir no YouTube](https://youtu.be/-SNA-cdIQr8) |
+| Screencast do Sistema | [Assistir no YouTube](https://youtu.be/LDaSQDC5Ia4) |
 | Bug Tracker (GitHub) | Atualização da ferramenta para o próprio GitHub |
 
 <br>
@@ -84,7 +84,7 @@ Foram implementadas **três novas histórias** com foco na jornada do usuário c
 - **Compra do Ingresso** – fluxo de pagamento
 - **Meus Ingressos** – acesso aos ingressos já adquiridos
 
-[![Screencast Terceira Entrega - Vem pra Arena](https://img.youtube.com/vi/-SNA-cdIQr8/0.jpg)](https://youtu.be/-SNA-cdIQr8)
+[![Screencast Terceira Entrega - Vem pra Arena](https://img.youtube.com/vi/LDaSQDC5Ia4/0.jpg)](https://youtu.be/LDaSQDC5Ia4)
 
 <br>
 
