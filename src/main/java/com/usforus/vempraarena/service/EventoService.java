@@ -25,6 +25,8 @@ public class EventoService {
         return repository.findByDataGreaterThanEqualOrderByDataAsc(LocalDate.now());
     }
 
+    public List<Evento> buscarPorCategoria(String categoria){ return repository.findByCategoriasContaining(categoria); }
+
     public List<Evento> listarEventosSemana(){
         LocalDate hoje = LocalDate.now();
         LocalDate inicioSemana = hoje.with(DayOfWeek.MONDAY);

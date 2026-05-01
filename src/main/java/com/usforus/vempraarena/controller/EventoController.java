@@ -73,4 +73,11 @@ public class EventoController {
         return "visualização-evento";
     }
 
+    @GetMapping("/categoria/{categoria}")
+    public String visualizarEventoPorCategoria(@PathVariable String categoria, Model model) {
+        List<Evento> eventos = eventoService.buscarPorCategoria(categoria);
+        model.addAttribute("eventos", eventos);
+        return "listar-eventos-categoria";
+    }
+
 }
