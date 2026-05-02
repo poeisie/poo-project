@@ -1,0 +1,195 @@
+.cadastro-page {
+    height: 100vh;
+    background-image: url("/images/estadio.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 80px;
+}
+
+.cadastro-page::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.cadastro-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 380px;
+    background: var(--color-card);
+    border-radius: var(--border-radius-lg);
+    padding: 40px 36px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.cadastro-title {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-primary);
+    margin: 0 0 4px 0;
+}
+
+.cadastro-title:last-of-type {
+    color: var(--color-primary);
+    margin-bottom: 28px;
+}
+
+.cadastro-container form > div {
+    margin-bottom: 4px;
+}
+
+.cadastro-container label {
+    display: inline-block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+.cadastro-container input,
+.cadastro-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid var(--color-input-border);
+    border-radius: var(--border-radius-md);
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    background: var(--color-input-bg);
+    color: var(--color-text-primary);
+}
+
+.cadastro-container input:focus,
+.cadastro-container select:focus {
+    border-color: var(--color-input-border-focus);
+    outline: none;
+}
+
+.cadastro-container form > div:has(> label + label) {
+    display: grid;
+    gap: 0 10px;
+    align-items: start;
+}
+
+.cadastro-container form > div:has(#rua) {
+    grid-template-columns: 1fr 90px;
+    grid-template-rows: auto auto auto;
+}
+
+.cadastro-container form > div:has(#rua) label[for="rua"] { grid-column: 1; grid-row: 1; }
+.cadastro-container form > div:has(#rua) label[for="numero"] { grid-column: 2; grid-row: 1; }
+.cadastro-container form > div:has(#rua) #rua { grid-column: 1; grid-row: 2; }
+.cadastro-container form > div:has(#rua) #numero { grid-column: 2; grid-row: 2; }
+.cadastro-container form > div:has(#rua) .error { grid-column: 1 / -1; grid-row: 3; }
+
+.cadastro-container form > div:has(#complemento) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+}
+
+.cadastro-container form > div:has(#complemento) label[for="complemento"] { grid-column: 1; grid-row: 1; }
+.cadastro-container form > div:has(#complemento) label[for="bairro"] { grid-column: 2; grid-row: 1; }
+.cadastro-container form > div:has(#complemento) #complemento { grid-column: 1; grid-row: 2; }
+.cadastro-container form > div:has(#complemento) #bairro { grid-column: 2; grid-row: 2; }
+.cadastro-container form > div:has(#complemento) .error { grid-column: 1 / -1; grid-row: 3; }
+
+.cadastro-container form > div:has(#cep) {
+    grid-template-columns: 130px 1fr 80px;
+    grid-template-rows: auto auto auto;
+}
+
+.cadastro-container form > div:has(#cep) label[for="cep"] { grid-column: 1; grid-row: 1; }
+.cadastro-container form > div:has(#cep) label[for="cidade"] { grid-column: 2; grid-row: 1; }
+.cadastro-container form > div:has(#cep) label[for="uf"] { grid-column: 3; grid-row: 1; }
+.cadastro-container form > div:has(#cep) #cep { grid-column: 1; grid-row: 2; }
+.cadastro-container form > div:has(#cep) #cidade { grid-column: 2; grid-row: 2; }
+.cadastro-container form > div:has(#cep) #uf { grid-column: 3; grid-row: 2; }
+.cadastro-container form > div:has(#cep) .error { grid-column: 1 / -1; grid-row: 3; }
+
+.cadastro-container form > div:has(#fotoFrente) {
+    display: flex;
+    flex-direction: column;
+}
+
+.cadastro-container form > div:has(#fotoFrente) > label:first-child {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.cadastro-container form > div:has(#fotoFrente) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0 10px;
+}
+
+.cadastro-container form > div:has(#fotoFrente) > label:first-of-type {
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+.cadastro-container form > div:has(#fotoFrente) #fotoFrente { grid-column: 1; grid-row: 2; }
+.cadastro-container form > div:has(#fotoFrente) label[for="fotoFrente"] { grid-column: 1; grid-row: 3; }
+.cadastro-container form > div:has(#fotoFrente) #fotoVerso { grid-column: 2; grid-row: 2; }
+.cadastro-container form > div:has(#fotoFrente) label[for="fotoVerso"] { grid-column: 2; grid-row: 3; }
+
+.error {
+    color: var(--color-error);
+    font-size: 12px;
+    margin-top: -6px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.input-error {
+    border-color: var(--color-error) !important;
+}
+
+.cadastro-container button[type="submit"] {
+    background-color: var(--color-primary);
+    color: var(--color-text-white);
+    border: none;
+    border-radius: var(--border-radius-md);
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.cadastro-container button[type="submit"]:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.cadastro-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+}
+
+.cadastro-footer a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cadastro-footer a:hover {
+    text-decoration: underline;
+}
