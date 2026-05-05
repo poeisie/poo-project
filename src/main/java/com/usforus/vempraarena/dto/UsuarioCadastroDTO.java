@@ -12,9 +12,6 @@ public class UsuarioCadastroDTO {
     private String email;
 
     @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
-    private String cpf;
-
-    @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$",
             message = "A senha deve ter no mínimo 8 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais (ex: @, #, $, !, &).")
     private String password;
@@ -33,14 +30,6 @@ public class UsuarioCadastroDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 
     public String getPassword() {

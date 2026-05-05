@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title th:text="${evento.nome}">Evento - Arena</title>
@@ -19,69 +18,66 @@
 
     <div class="evento-container">
 
-      <div class="evento-detalhes">
+      <section class="evento-detalhes">
+        <div class="evento-banner" aria-hidden="true"></div>
 
+        <div class="evento-linha-conteudo">
+          <div class="evento-conteudo">
+            <h1 th:text="${evento.nome}"></h1>
 
-        <h1 th:text="${evento.nome}"></h1>
-
-        <div class="evento-meta">
-          <span th:text="${#temporals.format(evento.data, 'dd de MMMM de yyyy')}"></span>
-          <span th:text="${evento.horario}"></span>
-          <span th:text="${evento.local}"></span>
-        </div>
-
-        <p th:text="${evento.descricao}"></p>
-
-
-
-        <h2>Localização</h2>
-        <div class="evento-mapa">
-          <iframe
-            th:src="'https://maps.google.com/maps?q=' + ${#strings.replace(evento.local, ' ', '+')} + '&output=embed'"
-            width="100%"
-            height="100%"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-
-      </div>
-
-      <div class="evento-compra">
-
-        <div class="ingresso-lista">
-          <div class="ingresso-item" th:each="entry : ${evento.ingressosDisponiveisPorTipo}">
-            <div class="ingresso-info">
-              <p class="ingresso-tipo"
-                 th:text="${entry.key.name() == 'INTEIRA' ? 'Inteira' : 'Meia Entrada'}">
-              </p>
-              <p class="ingresso-preco"
-                 th:text="${'R$ ' + (entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2)}">
-              </p>
-              <p class="ingresso-desc" th:text="${entry.value} + ' disponíveis'"></p>
+            <div class="evento-meta">
+              <span th:text="${#temporals.format(evento.data, 'dd ''de'' MMMM ''de'' yyyy')}"></span>
+              <span th:text="${evento.horario}"></span>
+              <span th:text="${evento.local}"></span>
             </div>
-            <div class="ingresso-qtd">
-              <button type="button" onclick="alterarQtd(this, -1)">−</button>
-              <input type="number"
-                     th:data-tipo="${entry.key.name()}"
-                     th:data-preco="${entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2}"
-                     th:max="${entry.value}"
-                     min="0" value="0"
-                     oninput="sincronizarForm(this)" />
-              <button type="button" onclick="alterarQtd(this, 1)">+</button>
+
+            <p th:text="${evento.descricao}"></p>
+
+            <h2>Localização</h2>
+            <div class="evento-mapa">
+              <iframe
+                th:src="'https://maps.google.com/maps?q=' + ${#strings.replace(evento.local, ' ', '+')} + '&output=embed'"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
             </div>
           </div>
+
+          <aside class="evento-compra">
+            <div class="ingresso-lista">
+              <div class="ingresso-item" th:each="entry : ${evento.ingressosDisponiveisPorTipo}">
+                <div class="ingresso-info">
+                  <p class="ingresso-tipo" th:text="${entry.key.name() == 'INTEIRA' ? 'Inteira' : 'Meia Entrada'}"></p>
+                  <p class="ingresso-preco" th:text="${'R$ ' + (entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2)}"></p>
+                  <p class="ingresso-desc" th:text="${entry.value} + ' disponíveis'"></p>
+                </div>
+                <div class="ingresso-qtd">
+                  <button type="button" onclick="alterarQtd(this, -1)">−</button>
+                  <label class="sr-only" th:for="'qtd-' + ${entry.key.name()}">Quantidade de ingressos</label>
+                  <input type="number"
+                         th:id="'qtd-' + ${entry.key.name()}"
+                         th:data-tipo="${entry.key.name()}"
+                         th:data-preco="${entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2}"
+                         th:max="${entry.value}"
+                         min="0" value="0"
+                         oninput="sincronizarForm(this)" />
+                  <button type="button" onclick="alterarQtd(this, 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <form id="formCompra">
+              <input type="hidden" id="tipoInput" value="" />
+              <input type="hidden" id="qtdInput" value="0" />
+              <button type="submit" id="btnComprar" disabled>Comprar Ingressos</button>
+            </form>
+          </aside>
         </div>
-
-        <form id="formCompra">
-          <input type="hidden" id="tipoInput" value="" />
-          <input type="hidden" id="qtdInput" value="0" />
-          <button type="submit" id="btnComprar" disabled>Comprar Ingressos</button>
-        </form>
-
-      </div>
+      </section>
 
     </div>
 

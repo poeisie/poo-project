@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+<link rel="stylesheet" href="/css/global.css">
+<link rel="stylesheet" href="/css/layout.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/cadastro-cnpj.css">
+<title>Cadastro Produtor CNPJ - Arena Pernambuco</title>
+</head>
+<body>
+<div class="cadastro-page">
+  <div class="cadastro-container">
+    <h2 class="cadastro-title">Crie sua conta</h2>
+    <h2 class="cadastro-title">Pessoa jurídica</h2>
+
+    <div th:if="${erroDuplicidade}" class="error">
+      <span th:text="${erroDuplicidade}"></span>
+      <a th:href="@{/login}">Fazer login</a>
+    </div>
+
+    <form th:action="@{/produtor/cadastro/cnpj}" th:object="${usuarioCadastroProdutorDTO}" method="post">
+
+      <div>
+        <label for="cnpj">CNPJ</label>
+        <input type="text" id="cnpj" th:field="*{cnpj}" placeholder="00.000.000/0000-00" th:classappend="${#fields.hasErrors('cnpj')} ? 'input-error' : ''" />
+        <span class="error" th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"></span>
+      </div>
+
+      <div>
+        <label for="razaoSocial">Razão Social</label>
+        <input type="text" id="razaoSocial" th:field="*{razaoSocial}" placeholder="Razão Social" th:classappend="${#fields.hasErrors('razaoSocial')} ? 'input-error' : ''" />
+        <span class="error" th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></span>
+      </div>
+
+      <div>
+        <label for="inscricaoMunicipal">Inscrição Municipal</label>
+        <input type="text" id="inscricaoMunicipal" th:field="*{inscricaoMunicipal}" placeholder="0.000.000-0" th:classappend="${#fields.hasErrors('inscricaoMunicipal')} ? 'input-error' : ''" />
+        <span class="error" th:if="${#fields.hasErrors('inscricaoMunicipal')}" th:errors="*{inscricaoMunicipal}"></span>
+      </div>
+
+      <button type="submit">Completar cadastro CNPJ</button>
+
+    </form>
+  </div>
+</div>
+</body>
+</html>

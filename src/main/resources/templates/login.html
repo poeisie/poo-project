@@ -12,14 +12,7 @@
         <div class="login-container">
             <h2 class="auth-title">ENTRAR NA SUA CONTA</h2>
 
-            <div th:if="${param.error}">
-                <div class="alert alert-danger" style="color: red; border: 1px solid red; padding: 10px;">
-                    <p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION'] != null}"
-                       th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
-                        Erro de login
-                    </p>
-                </div>
-            </div>
+            <div th:if="${param.error}" class="alert-error">Usuário ou senha inválidos.</div>
             <div th:if="${param.logout}" class="alert-success">Você saiu com sucesso.</div>
             <div th:if="${param.cadastrado}" class="alert-success">Cadastro realizado! Faça login.</div>
 
