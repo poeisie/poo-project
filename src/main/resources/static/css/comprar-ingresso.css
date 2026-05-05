@@ -1,8 +1,13 @@
+
 .compra-container {
+  padding: 24px 32px;
+}
+
+.compra-container form {
   display: flex;
   gap: 48px;
-  padding: 24px 32px;
   align-items: flex-start;
+  width: 100%;
 }
 
 .compra-resumo h1,
@@ -15,6 +20,7 @@
   margin-bottom: 24px;
 }
 
+/* ── Lado Esquerdo (Resumo) ── */
 .compra-resumo {
   flex: 1.2;
   min-width: 0;
@@ -101,6 +107,14 @@
   flex-shrink: 0;
 }
 
+.resumo-item-qtd input[type="number"] {
+  background: transparent;
+  color: white;
+  border: none;
+  font-weight: bold;
+  text-align: center;
+}
+
 .resumo-total {
   display: flex;
   align-items: center;
@@ -117,6 +131,7 @@
   font-size: 14px;
 }
 
+/* ── Lado Direito (Pagamento) ── */
 .compra-pagamento {
   flex: 1;
   min-width: 260px;
@@ -196,6 +211,7 @@
   text-decoration: underline;
 }
 
+/* Botão de Finalizar */
 form button[type=submit] {
   display: block;
   width: 100%;
@@ -226,11 +242,14 @@ form button[type=submit]:hover {
   text-decoration: underline;
 }
 
-/* ── Responsivo ── */
+
 @media (max-width: 700px) {
   .compra-container {
-    flex-direction: column;
     padding: 16px;
+  }
+
+  .compra-container form {
+    flex-direction: column;
     gap: 24px;
   }
 

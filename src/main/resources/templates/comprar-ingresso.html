@@ -19,62 +19,64 @@
 
     <div class="compra-container">
 
-      <div class="compra-resumo">
+      <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
 
-        <h1>Resumo da Compra</h1>
+        <input type="hidden" th:field="*{eventoId}" />
+        <!-- Variável invisível para o Javascript ler o preço do evento -->
+        <span id="precoUnitario" style="display:none;" th:text="${evento.precoIngresso}"></span>
 
-        <div class="resumo-evento">
-          <h2 th:text="${evento.nome}">Nome do Evento</h2>
-          <p>Dia: <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span></p>
-          <p>Horário: <span th:text="${evento.horario}"></span></p>
-          <p>Local: <span th:text="${evento.local}"></span></p>
-        </div>
+        <div class="compra-resumo">
 
-        <div class="resumo-ingressos">
-          <h2>Ingressos</h2>
+          <h1>Resumo da Compra</h1>
 
-          <div class="erro" th:if="${erroCompra}" th:text="${erroCompra}"></div>
+          <div class="resumo-evento">
+            <h2 th:text="${evento.nome}">Nome do Evento</h2>
+            <p>Dia: <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span></p>
+            <p>Horário: <span th:text="${evento.horario}"></span></p>
+            <p>Local: <span th:text="${evento.local}"></span></p>
+          </div>
 
-          <div class="resumo-item" th:each="entry : ${evento.ingressosDisponiveisPorTipo}">
-            <div class="resumo-item-info">
-              <p class="resumo-item-tipo"
-                 th:text="${entry.key.name() == 'INTEIRA' ? 'Inteira' : 'Meia Entrada'}">
-              </p>
-              <p class="resumo-item-preco"
-                 th:text="${'R$ ' + (entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2)}">
-              </p>
-              <p class="resumo-item-desc" th:text="${entry.value} + ' disponíveis'"></p>
+          <div class="resumo-ingressos">
+            <h2>Ingressos</h2>
+
+            <div class="erro" th:if="${erroCompra}" th:text="${erroCompra}"></div>
+
+            <!-- SELEÇÃO DE TIPO E QUANTIDADE (Estrutura original restaurada) -->
+            <div class="resumo-item">
+              <div class="resumo-item-info">
+                <p class="resumo-item-tipo">
+                  <select th:field="*{tipoIngresso}" id="tipoIngresso" onchange="atualizarTotal()">
+                    <option value="INTEIRA">Inteira</option>
+                    <option value="MEIA">Meia Entrada</option>
+                  </select>
+                </p>
+              </div>
+              <div class="resumo-item-qtd">
+                <input type="number" th:field="*{quantidade}" id="qtd" min="1" max="5" value="1" onchange="atualizarTotal()" onkeyup="atualizarTotal()"/>
+              </div>
             </div>
-            <div class="resumo-item-qtd">
-              <span th:text="${compraDto.quantidade}">1</span>
+
+            <!-- TOTAL RESTAURADO (Agora ele espalha na horizontal novamente!) -->
+            <div class="resumo-total">
+              <div class="resumo-item-info">
+                <p class="resumo-item-tipo">Total</p>
+                <p class="resumo-item-preco" id="valorTotal" th:text="'R$ ' + ${evento.precoIngresso}"></p>
+              </div>
+              <div class="resumo-item-qtd">
+                <span id="qtdLabel">1</span>
+              </div>
             </div>
           </div>
 
-          <div class="resumo-total">
-            <div class="resumo-item-info">
-              <p class="resumo-item-tipo">Total</p>
-              <p class="resumo-item-preco" id="valorTotal" th:text="'R$ ' + ${evento.precoIngresso}"></p>
-            </div>
-            <div class="resumo-item-qtd">
-              <span th:text="${compraDto.quantidade}">1</span>
-            </div>
+        </div>
+
+        <div class="compra-pagamento">
+
+          <h1>Formas de Pagamento</h1>
+
+          <div class="saldo-box">
+            Seu saldo atual: <span class="saldo-positivo" th:text="${usuario.saldoMoedas} + ' moedas'"></span>
           </div>
-        </div>
-
-      </div>
-
-      <div class="compra-pagamento">
-
-        <h1>Formas de Pagamento</h1>
-
-        <div class="saldo-box">
-          Seu saldo atual: <span class="saldo-positivo" th:text="${usuario.saldoMoedas} + ' moedas'"></span>
-        </div>
-
-        <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
-          <input type="hidden" th:field="*{eventoId}" />
-          <input type="hidden" th:field="*{tipoIngresso}" />
-          <input type="hidden" th:field="*{quantidade}" />
 
           <div class="pagamento-secao">
             <h3>Pré-Cadastradas</h3>
@@ -115,24 +117,16 @@
               <input type="radio" th:field="*{formaPagamento}" value="BOLETO" />
             </label>
 
-            <label class="pagamento-opcao">
-              <div class="pagamento-info">
-                <p class="pagamento-nome">Arena Coin</p>
-                <p class="pagamento-detalhe saldo-positivo" th:text="'R$ ' + ${usuario.saldoMoedas}"></p>
-              </div>
-              <input type="radio" th:field="*{formaPagamento}" value="ARENA_COIN" />
-            </label>
-          </div>
 
           <button type="submit">Finalizar Compra</button>
 
-        </form>
+          <div style="text-align: center; margin-top: 15px;">
+            <a th:href="@{/eventos/listar}">Cancelar</a>
+          </div>
 
-        <div style="text-align: center; margin-top: 15px;">
-          <a th:href="@{/eventos}">Cancelar</a>
         </div>
 
-      </div>
+      </form>
 
     </div>
 
@@ -145,11 +139,17 @@
     let precoBase = parseInt(document.getElementById('precoUnitario').innerText);
     let qtd = parseInt(document.getElementById('qtd').value);
     let tipo = document.getElementById('tipoIngresso').value;
-    if (!isNaN(precoBase) && !isNaN(qtd)) {
+
+    if (!isNaN(precoBase) && !isNaN(qtd) && qtd > 0) {
       let precoReal = tipo === 'MEIA' ? Math.floor(precoBase / 2) : precoBase;
+
       document.getElementById('valorTotal').innerText = 'R$ ' + (precoReal * qtd).toString();
+
+      document.getElementById('qtdLabel').innerText = qtd.toString();
     }
   }
+
+  window.onload = atualizarTotal;
 </script>
 
 </body>
