@@ -52,11 +52,6 @@ public class IngressoService {
 
         int precoTotalCompra = quantidade * precoUnitarioCobrado;
 
-        if (usuario.getSaldoMoedas() < precoTotalCompra) {
-            throw new Exception("Saldo insuficiente! A compra custa " + precoTotalCompra + " moedas, mas você tem " + usuario.getSaldoMoedas() + ".");
-        }
-        usuario.setSaldoMoedas(usuario.getSaldoMoedas() - precoTotalCompra);
-        usuarioRepository.save(usuario);
 
         Ingresso novoIngresso = new Ingresso(usuario, evento, quantidade, precoUnitarioCobrado, tipo);
         ingressoRepository.save(novoIngresso);

@@ -34,10 +34,7 @@
     <div class="ingresso-card" th:each="ingresso : ${ingressos}">
 
       <div class="ingresso-banner">
-        <img th:src="${ingresso.evento.bannerUrl}" th:if="${ingresso.evento.bannerUrl}" alt="Banner do evento" />
-        <div class="ingresso-banner-placeholder" th:unless="${ingresso.evento.bannerUrl}">
-          <span>VEM<br>·PRA·<br>ARENA</span>
-        </div>
+        <img src="/img/evento-padrao.jpg" alt="Banner do Evento">
       </div>
 
       <div class="ingresso-header">
@@ -69,10 +66,7 @@
         </div>
 
         <div class="ingresso-qr">
-          <img th:if="${ingresso.qrCodeUrl}"
-               th:src="${ingresso.qrCodeUrl}"
-               alt="QR Code do ingresso" />
-          <div class="ingresso-qr-placeholder" th:unless="${ingresso.qrCodeUrl}"></div>
+          <img src="/img/qrcode-padrao.png" alt="QR Code do Ingresso">
         </div>
 
       </div>
