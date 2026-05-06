@@ -14,4 +14,5 @@ public interface EventoRepository extends JpaRepository<Evento, Long> {
     List<Evento> findByDataGreaterThanEqualOrderByDataAsc(LocalDate dataAtual);
     List<Evento> findByDataBetweenOrderByDataAsc(LocalDate inicioSemana, LocalDate fimSemana);
     List<Evento> findByCategoriasContaining(String categoria);
+    List<Evento> findByProdutorId(Long produtorId);
 }

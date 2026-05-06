@@ -102,7 +102,7 @@ public class ProdutorController {
         Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
         model.addAttribute("usuario", usuario);
 
-        List<Evento> eventos = eventoService.listarEvento();
+        List<Evento> eventos = eventoService.listarEventosProdutor(usuario.getId());
         model.addAttribute("eventos", eventos);
         return "meus-eventos";
     }
