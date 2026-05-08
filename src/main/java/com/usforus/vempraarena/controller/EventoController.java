@@ -79,4 +79,9 @@ public class EventoController {
         return "listar-eventos-categoria";
     }
 
+    @GetMapping("/aceite-eventos")
+    public String listarEventosAceitos(Model model) {
+        return "aceite-eventos";
+    }
+
 }

@@ -29,5 +29,16 @@
         </form>
         <span class="user-avatar"></span>
     </th:block>
+
+      <th:block th:fragment="aceiteEventosActions">
+        <a th:href="@{/produtor/dashboard}" class="btn-nav green">+ Criar novos eventos</a>
+        <a th:href="@{/produtor/visualização-eventos}" class="btn-nav blue">Lista dos eventos</a> 
+        <a th:href="@{/eventos/aceite-eventos}" class="btn-nav blue">Aceite dos eventos</a> 
+        <form th:action="@{/logout}" method="post" style="display:inline">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <button type="submit" class="btn-nav white outline">Sair</button>
+        </form>
+        <span class="user-avatar"></span>
+    </th:block>
 </body>
 </html>
