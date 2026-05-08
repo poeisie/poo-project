@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+
+<head>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/aceite-eventos.css">
+    <meta charset="UTF-8">
+    <title>VEM·PRA·ARENA. — Aceite dos Eventos</title>
+</head>
+<body>
+
+    <div th:replace="layout/navbar :: navbar(~{layout/navbar :: aceiteEventosActions})"></div>
+
+    <main class="main">
+        <h1 class="content-box__title">ACEITE DOS EVENTOS</h1>
+
+        <ul class="event-list">
+            <li class="event-row" th:each="i : ${#numbers.sequence(1, 11)}">
+
+                <span class="event-row__name" th:text="'Nome do Evento ' + ${i}">Nome do Evento</span>
+
+                <span class="event-row__divider"></span>
+                <span class="event-row__category">Esporte</span>
+
+                <span class="event-row__divider"></span>
+                <span class="event-row__organizer">Aguinaldo Neto</span>
+
+                <span class="event-row__divider"></span>
+                <span class="event-row__date">05/04/2026</span>
+
+                <span class="event-row__divider"></span>
+                <span class="event-row__time">17:00 - 19:00</span>
+
+                <span class="event-row__divider"></span>
+                <a href="#" class="event-row__link">Ver mais eventos <span>›</span></a>
+
+                <span class="event-row__divider"></span>
+
+                <div class="event-row__actions">
+                    <button class="btn-action btn-action--accept">Aceitar</button>
+                    <button class="btn-action btn-action--refuse">Recusar</button>
+                </div>
+            </li>
+        </ul>
+    </main>
+
+</body>
+</html>
