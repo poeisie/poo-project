@@ -11,9 +11,6 @@ html, body {
     font-style: normal;
 }
 
-/* =========================================
-   MAIN
-   ========================================= */
 .main {
     min-height: 100vh;
     padding: 65px 30px 40px;
@@ -36,9 +33,6 @@ html, body {
     text-transform: uppercase;
 }
 
-/* =========================================
-   EVENT LIST
-   ========================================= */
 .event-list {
     padding-top: 0;
     margin-top: 0;
@@ -78,7 +72,7 @@ html, body {
     font-size: 0.88rem;
     font-weight: 500;
     color: #1D1D1B;
-    flex: 2; /* ← substitui o min-width */
+    flex: 2; 
 }
 
 .event-row__category {
@@ -118,7 +112,7 @@ html, body {
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: center; /* ← isso centraliza em elementos flex */
+    justify-content: center; 
     gap: 3px;
     transition: color 0.15s ease;
 }
@@ -140,9 +134,6 @@ html, body {
     flex-shrink: 0;
 }
 
-/* =========================================
-   ACTION BUTTONS
-   ========================================= */
 .btn-action {
     padding: 7px 18px;
     font-family: 'Inter', sans-serif;
@@ -176,9 +167,6 @@ html, body {
     background-color: #c9302c;
 }
 
-/* =========================================
-   RESPONSIVO
-   ========================================= */
 @media (max-width: 900px) {
     .event-row {
         flex-wrap: wrap;
@@ -214,24 +202,23 @@ html, body {
 .event-list {
     max-height: calc(100vh - 70px - 100px);
     overflow-y: auto;
-    padding-right: 6px; /* ← afasta o conteúdo do scroll */
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #c0c0c0 transparent; /* Firefox: cor da barra e do fundo */
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: #c0c0c0 transparent; 
 }
 
-/* Chrome, Safari, Edge */
 .event-list::-webkit-scrollbar {
     width: 6px;
 }
 
 .event-list::-webkit-scrollbar-track {
     background: transparent;
-    margin: 4px 0; /* ← afasta dos cantos */
+    margin: 4px 0; 
 }
 
 .event-list::-webkit-scrollbar-thumb {
     background-color: #c0c0c0;
-    border-radius: 999px; /* ← arredonda a barrinha */
+    border-radius: 999px; 
 }
 
 .event-list::-webkit-scrollbar-thumb:hover {
