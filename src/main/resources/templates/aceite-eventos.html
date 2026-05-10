@@ -12,6 +12,9 @@
 <body>
 
 <main class="main">
+
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
+
     <h1 class="content-box__title">ACEITE DOS EVENTOS</h1>
 
     <div th:if="${sucesso}" class="erro" style="background-color: #edf7ed; color: var(--color-success); border-color: var(--color-success); margin-bottom: 20px;" th:text="${sucesso}"></div>
