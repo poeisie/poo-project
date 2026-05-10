@@ -55,8 +55,8 @@ public class EventoController {
         Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
         model.addAttribute("nomeUsuario", usuario.getName());
 
-        List<Evento> eventos = eventoService.listarEvento();
-        List<Evento> eventosSemana = eventoService.listarEventosSemana();
+        List<Evento> eventos = eventoService.listarEventosAprovados();
+        List<Evento> eventosSemana = eventoService.listarEventosAprovados();
 
         model.addAttribute("eventos", eventos);
         model.addAttribute("eventosSemana", eventosSemana);
