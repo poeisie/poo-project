@@ -1,0 +1,227 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'Sizmo';
+    src: url('../fonts/SizmoPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 65px 30px 40px;
+    background-image: url('../images/fundo-tela-dashboard.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+.content-box__title {
+    font-family: 'Sizmo', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #000000;
+    margin-top: 12px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+}
+
+.event-list {
+    padding-top: 0;
+    margin-top: 0;
+    max-height: calc(100vh - 70px - 100px);
+    overflow-y: auto;
+}
+
+.event-row {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 14px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.15s ease;
+}
+
+.event-row:last-child {
+    margin-bottom: 0;
+}
+
+.event-row:hover {
+    background-color: #e8e8e8;
+}
+
+.event-row__divider {
+    display: inline-block;
+    width: 1px;
+    height: 20px;
+    background-color: #d0d0d0;
+    flex-shrink: 0;
+    margin: 0 14px;
+}
+
+.event-row__name {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #1D1D1B;
+    flex: 2;
+}
+
+.event-row__category {
+    font-size: 0.88rem;
+    color: #1D1D1B;
+    flex: 1;
+    text-align: center;
+}
+
+.event-row__organizer {
+    font-size: 0.88rem;
+    color: #1D1D1B;
+    flex: 1;
+    text-align: center;
+}
+
+.event-row__date {
+    font-size: 0.88rem;
+    color: #1D1D1B;
+    flex: 1;
+    text-align: center;
+}
+
+.event-row__time {
+    font-size: 0.88rem;
+    color: #1D1D1B;
+    flex: 1;
+    text-align: center;
+}
+
+.event-row__link {
+    font-size: 0.82rem;
+    font-weight: normal;
+    color: #2373B9;
+    text-decoration: none;
+    white-space: nowrap;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    transition: color 0.15s ease;
+}
+
+.event-row__link span {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.event-row__link:hover {
+    color: #1c5b94;
+    text-decoration: underline;
+}
+
+.event-row__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-action {
+    padding: 7px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: normal;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #ffffff;
+    transition: background-color 0.18s ease, transform 0.1s ease;
+    white-space: nowrap;
+}
+
+.btn-action:active {
+    transform: scale(0.97);
+}
+
+.btn-action--accept {
+    background-color: #4A9560;
+}
+
+.btn-action--accept:hover {
+    background-color: #3d7a4f;
+}
+
+.btn-action--refuse {
+    background-color: #D9534F;
+}
+
+.btn-action--refuse:hover {
+    background-color: #c9302c;
+}
+
+@media (max-width: 900px) {
+    .event-row {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .event-row__divider {
+        display: none;
+    }
+
+    .event-row__name,
+    .event-row__category,
+    .event-row__organizer,
+    .event-row__date,
+    .event-row__time {
+        min-width: unset;
+        font-size: 0.82rem;
+        text-align: center;
+    }
+
+    .event-row__link {
+        font-weight: normal;
+        flex: unset;
+        width: 100%;
+    }
+
+    .event-row__actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+.event-list {
+    max-height: calc(100vh - 70px - 100px);
+    overflow-y: auto;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: #c0c0c0 transparent;
+}
+
+.event-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.event-list::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 4px 0;
+}
+
+.event-list::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    border-radius: 999px;
+}
+
+.event-list::-webkit-scrollbar-thumb:hover {
+    background-color: #999999;
+}

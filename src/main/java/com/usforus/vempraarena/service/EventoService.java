@@ -2,6 +2,7 @@ package com.usforus.vempraarena.service;
 
 import com.usforus.vempraarena.dto.EventoDTO;
 import com.usforus.vempraarena.entities.Evento;
+import com.usforus.vempraarena.entities.StatusEvento;
 import com.usforus.vempraarena.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +61,30 @@ public class EventoService {
         novoEvento.setPrecoIngresso(dto.getPrecoIngresso());
 
         repository.save(novoEvento);
+    }
+
+    public List<Evento> listarEventosAprovados() {
+        return repository.findByStatusOrderByDataAsc(StatusEvento.CONFIRMADO);
+    }
+
+    public List<Evento> listarEventosPendentes() {
+        return repository.findByStatus(StatusEvento.PENDENTE);
+    }
+
+    public void aprovarEvento(Long id) throws Exception {
+        Evento evento = repository.findById(id)
+                .orElseThrow(() -> new Exception("Evento não encontrado."));
+
+        evento.setStatus(StatusEvento.CONFIRMADO);
+        repository.save(evento);
+    }
+
+    public void rejeitarEvento(Long id) throws Exception {
+        Evento evento = repository.findById(id)
+                .orElseThrow(() -> new Exception("Evento não encontrado."));
+
+        evento.setStatus(StatusEvento.REJEITADO);
+        repository.save(evento);
     }
 
     public Evento buscarPorId(Long id) {

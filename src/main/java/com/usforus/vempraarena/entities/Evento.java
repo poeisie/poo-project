@@ -32,6 +32,10 @@ public class Evento {
     @Column(nullable = false)
     private String categorias;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private StatusEvento status = StatusEvento.PENDENTE;
+
     @ElementCollection
     @CollectionTable(name = "evento_ingressos_disponiveis",
                      joinColumns = @JoinColumn(name = "evento_id"))
@@ -125,6 +129,14 @@ public class Evento {
 
     public void setPrecoIngresso(Integer precoIngresso) {
         this.precoIngresso = precoIngresso;
+    }
+
+    public StatusEvento getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEvento status) {
+        this.status = status;
     }
 }
 
