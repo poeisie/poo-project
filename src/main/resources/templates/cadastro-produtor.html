@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+
+<head>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/cadastro-produtor.css">
+    <meta charset="UTF-8">
+    <title>VEM·PRA·ARENA. — Cadastro Produtor</title>
+ </head>
+<body>
+    <div th:replace="layout/navbar :: navbar(~{layout/navbar :: produtorActions})"></div>
+        
+    <div class="cadastro-produtor-page">
+        <div class="hero-card">
+            <h2 style="font-family: 'Sizmo', sans-serif !important;">Seja um Produtor</h2>
+            <p class="card-description">É seu primeiro acesso?<br>Complemente seus dados para<br>acessar a Área do Produtor</p>
+     
+            <button onclick="window.location.href='/produtor/cadastro/cpf'" class="btn-card">
+                Criar como Pessoa Física (CPF)
+            </button>
+            <button onclick="window.location.href='/produtor/cadastro/cnpj'" class="btn-card">
+                Criar como Pessoa Jurídica (CNPJ)
+            </button>
+        </div> 
+    </div>
+</body>
+</html>

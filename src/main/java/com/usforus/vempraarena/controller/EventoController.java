@@ -5,7 +5,6 @@ import com.usforus.vempraarena.entities.Evento;
 import com.usforus.vempraarena.entities.Usuario;
 import com.usforus.vempraarena.repository.UsuarioRepository;
 import com.usforus.vempraarena.service.EventoService;
-import com.usforus.vempraarena.service.UsuarioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.core.Authentication;
 
 import java.util.List;
@@ -37,10 +35,11 @@ public class EventoController {
     }
 
     @PostMapping("/criar")
-    public String criarEvento(@ModelAttribute ("EventoDTO") EventoDTO dto, Model model, RedirectAttributes redirectAttributes) throws Exception {
+    public String criarEvento(@ModelAttribute ("EventoDTO") EventoDTO dto, Model model, Authentication authentication) throws Exception {
 
         try {
-            eventoService.criarEvento(dto);
+            Usuario produtor = usuarioRepository.findByEmail(authentication.getName());
+            eventoService.criarEvento(dto, produtor);
             return "redirect:/eventos/listar";
 
         } catch (Exception e) {

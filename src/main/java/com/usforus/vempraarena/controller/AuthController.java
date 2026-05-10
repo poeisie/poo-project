@@ -21,12 +21,14 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model){
+        model.addAttribute("paginaAtual", "login");
         return "login";
     }
 
     @GetMapping("/cadastro")
     public String exibirFormularioCadastro(Model model){
+        model.addAttribute("paginaAtual", "cadastro");
         model.addAttribute("usuarioCadastroDTO", new UsuarioCadastroDTO());
         return "cadastro";
     }

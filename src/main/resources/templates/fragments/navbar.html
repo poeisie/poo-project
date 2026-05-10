@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+
+<nav th:fragment="navbar" class="navbar">
+  <span class="navbar-logo">VEM·PRA·ARENA.</span>
+
+  <a th:href="@{/cadastro}" class="navbar-btn"
+     sec:authorize="isAnonymous()"
+     th:if="${paginaAtual == 'login'}">Criar conta</a>
+
+
+  <a th:href="@{/login}" class="navbar-btn"
+     sec:authorize="isAnonymous()"
+     th:if="${paginaAtual == 'cadastro'}">Entrar</a>
+
+  <div class="navbar-actions" sec:authorize="isAuthenticated()">
+    <a th:href="@{/tour}" class="navbar-btn navbar-btn--green">Agendar Tour</a>
+    <a th:href="@{/ingressos/meus}" class="navbar-btn navbar-btn--outline">Meus Ingressos</a>
+    <a th:href="@{/produtor}" class="navbar-btn navbar-btn--outline">Área do Produtor</a>
+    <a th:href="@{/logout}" class="navbar-btn navbar-btn--outline">Sair</a>
+    <div class="navbar-avatar">👤</div>
+  </div>
+</nav>
+
+</body>
+</html>

@@ -46,6 +46,10 @@ public class Evento {
     @Column(nullable = false)
     private Integer precoIngresso = 0;
 
+    @ManyToOne
+    @JoinColumn(name = "produtorId")
+    private Usuario produtor;
+
     public Map<TipoIngresso, Integer> getIngressosDisponiveisPorTipo() {
         return ingressosDisponiveisPorTipo;
     }
@@ -138,5 +142,10 @@ public class Evento {
     public void setStatus(StatusEvento status) {
         this.status = status;
     }
+    public Usuario getProdutor(){ return produtor;}
+
+    public void setProdutor(Usuario produtor){ this.produtor = produtor; }
+
+
 }
 

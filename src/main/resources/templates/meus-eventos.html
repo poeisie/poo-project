@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/meus-eventos.css">
+    <meta charset="UTF-8">
+    <title>VEM·PRA·ARENA. — Meus Eventos</title>
+</head>
+<body>
+    <div th:insert="layout/navbar :: navbar(~{layout/navbar :: produtorActions})"></div>
+
+    <div class="eventos-page">
+        <h1 class="eventos-title">EVENTOS</h1>
+
+        <div class="eventos-empty" th:if="${#lists.isEmpty(eventos)}">
+            <p>Você ainda não criou nenhum evento.</p>
+            <a th:href="@{/eventos/criar}" class="btn-nav green">+ Criar primeiro evento</a>
+        </div>
+
+        <div class="eventos-grid" th:unless="${#lists.isEmpty(eventos)}">
+            <div class="evento-card" th:each="evento : ${eventos}">
+                <div class="evento-thumbnail">
+                    <div class="evento-img-placeholder">
+                        <span>VEM·<br>·PRA<br>ARENA<br>.</span>
+                    </div>
+                </div>
+                <div class="evento-info">
+                    <h3 class="evento-nome" th:text="${evento.nome} ?: ''"></h3>
+                    <div class="line"></div>
+                    <div class="evento-meta">
+                        <span class="evento-data"
+                            th:text="${evento.data != null} ? ${#temporals.format(evento.data, 'dd/MM/yyyy')} : ''">
+                            13/03/2026
+                        </span>
+                        <span class="evento-horario"
+                            th:text="${evento.horario != null} ? ${#temporals.format(evento.horario, 'HH:mm')} : ''">
+                            20:00
+                        </span>
+                    </div>
+                    <div class="line"></div>
+                    <p class="evento-local" th:text="${evento.local} ?: ''"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

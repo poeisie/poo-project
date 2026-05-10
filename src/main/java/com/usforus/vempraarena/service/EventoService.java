@@ -3,6 +3,7 @@ package com.usforus.vempraarena.service;
 import com.usforus.vempraarena.dto.EventoDTO;
 import com.usforus.vempraarena.entities.Evento;
 import com.usforus.vempraarena.entities.StatusEvento;
+import com.usforus.vempraarena.entities.Usuario;
 import com.usforus.vempraarena.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,8 @@ public class EventoService {
         return repository.findByDataGreaterThanEqualOrderByDataAsc(LocalDate.now());
     }
 
+    public List<Evento> listarEventosProdutor(Long produtorId){ return repository.findByProdutorId(produtorId);}
+
     public List<Evento> buscarPorCategoria(String categoria){ return repository.findByCategoriasContaining(categoria); }
 
     public List<Evento> listarEventosSemana(){
@@ -35,7 +38,8 @@ public class EventoService {
         return repository.findByDataBetweenOrderByDataAsc(inicioSemana, fimSemana);
     }
 
-    public void criarEvento(EventoDTO dto) throws Exception{
+
+    public void criarEvento(EventoDTO dto, Usuario produtor) throws Exception{
         if(dto.getData().isBefore(LocalDate.now())){
             throw new Exception("A data do evento não pode ser anterior à data atual.");
         }
@@ -50,6 +54,8 @@ public class EventoService {
         novoEvento.setData(dto.getData());
         novoEvento.setHorario(dto.getHorario());
         novoEvento.setCategorias(dto.getCategorias());
+
+        novoEvento.setProdutor(produtor);
 
         Map<com.usforus.vempraarena.entities.TipoIngresso, Integer> ingressos = dto.getIngressosDisponiveisPorTipo();
         if (ingressos == null) {

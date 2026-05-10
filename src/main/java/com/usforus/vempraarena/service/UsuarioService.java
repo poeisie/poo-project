@@ -97,6 +97,8 @@ public class UsuarioService implements UserDetailsService {
         return repository.findByEmail(email);
     }
 
+
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = repository.findByEmail(email);
