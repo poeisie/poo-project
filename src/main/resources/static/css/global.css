@@ -23,8 +23,19 @@
   --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-body {
+html, body {
+  height: 100%;
   margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: Arial, sans-serif;
   padding-top: 60px;
+  overflow: hidden;
+}
+
+main, .auth-page, .events-page, .cadastro-page {
+  height: calc(100vh - 60px);
+  overflow-y: auto;
 }

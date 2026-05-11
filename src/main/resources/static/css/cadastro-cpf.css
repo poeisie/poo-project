@@ -1,12 +1,13 @@
 .cadastro-page {
-    height: 100vh;
-    background-image: url("/images/estadio.jpg");
+    height: calc(100vh - 60px);
+    background-image: url("/images/background-cadastro-cpf.png");
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 80px;
+    overflow-y: auto;
 }
 
 .cadastro-page::before {

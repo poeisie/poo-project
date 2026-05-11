@@ -1,6 +1,6 @@
 .cadastro-page {
     height: 100vh;
-    background-image: url("/images/estadio.jpg");
+    background-image: url("/images/background-cadastro-cpf.png");
     background-size: cover;
     background-position: center;
     display: flex;
