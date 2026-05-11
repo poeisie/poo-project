@@ -42,8 +42,7 @@
             <span class="event-row__time" th:text="${evento.horario}">17:00</span>
 
             <span class="event-row__divider"></span>
-            <a th:href="@{/eventos}" class="event-row__link">Ver detalhes <span>›</span></a>
-
+            <a th:href="@{/eventos/{id}(id=${evento.id})}" class="event-row__link" target="_blank">Ver detalhes <span>›</span></a>
             <span class="event-row__divider"></span>
 
             <div class="event-row__actions" style="display: flex; gap: 8px;">
