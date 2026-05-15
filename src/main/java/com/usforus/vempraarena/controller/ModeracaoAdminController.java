@@ -1,7 +1,9 @@
 package com.usforus.vempraarena.controller;
 
+import com.usforus.vempraarena.dto.DashboardEstatisticoDTO;
 import com.usforus.vempraarena.entities.Usuario;
 import com.usforus.vempraarena.repository.UsuarioRepository;
+import com.usforus.vempraarena.service.DashboardService;
 import com.usforus.vempraarena.service.EventoService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -20,12 +22,26 @@ public class ModeracaoAdminController {
 
     private final EventoService eventoService;
     private final UsuarioRepository usuarioRepository;
+    private final DashboardService dashboardService;
 
-    public ModeracaoAdminController(EventoService eventoService, UsuarioRepository usuarioRepository) {
+    public ModeracaoAdminController(EventoService eventoService, UsuarioRepository usuarioRepository, DashboardService dashboardService) {
         this.eventoService = eventoService;
         this.usuarioRepository = usuarioRepository;
+        this.dashboardService = dashboardService;
     }
 
+    @GetMapping("/dashboardEstatistico")
+    public String dashboardEstatistico(Model model, Authentication authentication) {
+
+        Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
+        DashboardEstatisticoDTO metricas = dashboardService.calcularMetricas();
+
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("metricas", metricas);
+
+        return "admin-dashboard-estatistico";
+
+    }
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, Authentication authentication) {

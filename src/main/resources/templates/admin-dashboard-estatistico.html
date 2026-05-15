@@ -1,0 +1,29 @@
+<div>
+    <h3>Total de Eventos Confirmados</h3>
+    <p th:text="${metricas.totalEventosConfirmados}">0</p>
+</div>
+
+<div>
+    <h3>Total de Ingressos Vendidos</h3>
+    <p th:text="${metricas.totalIngressosVendidos}">0</p>
+</div>
+
+<div>
+    <h3>Receita Total</h3>
+    <p th:text="${#numbers.formatDecimal(metricas.receitaTotal, 1, 'POINT', 2, 'COMMA')}">0,00</p>
+</div>
+
+<div>
+    <h3>Média de Ingressos por Evento</h3>
+    <p th:text="${#numbers.formatDecimal(metricas.mediaIngressosPorEvento, 1, 'POINT', 2, 'COMMA')}">0,00</p>
+</div>
+
+<div>
+    <h3>Desvio Padrão de Ingressos</h3>
+    <p th:text="${#numbers.formatDecimal(metricas.desvioPadraoIngressos, 1, 'POINT', 2, 'COMMA')}">0,00</p>
+</div>
+
+<div>
+    <h3>Categoria Mais Frequente</h3>
+    <p th:text="${metricas.modaCategoria}">Sem dados</p>
+</div>
