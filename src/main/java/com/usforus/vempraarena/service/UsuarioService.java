@@ -3,6 +3,7 @@ import com.usforus.vempraarena.dto.UsuarioCadastroDTO;
 import com.usforus.vempraarena.dto.UsuarioCadastroProdutorDTO;
 import com.usforus.vempraarena.entities.Usuario;
 import com.usforus.vempraarena.repository.UsuarioRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -93,6 +94,21 @@ public class UsuarioService implements UserDetailsService {
 
     public Usuario buscarPorEmail(String email) {
         return repository.findByEmail(email);
+    }
+
+
+    public boolean isProdutor(Authentication authentication) {
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return false;
+        }
+
+        String email = authentication.getName();
+
+        if (email == null) return false;
+
+        Usuario usuario = repository.findByEmail(email);
+        return usuario != null && "PROD".equalsIgnoreCase(usuario.getRole());
     }
 
 

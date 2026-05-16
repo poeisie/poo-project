@@ -35,6 +35,7 @@ public class ProdutorController {
         this.eventoService = eventoService;
     }
 
+
     @GetMapping("/cadastro")
     public String formularioCPFOuCNPJ(Model model, Authentication authentication) {
         Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
@@ -109,6 +110,11 @@ public class ProdutorController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, Authentication authentication) {
+
+        if (!usuarioService.isProdutor(authentication)) {
+            return "redirect:/produtor/cadastro";
+        }
+
         Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
         model.addAttribute("usuario", usuario);
         return "dashboard";
