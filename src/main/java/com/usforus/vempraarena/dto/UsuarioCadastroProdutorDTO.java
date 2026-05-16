@@ -5,7 +5,6 @@ public class UsuarioCadastroProdutorDTO {
     private String cpf;
     private String cnpj;
     private String razaoSocial;
-    private String inscricaoMunicipal;
 
 
     public String getCpf() {
@@ -32,11 +31,5 @@ public class UsuarioCadastroProdutorDTO {
         this.razaoSocial = razaoSocial;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
-    }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
-    }
 }
