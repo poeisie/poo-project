@@ -11,102 +11,55 @@
 </head>
 <body class="events-page">
 
-<aside class="sidebar">
-    <button class="sidebar-toggle-btn">«</button>
-
-    <div class="sidebar-profile-wrapper">
-        <div class="sidebar-profile">
-            <div class="sidebar-avatar">👤</div>
-            <div class="sidebar-profile-info">
-                <div class="name" th:text="${#authentication?.name ?: 'Nome Sobrenome'}">Nome Sobrenome</div>
-                <div class="email">email@email.com</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Funcionalidades <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/eventos/listar}">Eventos</a>
-            <a th:href="@{/ingressos/meus}">Meus Ingressos</a>
-        </div>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Configurações <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/conta}">Configurações da conta</a>
-            <a th:href="@{/notificacoes}">Notificações</a>
-        </div>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Legal <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/termos}">Termos de uso</a>
-            <a th:href="@{/privacidade}">Política de privacidade</a>
-        </div>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-section-header" onclick="toggleSection(this)">
-            Suporte <span class="arrow">▾</span>
-        </div>
-        <div class="sidebar-section-links">
-            <a th:href="@{/faq}">Central de ajuda/FAQ</a>
-            <a th:href="@{/contato}">Fale Conosco</a>
-        </div>
-    </div>
-</aside>
-
 <main class="main">
 
-    <a th:href="@{/eventos/listar}" class="voltar-link">
-        <span class="voltar-arrow">«</span> Voltar para <strong>Tela Principal</strong>
-    </a>
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
 
-    <div class="form-container">
-        <h2>Criar Novo Evento</h2>
+    <div class="page-content">
 
-        <div class="erro-msg" th:if="${erroEvento}" th:text="${erroEvento}"></div>
+        <div class="content-wrapper">
 
-        <form th:action="@{/eventos/criar}" th:object="${EventoDTO}" method="post">
+            <a th:href="@{/eventos/listar}" class="voltar-link">
+                <span class="voltar-arrow">«</span> Voltar para <strong>Tela Principal</strong>
+            </a>
 
-            <div class="form-group">
-                <label for="nome">Nome do Evento</label>
-                <input type="text" id="nome" th:field="*{nome}"
-                       placeholder="Ex: Nome do Evento - Primeira Edição" />
-            </div>
+            <div class="form-container">
+            <h2>Criar Novo Evento</h2>
 
-            <div class="form-group">
-                <label for="local">Local do Evento</label>
-                <select id="local" th:field="*{local}">
-                    <option value="">Arena Pernambuco - Sala 001</option>
-                    <option value="sala2">Arena Pernambuco - Sala 002</option>
-                    <option value="sala3">Arena Pernambuco - Sala 003</option>
-                    <option value="auditorio">Arena Pernambuco - Auditório Principal</option>
-                </select>
-            </div>
+            <div class="erro-msg" th:if="${erroEvento}" th:text="${erroEvento}"></div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="data">Data do Evento</label>
-                    <input type="date" id="data" th:field="*{data}" />
+            <form th:action="@{/eventos/criar}" th:object="${EventoDTO}" method="post">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome do Evento</label>
+                        <input type="text" id="nome" th:field="*{nome}"
+                               placeholder="Ex: Nome do Evento - Primeira Edição" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="local">Local do Evento</label>
+                        <select id="local" th:field="*{local}">
+                            <option value="">Arena Pernambuco - Sala 001</option>
+                            <option value="sala2">Arena Pernambuco - Sala 002</option>
+                            <option value="sala3">Arena Pernambuco - Sala 003</option>
+                            <option value="auditorio">Arena Pernambuco - Auditório Principal</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="horario">Horário</label>
-                    <input type="time" id="horario" th:field="*{horario}" />
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="data">Data do Evento</label>
+                        <input type="date" id="data" th:field="*{data}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="horario">Horário</label>
+                        <input type="time" id="horario" th:field="*{horario}" />
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
                     <label for="categorias">Categorias</label>
                     <div class="categorias-input-wrapper">
                         <span class="cat-tag verde">Palestra</span>
@@ -122,56 +75,40 @@
                         </select>
                     </div>
                 </div>
-            </div>
 
-            <!-- 🔥 NOVOS CAMPOS DE INGRESSOS POR TIPO (substituem a antiga "Capacidade") -->
-            <div style="display: flex; gap: 15px;">
-                <div class="form-group" style="flex: 1;">
-                    <label>Carga de ingressos INTEIRA:</label>
-                    <input type="number" th:field="*{ingressosDisponiveisPorTipo['INTEIRA']}" placeholder="Ex: 600" required />
-                </div>
+                <div class="textareas-wrapper">
 
-                <div class="form-group" style="flex: 1;">
-                    <label>Carga de ingressos MEIA:</label>
-                    <input type="number" th:field="*{ingressosDisponiveisPorTipo['MEIA']}" placeholder="Ex: 400" required />
-                </div>
-
-                <div class="form-group">
-                    <label for="preco">Preço do Ingresso (Inteira):</label>
-                    <div class="input-group">
-                        <span class="input-prefix">M$</span>
-                        <input type="number" id="preco" th:field="*{precoIngresso}"
-                               placeholder="Ex: 100" min="0" required />
+                    <div class="form-group textarea-group">
+                        <label for="descricao">Descrição Completa</label>
+                        <textarea id="descricao" th:field="*{descricao}" maxlength="2000"
+                                  placeholder="Descreva seu evento com detalhes para compreensão do público..."
+                                  oninput="updateCounter(this, 'char-count')"></textarea>
+                        <div class="textarea-counter">Máx.: 2000 / <span id="char-count">0</span></div>
                     </div>
-                    <small>A meia-entrada será calculada automaticamente como 50% deste valor.</small>
+
+                    <div class="form-group textarea-group">
+                        <label for="sobreProdutor">Sobre o Produtor</label>
+                        <textarea id="sobreProdutor" th:field="*{sobreProdutor}" maxlength="2000"
+                                  placeholder="Faça uma breve descrição sobre você e seu histórico que será exibida ao público..."
+                                  oninput="updateCounter(this, 'char-count-produtor')"></textarea>
+                        <div class="textarea-counter">Máx.: 2000 / <span id="char-count-produtor">0</span></div>
+                    </div>
+
                 </div>
-            </div>
 
+                <button type="submit" class="btn-submit">Criar novo evento</button>
 
-            <div class="form-group">
-                <label for="descricao">Descrição Completa</label>
-                <textarea id="descricao" th:field="*{descricao}" rows="6" maxlength="2000"
-                          placeholder="Descreva seu evento com detalhes para compreensão do público..."
-                          oninput="updateCounter(this)"></textarea>
-                <div class="textarea-counter">Máx.: 2000/<span id="char-count">0</span></div>
-            </div>
+            </form>
+        </div>
 
-            <button type="submit" class="btn-submit">Criar novo evento</button>
+        </div>
 
-        </form>
     </div>
-
 </main>
 
 <script>
-    function toggleSection(header) {
-        header.classList.toggle('collapsed');
-        const links = header.nextElementSibling;
-        links.style.display = links.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function updateCounter(textarea) {
-        document.getElementById('char-count').textContent = textarea.value.length;
+    function updateCounter(textarea, spanId) {
+        document.getElementById(spanId).textContent = textarea.value.length;
     }
 </script>
 
