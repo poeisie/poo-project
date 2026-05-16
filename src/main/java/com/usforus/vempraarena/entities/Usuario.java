@@ -30,6 +30,9 @@ public class Usuario implements UserDetails {
     @Column(unique = true, nullable = true)
     private String razaoSocial;
 
+    @Column(unique = true, nullable = true)
+    private String inscricaoMunicipal;
+
     @Column(nullable = false)
     private String password;
 
@@ -111,6 +114,14 @@ public class Usuario implements UserDetails {
 
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
+    }
+
+    public String getInscricaoMunicipal() {
+        return inscricaoMunicipal;
+    }
+
+    public void setInscricaoMunicipal(String inscricaoMunicipal) {
+        this.inscricaoMunicipal = inscricaoMunicipal;
     }
 
     public void setPassword(String password) {

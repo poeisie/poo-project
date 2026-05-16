@@ -33,6 +33,11 @@
         <span class="error" th:if="${#fields.hasErrors('razaoSocial')}" th:errors="*{razaoSocial}"></span>
       </div>
 
+      <div>
+        <label for="inscricaoMunicipal">Inscrição Municipal</label>
+        <input type="text" id="inscricaoMunicipal" th:field="*{inscricaoMunicipal}" placeholder="0.000.000-0" th:classappend="${#fields.hasErrors('inscricaoMunicipal')} ? 'input-error' : ''" />
+        <span class="error" th:if="${#fields.hasErrors('inscricaoMunicipal')}" th:errors="*{inscricaoMunicipal}"></span>
+      </div>
 
       <button type="submit">Completar cadastro CNPJ</button>
 
