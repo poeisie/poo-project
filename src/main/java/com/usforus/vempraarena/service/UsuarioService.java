@@ -61,7 +61,6 @@ public class UsuarioService implements UserDetailsService {
         usuario.setCpf(dto.getCpf());
         usuario.setCnpj(null);
         usuario.setRazaoSocial(null);
-        usuario.setInscricaoMunicipal(null);
         usuario.setRole("PROD");
 
         repository.save(usuario);
@@ -86,7 +85,6 @@ public class UsuarioService implements UserDetailsService {
         usuario.setCnpj(dto.getCnpj());
         usuario.setCpf(null);
         usuario.setRazaoSocial(dto.getRazaoSocial());
-        usuario.setInscricaoMunicipal(dto.getInscricaoMunicipal());
         usuario.setRole("PROD");
 
         repository.save(usuario);
