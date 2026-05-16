@@ -76,6 +76,28 @@
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ingressosInteira">Carga de ingressos INTEIRA</label>
+                        <input type="number" id="ingressosInteira"
+                               th:field="*{ingressosDisponiveisPorTipo['INTEIRA']}"
+                               placeholder="Ex: 600" min="0" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingressosMeia">Carga de ingressos MEIA</label>
+                        <input type="number" id="ingressosMeia"
+                               th:field="*{ingressosDisponiveisPorTipo['MEIA']}"
+                               placeholder="Ex: 400" min="0" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="precoIngresso">Preco do Ingresso (Inteira)</label>
+                        <input type="number" id="precoIngresso" th:field="*{precoIngresso}"
+                               placeholder="Ex: 100" min="0" required />
+                    </div>
+                </div>
+
                 <div class="textareas-wrapper">
 
                     <div class="form-group textarea-group">
