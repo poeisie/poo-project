@@ -3,103 +3,203 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Explorar Eventos - Arena Pernambuco</title>
+    <title>Explorar Eventos - VemPraArena</title>
     <link rel="stylesheet" href="/css/listar-eventos.css"/>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/components.css">
+    <style>
+        @font-face {
+            font-family: 'Sizmo Pro';
+            src: url('https://fonts.googleapis.com/css?family=Poppins:600,700') format('woff2');
+        }
+    </style>
 </head>
 <body class="events-page">
 
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 
 <div class="events-container">
-
-
     <main class="main">
 
-        <div class="events-header">
-            <h1>🗓️ Eventos na Arena</h1>
-            <a sec:authorize="hasRole('ADMIN')" th:href="@{/eventos/novo}" class="btn-primary btn-criar">+ Criar Evento</a>
-        </div>
-
-        <p class="secao-titulo">EXPLORE POR <span>#COLEÇÕES</span></p>
-        <div class="colecoes-wrapper">
-            <div class="colecoes-scroll">
-                <div class="colecao-item"><div class="icon">🎵</div><div class="label">Festas e Shows</div></div>
-                <div class="colecao-item"><div class="icon">🎭</div><div class="label">Teatros e Espetáculos</div></div>
-                <div class="colecao-item"><div class="icon">🎤</div><div class="label">Stand up Comedy</div></div>
-                <div class="colecao-item"><div class="icon">👟</div><div class="label">Esportes</div></div>
-                <div class="colecao-item"><div class="icon">🗺️</div><div class="label">Passeios e Tours</div></div>
-                <div class="colecao-item"><div class="icon">🎙️</div><div class="label">Congressos e Palestras</div></div>
-                <div class="colecao-item"><div class="icon">🧸</div><div class="label">Infantil</div></div>
-                <div class="colecao-item"><div class="icon">🛍️</div><div class="label">Eventos com loja</div></div>
+        <!-- Coleções Section -->
+        <section class="colecoes-section">
+            <div class="colecoes-header">
+                <h2 class="secao-titulo">EXPLORE POR <span class="titulo-destaque">#COLEÇÕES</span></h2>
             </div>
-            <div class="colecoes-nav">›</div>
-        </div>
+            <div class="colecoes-wrapper">
+                <div class="colecoes-grid" id="colecoes-grid">
+                <a th:href="@{/eventos/categoria/Festas}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🎵</div>
+                        <span class="colecao-label">Festas e Shows</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Teatro}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🎭</div>
+                        <span class="colecao-label">Teatros e Espetáculos</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/StandUp}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🎤</div>
+                        <span class="colecao-label">Stand up<br/>Comedy</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Esportes}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">⚽</div>
+                        <span class="colecao-label">Esportes</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Passeios}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🗺️</div>
+                        <span class="colecao-label">Passeios e Tours</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Congressos}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🎙️</div>
+                        <span class="colecao-label">Congressos e Palestras</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Infantil}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🧸</div>
+                        <span class="colecao-label">Infantil</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Loja}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🛍️</div>
+                        <span class="colecao-label">Eventos com loja</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Cursos}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">📚</div>
+                        <span class="colecao-label">Cursos e Workshops</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Gastronomia}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🍽️</div>
+                        <span class="colecao-label">Gastronomia</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Praia}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">✨</div>
+                        <span class="colecao-label">Pride</span>
+                    </div>
+                </a>
+                <a th:href="@{/eventos/categoria/Visita}" class="colecao-item">
+                    <div class="colecao-box">
+                        <div class="colecao-icon">🙏</div>
+                        <span class="colecao-label">Religião e Espiritualidade</span>
+                    </div>
+                </a>
+            </div>
+                <button class="colecoes-nav-next" id="colecoes-next" aria-label="Próximas coleções">›</button>
+            </div>
+        </section>
 
-        <div class="secao-eventos">
-            <p class="secao-titulo">EVENTOS <span>#ESSA SEMANA</span></p>
+        <!-- Eventos essa semana -->
+        <section class="secao-eventos">
+            <h2 class="secao-titulo">EVENTOS <span class="titulo-destaque">#ESSA SEMANA</span></h2>
 
-            <div class="grid-eventos" th:if="${not #lists.isEmpty(eventosSemana)}">
-                <div class="card" th:each="evento : ${eventosSemana}">
-                    <a th:href="@{/eventos/{id}(id=${evento.id})}" style="text-decoration: none; color: inherit;">
-                        <div class="card-img">
-                            <div class="card-img-placeholder">VEM PRA ARENA</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
-                            <div class="card-meta">
-                                <span class="card-data" th:text="${#temporals.format(evento.data, 'dd')} + ' de ' + ${#temporals.format(evento.data, 'MMM')} + ' de ' + ${#temporals.format(evento.data, 'yyyy')}">13 de Mar de 2026</span>
-                                <span class="card-horario" th:text="${#temporals.format(evento.horario, 'HH:mm')} + ' - 19:00'">17:00 - 19:00</span>
+            <div class="carrossel-wrapper" th:if="${not #lists.isEmpty(eventosSemana)}">
+                <div class="carrossel-scroll" id="carrossel-semana">
+                    <div class="evento-card" th:each="evento : ${eventosSemana}">
+                        <a th:href="@{/eventos/{id}(id=${evento.id})}" class="evento-link">
+                            <div class="evento-img">
+                                <span class="evento-img-placeholder">VEM<br/>PRA<br/>ARENA</span>
                             </div>
-                            <div class="card-local" th:text="${evento.local}">Rua endereço, bairro, Recife/PE</div>
-                        </div>
-                    </a>
+                            <div class="evento-body">
+                                <h3 class="evento-titulo" th:text="${evento.nome}">NOME DO EVENTO</h3>
+                                <div class="evento-info">
+                                    <span class="evento-data" th:text="${#temporals.format(evento.data, 'dd')} + ' de ' + ${#temporals.format(evento.data, 'MMM')} + ' de ' + ${#temporals.format(evento.data, 'yyyy')}">13 de Mar de 2026</span>
+                                    <span class="evento-horario" th:text="${#temporals.format(evento.horario, 'HH:mm')} + ' - 19:00'">17:00 - 19:00</span>
+                                </div>
+                                <div class="evento-local" th:text="${evento.local}">Rua endereço, bairro, Recife/PE</div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
+                <button class="carrossel-nav-btn" id="nav-semana-next" aria-label="Próximos eventos">›</button>
             </div>
 
             <div class="empty-state" th:if="${#lists.isEmpty(eventosSemana)}">
                 <p>Nenhum evento esta semana 😢</p>
             </div>
-        </div>
+        </section>
 
-        <div class="secao-eventos">
-            <p class="secao-titulo">TODOS OS <span>#EVENTOS</span></p>
+        <!-- Todos os eventos -->
+        <section class="secao-eventos">
+            <h2 class="secao-titulo">TODOS OS <span class="titulo-destaque">#EVENTOS</span></h2>
 
-            <div class="grid-eventos" th:if="${not #lists.isEmpty(eventosRecomendados)}">
-                <div class="card" th:each="evento : ${eventosRecomendados}">
-                    <a th:href="@{/eventos/{id}(id=${evento.id})}" style="text-decoration: none; color: inherit;">
-                        <div class="card-img">
-                            <div class="card-img-placeholder">VEM PRA ARENA</div>
+            <div th:if="${not #lists.isEmpty(eventosRecomendados)}">
+                <div class="carrossel-wrapper">
+                    <div class="carrossel-scroll" id="carrossel-todos">
+                        <div class="evento-card" th:each="evento : ${eventosRecomendados}">
+                            <a th:href="@{/eventos/{id}(id=${evento.id})}" class="evento-link">
+                                <div class="evento-img">
+                                    <span class="evento-img-placeholder">VEM<br/>PRA<br/>ARENA</span>
+                                </div>
+                                <div class="evento-body">
+                                    <h3 class="evento-titulo" th:text="${evento.nome}">NOME DO EVENTO</h3>
+                                    <div class="evento-info">
+                                        <span class="evento-data" th:text="${#temporals.format(evento.data, 'dd')} + ' de ' + ${#temporals.format(evento.data, 'MMM')} + ' de ' + ${#temporals.format(evento.data, 'yyyy')}">13 de Mar de 2026</span>
+                                        <span class="evento-horario" th:text="${#temporals.format(evento.horario, 'HH:mm')} + ' - 19:00'">17:00 - 19:00</span>
+                                    </div>
+                                    <div class="evento-local" th:text="${evento.local}">Rua endereço, bairro, Recife/PE</div>
+                                </div>
+                            </a>
                         </div>
-                        <div class="card-body">
-                            <div class="card-titulo" th:text="${evento.nome}">NOME DO EVENTO</div>
-                            <div class="card-meta">
-                                <span class="card-data" th:text="${#temporals.format(evento.data, 'dd')} + ' de ' + ${#temporals.format(evento.data, 'MMM')} + ' de ' + ${#temporals.format(evento.data, 'yyyy')}">13 de Mar de 2026</span>
-                                <span class="card-horario" th:text="${#temporals.format(evento.horario, 'HH:mm')} + ' - 19:00'">17:00 - 19:00</span>
-                            </div>
-                            <div class="card-local" th:text="${evento.local}">Rua endereço, bairro, Recife/PE</div>
-                        </div>
-                    </a>
+                    </div>
+                    <button class="carrossel-nav-btn" id="nav-todos-next" aria-label="Próximos eventos">›</button>
+                </div>
+
+                <div class="ver-mais-container">
+                    <a th:href="@{/eventos/todos}" class="ver-mais-btn">Ver mais eventos</a>
                 </div>
             </div>
 
             <div class="empty-state" th:if="${#lists.isEmpty(eventosRecomendados)}">
                 <p>Nenhum evento disponível ainda 😢</p>
             </div>
-        </div>
+        </section>
 
     </main>
-
 </div>
 
 <script>
-    function toggleSection(header) {
-        header.classList.toggle('collapsed');
-        const links = header.nextElementSibling;
-        links.style.display = links.style.display === 'none' ? 'block' : 'none';
+    function setupCarrossel(scrollId, nextBtnId, prevBtnId) {
+        const scroll = document.getElementById(scrollId);
+        const btnNext = document.getElementById(nextBtnId);
+        const btnPrev = document.getElementById(prevBtnId);
+        
+        if (!scroll || !btnNext) return;
+        
+        if (btnNext) {
+            btnNext.addEventListener('click', () => {
+                scroll.scrollBy({ left: 300, behavior: 'smooth' });
+            });
+        }
+        
+        if (btnPrev) {
+            btnPrev.addEventListener('click', () => {
+                scroll.scrollBy({ left: -300, behavior: 'smooth' });
+            });
+        }
     }
+
+    // Setup carousels
+    setupCarrossel('carrossel-semana', 'nav-semana-next');
+    setupCarrossel('carrossel-todos', 'nav-todos-next');
+    setupCarrossel('colecoes-grid', 'colecoes-next');
 </script>
 
 </body>
