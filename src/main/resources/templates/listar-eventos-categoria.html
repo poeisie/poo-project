@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${categoria != null} ? 'Eventos - ' + ${categoria} : 'Eventos por Categoria'">Eventos por Categoria</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/meus-eventos.css">
+</head>
+<body>
+
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+
+<div class="eventos-page">
+    <h1 class="eventos-title" th:text="${categoria != null} ? 'Eventos: ' + ${categoria} : 'Eventos'">EVENTOS</h1>
+
+    <div class="eventos-empty" th:if="${#lists.isEmpty(eventos)}">
+        <p>Nenhum evento encontrado para esta categoria.</p>
+        <a th:href="@{/eventos/listar}" class="btn-nav">Voltar</a>
+    </div>
+
+    <div class="eventos-grid" th:unless="${#lists.isEmpty(eventos)}">
+        <div class="evento-card" th:each="evento : ${eventos}">
+            <div class="evento-thumbnail">
+                <div class="evento-img-placeholder">
+                    <span>VEM·<br>·PRA<br>ARENA<br>.</span>
+                </div>
+            </div>
+            <div class="evento-info">
+                <h3 class="evento-nome" th:text="${evento.nome} ?: ''"></h3>
+                <div class="line"></div>
+                <div class="evento-meta">
+                        <span class="evento-data"
+                              th:text="${evento.data != null} ? ${#temporals.format(evento.data, 'dd/MM/yyyy')} : ''">13/03/2026</span>
+                    <span class="evento-horario"
+                          th:text="${evento.horario != null} ? ${#temporals.format(evento.horario, 'HH:mm')} : ''">20:00</span>
+                </div>
+                <div class="line"></div>
+                <p class="evento-local" th:text="${evento.local} ?: ''"></p>
+                <div style="margin-top:8px;">
+                    <a th:href="@{/eventos/{id}(id=${evento.id})}" class="btn-nav">Ver detalhes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

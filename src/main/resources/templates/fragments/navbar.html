@@ -21,7 +21,7 @@
      th:if="${paginaAtual == 'cadastro'}">Entrar</a>
 
   <div class="navbar-actions" sec:authorize="isAuthenticated()">
-    <a th:href="@{/tour}" class="navbar-btn navbar-btn--green">Agendar Tour</a>
+    <a th:href="@{/eventos/categoria/Visita}" class="navbar-btn navbar-btn--green">Agendar Tour</a>
     <a th:href="@{/ingressos/meus}" class="navbar-btn navbar-btn--outline">Meus Ingressos</a>
     <a th:href="@{/produtor/dashboard}" class="navbar-btn navbar-btn--outline">Área do Produtor</a>
     <form th:action="@{/logout}" method="post" style="display:inline">
