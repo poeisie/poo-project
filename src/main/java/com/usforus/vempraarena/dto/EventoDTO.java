@@ -88,5 +88,11 @@ public class EventoDTO {
     }
 
     public Integer getPrecoIngresso() { return precoIngresso; }
-    public void setPrecoIngresso(Integer precoIngresso) { this.precoIngresso = precoIngresso; }
+    public void setPrecoIngresso(Integer precoIngresso) { this.precoIngresso = precoIngresso; 
+    }
+
+    private String sobreProdutor;
+
+    public String getSobreProdutor() { return sobreProdutor; }
+    public void setSobreProdutor(String sobreProdutor) { this.sobreProdutor = sobreProdutor; }
 }
