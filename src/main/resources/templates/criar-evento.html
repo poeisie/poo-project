@@ -122,7 +122,7 @@
 
                         </div>
 
-                    </div><!-- fim .form-scroll-area -->
+                    </div>
 
                     <button type="submit" class="btn-submit">Criar novo evento</button>
 
@@ -165,11 +165,9 @@
 
         categoriasAdicionadas.add(valor);
 
-        // Oculta a opção no select
         const opcao = [...select.options].find(o => o.value === valor);
         if (opcao) opcao.hidden = true;
 
-        // Cria a tag
         const cor = coresCategorias[corIndex % coresCategorias.length];
         corIndex++;
 
@@ -178,7 +176,6 @@
         tag.dataset.valor = valor;
         tag.innerHTML = `${valor} <span class="cat-tag-remove" onclick="removerCategoria('${valor}', this)">×</span>`;
 
-        // Adiciona input hidden para o form enviar o valor
         const hidden = document.createElement('input');
         hidden.type = 'hidden';
         hidden.name = 'categorias';
@@ -186,7 +183,6 @@
         hidden.id = `hidden-cat-${valor}`;
         document.getElementById('categorias-hidden').appendChild(hidden);
 
-        // Insere a tag antes do select
         const wrapper = document.getElementById('categorias-wrapper');
         wrapper.insertBefore(tag, select);
 
@@ -196,20 +192,16 @@
     function removerCategoria(valor, btn) {
         categoriasAdicionadas.delete(valor);
 
-        // Remove a tag
         btn.closest('.cat-tag').remove();
 
-        // Reabilita a opção no select
         const select = document.getElementById('categorias');
         const opcao = [...select.options].find(o => o.value === valor);
         if (opcao) opcao.hidden = false;
 
-        // Remove o input hidden
         const hidden = document.getElementById(`hidden-cat-${valor}`);
         if (hidden) hidden.remove();
     }
 
-    // Inicializa com Palestra e Tecnologia como padrão
     window.addEventListener('DOMContentLoaded', () => {
         const select = document.getElementById('categorias');
         select.value = 'Palestra';
