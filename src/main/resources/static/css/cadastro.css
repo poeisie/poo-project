@@ -1,12 +1,17 @@
 .cadastro-page {
-    height: 100vh;
+    height: calc(100vh - 60px); 
+    
     background-image: url("/images/estadio.jpg");
     background-size: cover;
     background-position: center;
+    background-attachment: fixed; 
+    
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: center; 
     padding: 80px;
+    box-sizing: border-box; 
+    overflow: hidden; 
 }
 
 .cadastro-page::before {
@@ -30,8 +35,15 @@
     flex-direction: column;
 }
 
+@font-face {
+    font-family: 'Sizmo';
+    src: url('/fonts/SizmoPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .cadastro-title {
-    font-size: 22px;
+    font-family: 'Sizmo', sans-serif; 
     font-weight: 700;
     text-align: center;
     text-transform: uppercase;
