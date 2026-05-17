@@ -1,4 +1,3 @@
-
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -109,7 +108,8 @@ html, body {
     color: #0f172a;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+    flex-shrink: 0;
 }
 
 form {
@@ -120,28 +120,43 @@ form {
     overflow: hidden;
 }
 
+/* Área rolável — só o miolo do form rola */
+.form-scroll-area {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 6px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Scrollbar discreta */
+.form-scroll-area::-webkit-scrollbar { width: 5px; }
+.form-scroll-area::-webkit-scrollbar-track { background: transparent; }
+.form-scroll-area::-webkit-scrollbar-thumb { background: #d1dae6; border-radius: 4px; }
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 0px !important;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-bottom: 0 !important;
+    margin-bottom: 14px !important;
 }
 
 .form-group.full-width {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .form-group label {
     font-size: 0.82rem;
     font-weight: 600;
     color: #334155;
+    margin-bottom: 4px;
 }
 
 .form-group input,
@@ -226,33 +241,43 @@ form {
 }
 .cat-tag.verde { background: #16a34a; color: #fff; }
 .cat-tag.azul  { background: #2563eb; color: #fff; }
+.cat-tag.roxo   { background: #7c3aed; color: #fff; }
+.cat-tag.laranja { background: #ea580c; color: #fff; }
+.cat-tag.rosa   { background: #db2777; color: #fff; }
+
+.cat-tag-remove {
+    margin-left: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+.cat-tag-remove:hover { opacity: 1; }
 
 .textareas-wrapper {
-    flex: 8;
+    flex: none;
     min-height: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    overflow: hidden;
-    margin-top: 8px;
+    gap: 14px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .form-group.textarea-group {
-    flex: 1;
-    min-height: 0;
     display: flex;
     flex-direction: column;
     gap: 4px;
+    margin-bottom: 0 !important;
 }
 
 .form-group.textarea-group textarea {
-    flex: 1;
-    min-height: 0;
-    height: 100%;
+    min-height: 130px;
+    height: 130px;
     overflow-y: auto;
-    resize: none;
+    resize: vertical;
 }
 
+/* Botão fixo no fundo */
 .btn-submit {
     display: block;
     width: 100%;
@@ -265,7 +290,8 @@ form {
     font-weight: 700;
     cursor: pointer;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 14px;
+    flex-shrink: 0;
     transition: background 0.2s ease;
     font-family: 'Segoe UI', Arial, sans-serif;
 }
