@@ -30,10 +30,14 @@ html, body {
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
   padding-top: 60px;
   overflow: hidden;
 }
+
 
 main, .auth-page, .events-page, .cadastro-page {
   height: calc(100vh - 60px);
