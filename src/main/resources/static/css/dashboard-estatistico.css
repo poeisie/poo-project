@@ -1,9 +1,26 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    background-color: transparent;
+}
+
 .dashboard-container {
     width: 100%;
-    max-width: 1440px;
-    height: auto;
-    background: var(--Branco, #F1F1F1);
-    margin: 0 auto;
+    min-height: 100vh;
+    background-image: url('/images/fundo-tela-dashboard.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    margin: 0;
     padding: 40px 20px;
 }
 
@@ -18,15 +35,16 @@
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 30px;
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 .stat-card {
-    width: 333px;
-    height: 210px;
+    width: 100%;
+    min-height: 210px;
     border-radius: 25px;
     background: var(--Branco, #F1F1F1);
     box-shadow: 0 1px 6px 3px rgba(0, 0, 0, 0.15);
@@ -82,7 +100,7 @@
 
 @media (max-width: 1200px) {
     .cards-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
@@ -91,7 +109,7 @@
         grid-template-columns: 1fr;
     }
 
-    .stat-card {
-        width: 100%;
+    .dashboard-title {
+        font-size: 20px;
     }
 }
