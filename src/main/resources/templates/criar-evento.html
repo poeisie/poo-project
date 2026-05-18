@@ -158,63 +158,61 @@
         }
     }
 
-    const coresCategorias = ['azul', 'verde', 'roxo', 'laranja', 'rosa'];
-    const categoriasAdicionadas = new Set();
-    let corIndex = 0;
-
+    // Simplify categories: allow only a single category selection.
     function adicionarCategoria(select) {
         const valor = select.value;
-        if (!valor || categoriasAdicionadas.has(valor)) {
-            select.value = '';
+        if (!valor) {
             return;
         }
 
-        categoriasAdicionadas.add(valor);
 
-        const opcao = [...select.options].find(o => o.value === valor);
-        if (opcao) opcao.hidden = true;
+        const existingTag = document.querySelector('.cat-tag');
+        if (existingTag) existingTag.remove();
+        const hiddenContainer = document.getElementById('categorias-hidden');
+        hiddenContainer.innerHTML = '';
 
-        const cor = coresCategorias[corIndex % coresCategorias.length];
-        corIndex++;
 
         const tag = document.createElement('span');
-        tag.className = `cat-tag ${cor}`;
+        tag.className = `cat-tag azul`;
         tag.dataset.valor = valor;
-        tag.innerHTML = `${valor} <span class="cat-tag-remove" onclick="removerCategoria('${valor}', this)">×</span>`;
+        tag.innerHTML = `${valor} <span class="cat-tag-remove" onclick="removerCategoria(this)">×</span>`;
+
 
         const hidden = document.createElement('input');
         hidden.type = 'hidden';
         hidden.name = 'categorias';
         hidden.value = valor;
-        hidden.id = `hidden-cat-${valor}`;
-        document.getElementById('categorias-hidden').appendChild(hidden);
+        hidden.id = `hidden-cat`;
+        hiddenContainer.appendChild(hidden);
+
 
         const wrapper = document.getElementById('categorias-wrapper');
-        wrapper.insertBefore(tag, select);
-
-        select.value = '';
+        const selectEl = document.getElementById('categorias');
+        wrapper.insertBefore(tag, selectEl);
+        selectEl.value = '';
+        selectEl.style.display = 'none';
+        selectEl.disabled = true;
     }
 
-    function removerCategoria(valor, btn) {
-        categoriasAdicionadas.delete(valor);
+    function removerCategoria(btnOrElem) {
 
-        btn.closest('.cat-tag').remove();
+        let tag;
+        if (btnOrElem instanceof Element && btnOrElem.classList.contains('cat-tag')) {
+            tag = btnOrElem;
+        } else if (btnOrElem instanceof Element) {
+            tag = btnOrElem.closest('.cat-tag');
+        }
+        if (tag) tag.remove();
 
-        const select = document.getElementById('categorias');
-        const opcao = [...select.options].find(o => o.value === valor);
-        if (opcao) opcao.hidden = false;
 
-        const hidden = document.getElementById(`hidden-cat-${valor}`);
+        const hidden = document.getElementById('hidden-cat');
         if (hidden) hidden.remove();
-    }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const select = document.getElementById('categorias');
-        select.value = 'Palestra';
-        adicionarCategoria(select);
-        select.value = 'Tecnologia';
-        adicionarCategoria(select);
-    });
+
+        const selectEl = document.getElementById('categorias');
+        selectEl.style.display = '';
+        selectEl.disabled = false;
+    }
 </script>
 
 </body>
