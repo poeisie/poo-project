@@ -64,7 +64,7 @@ Compra de ingressos, criação de eventos e painel de inteligência para gestore
 
 | Recurso | |
 |---|---|
-| 🎥 Screencast | [Assistir no YouTube →](youtu.be/-SNA-cdIQr8) |
+| 🎥 Screencast | [Assistir no YouTube →](https://youtu.be/-SNA-cdIQr8) |
 | 🐞 Bug tracker (VPA-1 a VPA-19) | [Ver planilha →](https://docs.google.com/spreadsheets/d/1F9LqVv9y9CrThgpUzaNE2ApuoM_dKlN1JgAWgZU_HiA/edit?usp=sharing) |
 
 <br>
@@ -77,7 +77,7 @@ Compra de ingressos, criação de eventos e painel de inteligência para gestore
 
 | Recurso | |
 |---|---|
-| 🎥 Screencast | [Assistir no YouTube →](youtu.be/LDaSQDC5Ia4) |
+| 🎥 Screencast | [Assistir no YouTube →](https://youtu.be/LDaSQDC5Ia4) |
 | 🐞 Issues abertas | [Ver captura →](https://github.com/user-attachments/assets/acb53e06-bc84-45d7-a8f4-eef56549f5e6) |
 | 🐞 Issues concluídas | [Ver captura →](https://github.com/user-attachments/assets/3926ef2c-f772-4aa1-98d0-079e946e5ad9) |
 
