@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/components.css">
-    <link rel="stylesheet" href="/css/meus-eventos.css">
+    <link rel="stylesheet" href="/css/listar-eventos.css">
+    <link rel="stylesheet" href="/css/listar-eventos-categoria.css">
 </head>
 <body>
 
@@ -22,26 +23,24 @@
 
     <div class="eventos-grid" th:unless="${#lists.isEmpty(eventos)}">
         <div class="evento-card" th:each="evento : ${eventos}">
-            <div class="evento-thumbnail">
-                <div class="evento-img-placeholder">
-                    <span>VEM·<br>·PRA<br>ARENA<br>.</span>
+            <a th:href="@{/eventos/{id}(id=${evento.id})}" class="evento-link">
+                <div class="evento-img">
+                    <div th:if="${evento.imagemPath}">
+                        <img th:src="${evento.imagemPath}" alt="Banner do evento" />
+                    </div>
+                    <span class="evento-img-placeholder" th:if="${evento.imagemPath == null}">VEM<br/>PRA<br/>ARENA</span>
                 </div>
-            </div>
-            <div class="evento-info">
-                <h3 class="evento-nome" th:text="${evento.nome} ?: ''"></h3>
-                <div class="line"></div>
-                <div class="evento-meta">
+                <div class="evento-body">
+                    <h3 class="evento-titulo" th:text="${evento.nome}">NOME DO EVENTO</h3>
+                    <div class="evento-info">
                         <span class="evento-data"
-                              th:text="${evento.data != null} ? ${#temporals.format(evento.data, 'dd/MM/yyyy')} : ''">13/03/2026</span>
-                    <span class="evento-horario"
-                          th:text="${evento.horario != null} ? ${#temporals.format(evento.horario, 'HH:mm')} : ''">20:00</span>
+                              th:text="${evento.data != null} ? ${#temporals.format(evento.data, 'dd')} + ' de ' + ${#temporals.format(evento.data, 'MMM')} + ' de ' + ${#temporals.format(evento.data, 'yyyy')} : ''">13 de Mar de 2026</span>
+                        <span class="evento-horario"
+                              th:text="${evento.horario != null} ? ${#temporals.format(evento.horario, 'HH:mm')} : ''">20:00</span>
+                    </div>
+                    <div class="evento-local" th:text="${evento.local}">Rua endereço, bairro, Recife/PE</div>
                 </div>
-                <div class="line"></div>
-                <p class="evento-local" th:text="${evento.local} ?: ''"></p>
-                <div style="margin-top:8px;">
-                    <a th:href="@{/eventos/{id}(id=${evento.id})}" class="btn-nav">Ver detalhes</a>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>
