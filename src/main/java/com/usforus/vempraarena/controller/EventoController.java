@@ -5,6 +5,7 @@ import com.usforus.vempraarena.entities.Evento;
 import com.usforus.vempraarena.entities.Usuario;
 import com.usforus.vempraarena.repository.UsuarioRepository;
 import com.usforus.vempraarena.service.EventoService;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +35,7 @@ public class EventoController {
         return "criar-evento";
     }
 
-    @PostMapping("/criar")
+    @PostMapping(value = "/criar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String criarEvento(@ModelAttribute ("EventoDTO") EventoDTO dto, Model model, Authentication authentication) throws Exception {
 
         try {
@@ -63,6 +64,17 @@ public class EventoController {
         model.addAttribute("eventosRecomendados", eventos); // temporário
 
         return "listar-eventos";
+    }
+
+    @GetMapping("/listar/todos")
+    public String listarTodosEventos(Model model, Authentication authentication) {
+
+        Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
+
+        List<Evento> eventos =  eventoService.listarEventosAprovados();
+        model.addAttribute("eventos", eventos);
+
+        return "listar-todos-eventos";
     }
 
     @GetMapping("/{eventoId}")

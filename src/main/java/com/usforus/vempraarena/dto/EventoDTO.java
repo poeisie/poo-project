@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
 
 public class EventoDTO {
 
@@ -30,6 +31,12 @@ public class EventoDTO {
     private Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo;
 
     private Integer precoIngresso;
+
+    private String sobreProdutor;
+
+    private MultipartFile imagem;
+
+
 
     public String getNome() {
         return nome;
@@ -91,8 +98,17 @@ public class EventoDTO {
     public void setPrecoIngresso(Integer precoIngresso) { this.precoIngresso = precoIngresso; 
     }
 
-    private String sobreProdutor;
+
 
     public String getSobreProdutor() { return sobreProdutor; }
     public void setSobreProdutor(String sobreProdutor) { this.sobreProdutor = sobreProdutor; }
+
+    public MultipartFile getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(MultipartFile imagem) {
+        this.imagem = imagem;
+    }
+
 }

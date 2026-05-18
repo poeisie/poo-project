@@ -30,6 +30,9 @@ public class Evento {
     private String descricao;
 
     @Column(nullable = false)
+    private String sobreProdutor;
+
+    @Column(nullable = false)
     private String categorias;
 
     @Enumerated(EnumType.STRING)
@@ -45,6 +48,9 @@ public class Evento {
 
     @Column(nullable = false)
     private Integer precoIngresso = 0;
+
+    @Column(nullable = true)
+    private String imagemPath;
 
     @ManyToOne
     @JoinColumn(name = "produtorId")
@@ -119,6 +125,14 @@ public class Evento {
         this.descricao = descricao;
     }
 
+    public String getSobreProdutor() {
+        return sobreProdutor;
+    }
+
+    public void setSobreProdutor(String sobreProdutor) {
+        this.sobreProdutor = sobreProdutor;
+    }
+
     public String getCategorias() {
         return categorias;
     }
@@ -142,6 +156,11 @@ public class Evento {
     public void setStatus(StatusEvento status) {
         this.status = status;
     }
+
+    public String getImagemPath() { return imagemPath; }
+
+    public void setImagemPath(String imagemPath) { this.imagemPath = imagemPath; }
+
     public Usuario getProdutor(){ return produtor;}
 
     public void setProdutor(Usuario produtor){ this.produtor = produtor; }
