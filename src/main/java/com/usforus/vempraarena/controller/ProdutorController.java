@@ -64,7 +64,7 @@ public class ProdutorController {
         try {
             Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
             usuarioService.cadastrarProdutorCpf(usuario.getId(), dto);
-            return "redirect:/home?produtor";
+            return "redirect:/produtor/dashboard";
         } catch (Exception e) {
             model.addAttribute("erroDuplicidade", e.getMessage());
             return "cadastro-cpf";
@@ -91,7 +91,7 @@ public class ProdutorController {
         try {
             Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
             usuarioService.cadastrarProdutorCnpj(usuario.getId(), dto);
-            return "redirect:/home?produtor";
+            return "redirect:/produtor/dashboard";
         } catch (Exception e) {
             model.addAttribute("erroDuplicidade", e.getMessage());
             return "cadastro-cnpj";
