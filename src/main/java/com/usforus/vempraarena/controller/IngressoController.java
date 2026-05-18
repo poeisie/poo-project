@@ -4,7 +4,6 @@ import com.usforus.vempraarena.dto.CompraIngressoDTO;
 import com.usforus.vempraarena.entities.Evento;
 import com.usforus.vempraarena.entities.Ingresso;
 import com.usforus.vempraarena.entities.Usuario;
-import com.usforus.vempraarena.entities.TipoIngresso;
 import com.usforus.vempraarena.repository.UsuarioRepository;
 import com.usforus.vempraarena.service.EventoService;
 import com.usforus.vempraarena.service.IngressoService;
@@ -32,31 +31,17 @@ public class IngressoController {
     }
 
     @GetMapping("/comprar/{eventoId}")
-    public String telaCompra(@PathVariable Long eventoId, 
-                             @RequestParam(required = false) String tipo,
-                             @RequestParam(required = false) String quantidade,
+    public String telaCompra(@PathVariable Long eventoId,
+                             @RequestParam(required = false, defaultValue = "0") int inteira,
+                             @RequestParam(required = false, defaultValue = "0") int meia,
                              Authentication authentication, Model model) {
         Evento evento = eventoService.buscarPorId(eventoId);
         Usuario usuarioLogado = usuarioRepository.findByEmail(authentication.getName());
 
         CompraIngressoDTO dto = new CompraIngressoDTO();
         dto.setEventoId(evento.getId());
-        
-        if (tipo != null && !tipo.isEmpty()) {
-            try {
-                dto.setTipoIngresso(TipoIngresso.valueOf(tipo.toUpperCase()));
-            } catch (IllegalArgumentException e) {
-                System.err.println("Tipo de ingresso inválido recebido: " + tipo);
-            }
-        }
-        
-        if (quantidade != null && !quantidade.isEmpty()) {
-            try {
-                dto.setQuantidade(Integer.parseInt(quantidade));
-            } catch (NumberFormatException e) {
-                dto.setQuantidade(1);
-            }
-        }
+        dto.setQuantidadeInteira(Math.max(0, inteira));
+        dto.setQuantidadeMeia(Math.max(0, meia));
 
         model.addAttribute("evento", evento);
         model.addAttribute("usuario", usuarioLogado);

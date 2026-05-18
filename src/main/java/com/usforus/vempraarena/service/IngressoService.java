@@ -34,24 +34,34 @@ public class IngressoService {
 
         Usuario usuario = usuarioRepository.findByEmail(emailUsuario);
 
-        if (dto.getQuantidade() == null || dto.getQuantidade() <= 0) {
-            throw new Exception("A quantidade deve ser de pelo menos 1 ingresso.");
+        int qtdInteira = dto.getQuantidadeInteiraOuZero();
+        int qtdMeia = dto.getQuantidadeMeiaOuZero();
+
+        if (qtdInteira + qtdMeia <= 0) {
+            throw new Exception("Selecione pelo menos 1 ingresso.");
         }
 
-        TipoIngresso tipo = dto.getTipoIngresso();
-        int quantidade = dto.getQuantidade();
+        if (qtdInteira > 0) {
+            comprarLinha(evento, usuario, TipoIngresso.INTEIRA, qtdInteira);
+        }
+        if (qtdMeia > 0) {
+            comprarLinha(evento, usuario, TipoIngresso.MEIA, qtdMeia);
+        }
+
+        eventoRepository.save(evento);
+    }
+
+    private void comprarLinha(Evento evento, Usuario usuario, TipoIngresso tipo, int quantidade) throws Exception {
         int disponivel = evento.getQuantidadeDisponivelPorTipo(tipo);
         if (quantidade > disponivel) {
-            throw new Exception("Estoque insuficiente para o tipo " + tipo + "! Disponível: " + disponivel);
+            String nomeTipo = tipo == TipoIngresso.MEIA ? "Meia Entrada" : "Inteira";
+            throw new Exception("Estoque insuficiente para " + nomeTipo + "! Disponível: " + disponivel);
         }
 
         int precoUnitarioCobrado = evento.getPrecoIngresso();
         if (tipo == TipoIngresso.MEIA) {
             precoUnitarioCobrado = evento.getPrecoIngresso() / 2;
         }
-
-        int precoTotalCompra = quantidade * precoUnitarioCobrado;
-
 
         Ingresso novoIngresso = new Ingresso(usuario, evento, quantidade, precoUnitarioCobrado, tipo);
         ingressoRepository.save(novoIngresso);
@@ -60,7 +70,6 @@ public class IngressoService {
         if (!atualizou) {
             throw new Exception("Erro ao atualizar o estoque do evento.");
         }
-        eventoRepository.save(evento);
     }
 
     public List<Ingresso> listarPorUsuario(Long usuarioId){
