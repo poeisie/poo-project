@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@font-face {
+    font-family: 'Sizmo';
+    src: url('/fonts/SizmoPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .login-page {
     height: 100vh;
     background-image: url("/images/estadio2.gif");
@@ -7,6 +16,7 @@
     justify-content: flex-end;
     align-items: center;
     padding-right: 80px;
+    font-family: 'Inter', sans-serif; /* corpo da página */
 }
 
 .login-page::before {
@@ -28,6 +38,7 @@
     box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
+    font-family: 'Inter', sans-serif; /* corpo do container */
 }
 
 .auth-title {
@@ -38,6 +49,7 @@
     letter-spacing: 1px;
     color: var(--color-text-primary);
     margin: 0 0 32px 0;
+    font-family: 'Sizmo', sans-serif; /* título */
 }
 
 .auth-footer {
@@ -45,6 +57,7 @@
     margin-top: 20px;
     font-size: 14px;
     color: var(--color-text-muted);
+    font-family: 'Inter', sans-serif;
 }
 
 .auth-footer a {
@@ -62,6 +75,7 @@
     font-size: 14px;
     text-decoration: none;
     transition: color 0.2s;
+    font-family: 'Inter', sans-serif;
 }
 
 .forgot-password:hover {
