@@ -9,7 +9,8 @@
 <body>
 
 <nav th:fragment="navbar" class="navbar">
-  <a th:href="@{/home}" class="navbar-logo"></a>
+  <a th:href="@{/admin/dashboard}" class="navbar-logo" sec:authorize="hasRole('ADMIN')"></a>
+  <a th:href="@{/home}" class="navbar-logo" sec:authorize="!hasRole('ADMIN')"></a>
 
   <a th:href="@{/cadastro}" class="navbar-btn"
      sec:authorize="isAnonymous()"
@@ -20,7 +21,21 @@
      sec:authorize="isAnonymous()"
      th:if="${paginaAtual == 'cadastro'}">Entrar</a>
 
-  <div class="navbar-actions" sec:authorize="isAuthenticated()">
+  <!-- Botões para ADMIN -->
+  <div class="navbar-actions" sec:authorize="hasRole('ADMIN')">
+    <a th:href="@{/eventos/criar}" class="navbar-btn navbar-btn--green">+ Criar novos eventos</a>
+    <a th:href="@{/admin/eventos/pendentes}" class="navbar-btn btn-nav blue navbar-btn--outline">Aceite dos eventos</a>
+    <a th:href="@{/eventos/listar/todos}" class="navbar-btn btn-nav blue navbar-btn--outline">Lista dos eventos</a>
+    <a th:href="@{/admin/dashboardEstatistico}" class="navbar-btn btn-nav blue navbar-btn--outline">Métricas</a>
+    <form th:action="@{/logout}" method="post" style="display:inline">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <button type="submit" class="navbar-btn btn-nav white navbar-btn--outline">Sair</button>
+    </form>
+    <div class="navbar-avatar"></div>
+  </div>
+
+  <!-- Botões para usuário comum (não admin) -->
+  <div class="navbar-actions" sec:authorize="isAuthenticated() and !hasRole('ADMIN')">
     <a th:href="@{/eventos/categoria/Visita}" class="navbar-btn navbar-btn--green">Agendar Tour</a>
     <a th:href="@{/ingressos/meus}" class="navbar-btn btn-nav blue navbar-btn--outline">Meus Ingressos</a>
     <a th:href="@{/produtor/dashboard}" class="navbar-btn btn-nav blue navbar-btn--outline">Área do Produtor</a>
