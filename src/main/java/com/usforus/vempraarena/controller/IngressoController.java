@@ -74,8 +74,10 @@ public class IngressoController {
 
         try {
             ingressoService.realizarCompra(dto, emailLogado);
-            attributes.addFlashAttribute("sucesso", "Compra realizada com sucesso!");
-            return "redirect:/ingressos/meus";
+            
+            attributes.addFlashAttribute("compraRealizada", true);
+            
+            return "redirect:/ingressos/comprar/" + dto.getEventoId();
 
         } catch (Exception e) {
             Evento evento = eventoService.buscarPorId(dto.getEventoId());

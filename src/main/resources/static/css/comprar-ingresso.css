@@ -327,6 +327,110 @@ body.events-page {
   text-decoration: underline;
 }
 
+/* ── Overlay que cobre a tela toda e desfoca o fundo ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0; /* Preenche topo, baixo, esquerda, direita */
+  background-color: rgba(255, 255, 255, 0.4); /* Fundo claro semi-transparente */
+  backdrop-filter: blur(4px); /* Efeito de desfoque (como no print) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Garante que fique por cima de tudo */
+}
+
+/* ── Caixa branca do Modal ── */
+.modal-content {
+  background-color: #F4F4F4; /* Cor levemente cinza do seu print */
+  border-radius: 20px;
+  padding: 40px 32px;
+  width: 90%;
+  max-width: 480px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+  font-family: "Inter", sans-serif;
+}
+
+/* ── Botão Fechar (X) ── */
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-primary); /* Se não tiver essa var, troque por #2373B9 */
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.modal-close:hover {
+  transform: scale(1.05);
+}
+
+/* ── Título (Sizmo) ── */
+.modal-title {
+  font-family: 'Sizmo', sans-serif;
+  font-size: 24px;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  margin-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Texto explicativo ── */
+.modal-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 32px;
+  padding: 0 10px;
+}
+
+/* ── Container dos botões ── */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* ── Estilo dos botões ── */
+.modal-btn {
+  background-color: var(--color-primary); /* #2373B9 */
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
+}
+
+.modal-btn:hover {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Ajuste para Mobile ── */
+@media (max-width: 500px) {
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+
 /* ── Responsivo ── */
 @media (max-width: 700px) {
   .main > form {

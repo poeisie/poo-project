@@ -20,8 +20,7 @@
     <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
 
       <input type="hidden" th:field="*{eventoId}" />
-      <span id="precoUnitario" style="display:none;" th:text="${evento.precoIngresso}"></span>
-
+      <input type="hidden" th:field="*{tipoIngresso}" /> <input type="hidden" th:field="*{quantidade}" />    <span id="precoUnitario" style="display:none;" th:text="${evento.precoIngresso}"></span>
       <!-- ── LADO ESQUERDO: background image ── -->
       <div class="compra-left">
         <div class="compra-resumo">
@@ -127,6 +126,22 @@
 
     </form>
 
+    <div class="modal-overlay" id="modalSucesso" th:if="${compraRealizada}">
+      <div class="modal-content">
+        <button class="modal-close" onclick="fecharModal()">×</button>
+        
+        <h2 class="modal-title">INGRESSOS COMPRADOS</h2>
+        <p class="modal-text">
+          Sua compra foi realizada com sucesso. Agora é só preparar a animação! Aguardamos você para viver essa experiência na Arena Pernambuco.
+        </p>
+        
+        <div class="modal-actions">
+          <a th:href="@{/ingressos/meus}" class="modal-btn">Ver ingresso</a>
+          <a th:href="@{/eventos/listar}" class="modal-btn">Retornar ao Menu</a>
+        </div>
+      </div>
+    </div>
+
   </main>
 
 </div>
@@ -143,6 +158,13 @@
       document.getElementById('valorUnitario').innerText = 'R$ ' + precoReal.toString();
       document.getElementById('valorTotal').innerText = 'R$ ' + (precoReal * qtd).toString();
       document.getElementById('qtdLabel').innerText = qtd.toString();
+    }
+  }
+
+  function fecharModal() {
+    const modal = document.getElementById('modalSucesso');
+    if (modal) {
+      modal.style.display = 'none';
     }
   }
 
