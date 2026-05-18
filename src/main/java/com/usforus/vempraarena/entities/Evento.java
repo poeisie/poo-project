@@ -46,6 +46,9 @@ public class Evento {
     @Column(nullable = false)
     private Integer precoIngresso = 0;
 
+    @Column(nullable = true)
+    private String imagemPath;
+
     @ManyToOne
     @JoinColumn(name = "produtorId")
     private Usuario produtor;
@@ -142,6 +145,11 @@ public class Evento {
     public void setStatus(StatusEvento status) {
         this.status = status;
     }
+
+    public String getImagemPath() { return imagemPath; }
+
+    public void setImagemPath(String imagemPath) { this.imagemPath = imagemPath; }
+
     public Usuario getProdutor(){ return produtor;}
 
     public void setProdutor(Usuario produtor){ this.produtor = produtor; }

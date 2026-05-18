@@ -137,4 +137,16 @@ public class Usuario implements UserDetails {
         return password;
     }
 
+    public String getInitiais() {
+        if (name == null || name.isEmpty()) {
+            return "";
+        }
+        String[] palavras = name.trim().split("\\s+");
+        if (palavras.length >= 2) {
+            return (palavras[0].charAt(0) + "" + palavras[palavras.length - 1].charAt(0)).toUpperCase();
+        } else {
+            return (palavras[0].charAt(0) + "").toUpperCase();
+        }
+    }
+
 }

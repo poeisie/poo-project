@@ -7,12 +7,18 @@ import com.usforus.vempraarena.entities.Usuario;
 import com.usforus.vempraarena.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class EventoService {
@@ -65,6 +71,27 @@ public class EventoService {
 
         novoEvento.setIngressosDisponiveisPorTipo(dto.getIngressosDisponiveisPorTipo());
         novoEvento.setPrecoIngresso(dto.getPrecoIngresso());
+
+        if (dto.getImagem() != null && !dto.getImagem().isEmpty()) {
+            try {
+                String originalFilename = dto.getImagem().getOriginalFilename();
+                String safeName = (originalFilename == null) ? "img" : originalFilename.replaceAll("[^a-zA-Z0-9._-]", "_");
+                String filename = System.currentTimeMillis() + "_" + UUID.randomUUID() + "_" + safeName;
+
+                Path imagesDir = Paths.get("static", "images", "eventos");
+                if (!Files.exists(imagesDir)) {
+                    Files.createDirectories(imagesDir);
+                }
+
+                Path target = imagesDir.resolve(filename);
+                Files.copy(dto.getImagem().getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
+
+                // caminho público usado nas views (static monta em /)
+                novoEvento.setImagemPath("/images/eventos/" + filename);
+            } catch (IOException e) {
+                throw new Exception("Falha ao salvar a imagem do evento: " + e.getMessage());
+            }
+        }
 
         repository.save(novoEvento);
     }

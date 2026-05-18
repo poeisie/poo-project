@@ -13,18 +13,16 @@
 
 <div class="events-container">
 
-  <nav th:replace="~{fragments/navbar :: navbar}"></nav>
+  <div th:insert="~{fragments/navbar :: navbar}"></div>
 
   <main class="main">
 
-    <div class="compra-container">
+    <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
 
-      <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
-
-        <input type="hidden" th:field="*{eventoId}" />
-        <!-- Variável invisível para o Javascript ler o preço do evento -->
-        <span id="precoUnitario" style="display:none;" th:text="${evento.precoIngresso}"></span>
-
+      <input type="hidden" th:field="*{eventoId}" />
+      <input type="hidden" th:field="*{tipoIngresso}" /> <input type="hidden" th:field="*{quantidade}" />    <span id="precoUnitario" style="display:none;" th:text="${evento.precoIngresso}"></span>
+      <!-- ── LADO ESQUERDO: background image ── -->
+      <div class="compra-left">
         <div class="compra-resumo">
 
           <h1>Resumo da Compra</h1>
@@ -41,45 +39,43 @@
 
             <div class="erro" th:if="${erroCompra}" th:text="${erroCompra}"></div>
 
-            <!-- SELEÇÃO DE TIPO E QUANTIDADE (Estrutura original restaurada) -->
             <div class="resumo-item">
               <div class="resumo-item-info">
-                <p class="resumo-item-tipo">
-                  <select th:field="*{tipoIngresso}" id="tipoIngresso" onchange="atualizarTotal()">
-                    <option value="INTEIRA">Inteira</option>
-                    <option value="MEIA">Meia Entrada</option>
-                  </select>
-                </p>
+                <p class="resumo-item-tipo"
+                   th:text="*{tipoIngresso} == 'MEIA' ? 'Meia Entrada' : 'Inteira'">Inteira</p>
+                <p class="resumo-item-preco" id="valorUnitario"
+                   th:text="'R$ ' + ${evento.precoIngresso}"></p>
+                <p class="resumo-item-desc">Ingresso para o evento selecionado.</p>
               </div>
               <div class="resumo-item-qtd">
-                <input type="number" th:field="*{quantidade}" id="qtd" min="1" max="5" value="1" onchange="atualizarTotal()" onkeyup="atualizarTotal()"/>
+                <span th:text="*{quantidade}">1</span>
               </div>
             </div>
 
-            <!-- TOTAL RESTAURADO (Agora ele espalha na horizontal novamente!) -->
             <div class="resumo-total">
               <div class="resumo-item-info">
                 <p class="resumo-item-tipo">Total</p>
-                <p class="resumo-item-preco" id="valorTotal" th:text="'R$ ' + ${evento.precoIngresso}"></p>
+                <p class="resumo-item-preco" id="valorTotal"
+                   th:text="'R$ ' + ${evento.precoIngresso}"></p>
               </div>
               <div class="resumo-item-qtd">
                 <span id="qtdLabel">1</span>
               </div>
             </div>
+
           </div>
 
         </div>
+      </div>
 
+      <!-- ── LADO DIREITO: fundo branco ── -->
+      <div class="compra-right">
         <div class="compra-pagamento">
 
           <h1>Formas de Pagamento</h1>
 
-          <div class="saldo-box">
-            Seu saldo atual: <span class="saldo-positivo" th:text="${usuario.saldoMoedas} + ' moedas'"></span>
-          </div>
-
           <div class="pagamento-secao">
-            <h3>Pré-Cadastradas</h3>
+            <h3>Pré-Cadastrados</h3>
 
             <label class="pagamento-opcao">
               <div class="pagamento-info">
@@ -117,6 +113,7 @@
               <input type="radio" th:field="*{formaPagamento}" value="BOLETO" />
             </label>
 
+          </div>
 
           <button type="submit">Finalizar Compra</button>
 
@@ -125,9 +122,24 @@
           </div>
 
         </div>
+      </div>
 
-      </form>
+    </form>
 
+    <div class="modal-overlay" id="modalSucesso" th:if="${compraRealizada}">
+      <div class="modal-content">
+        <button class="modal-close" onclick="fecharModal()">×</button>
+        
+        <h2 class="modal-title">INGRESSOS COMPRADOS</h2>
+        <p class="modal-text">
+          Sua compra foi realizada com sucesso. Agora é só preparar a animação! Aguardamos você para viver essa experiência na Arena Pernambuco.
+        </p>
+        
+        <div class="modal-actions">
+          <a th:href="@{/ingressos/meus}" class="modal-btn">Ver ingresso</a>
+          <a th:href="@{/eventos/listar}" class="modal-btn">Retornar ao Menu</a>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -143,9 +155,16 @@
     if (!isNaN(precoBase) && !isNaN(qtd) && qtd > 0) {
       let precoReal = tipo === 'MEIA' ? Math.floor(precoBase / 2) : precoBase;
 
+      document.getElementById('valorUnitario').innerText = 'R$ ' + precoReal.toString();
       document.getElementById('valorTotal').innerText = 'R$ ' + (precoReal * qtd).toString();
-
       document.getElementById('qtdLabel').innerText = qtd.toString();
+    }
+  }
+
+  function fecharModal() {
+    const modal = document.getElementById('modalSucesso');
+    if (modal) {
+      modal.style.display = 'none';
     }
   }
 

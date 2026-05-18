@@ -19,7 +19,13 @@
     <div class="evento-container">
 
       <section class="evento-detalhes">
-        <div class="evento-banner" aria-hidden="true"></div>
+
+        <div th:if="${evento.imagemPath}">
+          <div class="evento-banner">
+            <img th:src="${evento.imagemPath}" alt="Imagem do evento" />
+          </div>
+        </div>
+        <div th:if="${evento.imagemPath == null}" class="evento-banner" aria-hidden="true"></div>
 
         <div class="evento-linha-conteudo">
           <div class="evento-conteudo">

@@ -214,15 +214,15 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
+    background-image: url('../images/profile-avatar.png'); 
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
     background-color: #2373B9;
+    padding: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-    text-decoration: none;
-    text-transform: uppercase;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

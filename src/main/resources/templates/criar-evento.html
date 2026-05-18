@@ -28,7 +28,7 @@
 
                 <div class="erro-msg" th:if="${erroEvento}" th:text="${erroEvento}"></div>
 
-                <form th:action="@{/eventos/criar}" th:object="${EventoDTO}" method="post">
+                <form th:action="@{/eventos/criar}" th:object="${EventoDTO}" method="post" enctype="multipart/form-data">
 
                     <div class="form-scroll-area">
 
@@ -122,6 +122,12 @@
 
                         </div>
 
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagem">Imagem do Evento</label>
+                        <input type="file" id="imagem" name="imagem" th:field="*{imagem}" accept="image/*" />
+                        <small>Recomendado: 1200x600px. Máx. 5MB.</small>
                     </div>
 
                     <button type="submit" class="btn-submit">Criar novo evento</button>
