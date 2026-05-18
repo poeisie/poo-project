@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@font-face {
+    font-family: 'Sizmo';
+    src: url('/fonts/SizmoPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -16,6 +25,7 @@
     padding: 0 0 40px;
     margin: 0;
     overflow-x: hidden;
+    font-family: 'Inter', sans-serif; /* corpo da página */
 }
 
 .eventos-empty {
@@ -25,11 +35,12 @@
     justify-content: center;
     gap: 16px;
     text-align: center;
+    font-family: 'Inter', sans-serif;
 }
 
 .eventos-title {
     text-align: center;
-    font-family: 'Sizmo', sans-serif;
+    font-family: 'Sizmo', sans-serif; /* título */
     font-size: 22px;
     letter-spacing: 2px;
     color: #000;
@@ -61,5 +72,3 @@
         padding: 0 16px;
     }
 }
-
-

@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@font-face {
+    font-family: 'Sizmo';
+    src: url('/fonts/SizmoPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
 .cadastro-page {
     height: 100vh;
     background-image: url("/images/background-cadastro-cpf.png");
@@ -7,6 +16,7 @@
     justify-content: flex-end;
     align-items: center;
     padding: 80px;
+    font-family: 'Inter', sans-serif;
 }
 
 .cadastro-page::before {
@@ -30,9 +40,11 @@
     flex-direction: column;
     overflow-y: auto;
     max-height: 90vh;
+    font-family: 'Inter', sans-serif;
 }
 
 .cadastro-title {
+    font-family: 'Sizmo', sans-serif; /* título → Sizmo */
     font-size: 22px;
     font-weight: 700;
     text-align: center;
@@ -57,6 +69,7 @@
     font-size: 14px;
     font-weight: 500;
     color: var(--color-text-secondary);
+    font-family: 'Inter', sans-serif;
 }
 
 .cadastro-container input,
@@ -64,6 +77,7 @@
     width: 100%;
     padding: 10px;
     font-size: 14px;
+    font-family: 'Inter', sans-serif;
     border: 1px solid var(--color-input-border);
     border-radius: var(--border-radius-md);
     margin-bottom: 10px;
@@ -107,7 +121,6 @@
 .cadastro-container form > div:has(#complemento) #bairro                  { grid-column: 2; grid-row: 2; }
 .cadastro-container form > div:has(#complemento) .error                   { grid-column: 1 / -1; grid-row: 3; }
 
-/* CEP + Cidade + UF */
 .cadastro-container form > div:has(#cep) {
     display: grid;
     grid-template-columns: 130px 1fr 80px;
@@ -141,6 +154,7 @@
 .error {
     color: var(--color-error);
     font-size: 12px;
+    font-family: 'Inter', sans-serif;
     margin-top: -6px;
     margin-bottom: 10px;
     display: block;
@@ -158,6 +172,7 @@
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
+    font-family: 'Inter', sans-serif;
     cursor: pointer;
     transition: background-color 0.3s;
     width: 100%;
@@ -173,6 +188,7 @@
     margin-top: 20px;
     font-size: 14px;
     color: var(--color-text-muted);
+    font-family: 'Inter', sans-serif;
 }
 
 .cadastro-footer a {
