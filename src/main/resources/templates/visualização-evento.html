@@ -37,7 +37,11 @@
               <span th:text="${evento.local}"></span>
             </div>
 
+            <h2>Descrição</h2>
             <p th:text="${evento.descricao}"></p>
+
+            <h2>Sobre o Produtor</h2>
+            <p th:text="${evento.produtor != null ? (evento.produtor.razaoSocial != null && !#strings.isEmpty(evento.produtor.razaoSocial) ? evento.produtor.razaoSocial : evento.produtor.name) : 'Produtor não informado'}"></p>
 
             <h2>Localização</h2>
             <div class="evento-mapa">
@@ -63,8 +67,9 @@
                 </div>
                 <div class="ingresso-qtd">
                   <button type="button" onclick="alterarQtd(this, -1)">−</button>
-                  <label class="sr-only" th:for="'qtd-' + ${entry.key.name()}">Quantidade de ingressos</label>
+                  <label class="sr-only" for="qtd-ingresso" th:for="'qtd-' + ${entry.key.name()}">Quantidade de ingressos</label>
                   <input type="number"
+                         id="qtd-ingresso"
                          th:id="'qtd-' + ${entry.key.name()}"
                          th:data-tipo="${entry.key.name()}"
                          th:data-preco="${entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2}"
