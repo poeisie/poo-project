@@ -16,65 +16,53 @@
 
   <main class="main">
 
-  <div class="ingressos-container">
+    <div class="ingressos-container">
 
-  <h1>Seus Ingressos</h1>
+      <h1>Seus Ingressos</h1>
 
-  <div class="sucesso" th:if="${sucesso}" th:text="${sucesso}"></div>
+      <div class="sucesso" th:if="${sucesso}" th:text="${sucesso}"></div>
 
-  <div class="ingressos-empty" th:if="${#lists.isEmpty(ingressos)}">
-    <h3>Você ainda não comprou nenhum ingresso.</h3>
-    <p>Vá até a aba de eventos e garanta o seu lugar!</p>
-    <a th:href="@{/eventos/listar}">Explorar Eventos</a>
-  </div>
-
-  <div class="ingressos-grid" th:if="${!#lists.isEmpty(ingressos)}">
-
-    <div class="ingresso-card" th:each="ingresso : ${ingressos}">
-
-      <div class="ingresso-banner">
-        <img src="/img/evento-padrao.jpg" alt="Banner do Evento">
+      <div class="ingressos-empty" th:if="${#lists.isEmpty(ingressos)}">
+        <h3>Você ainda não comprou nenhum ingresso.</h3>
+        <p>Vá até a aba de eventos e garanta o seu lugar!</p>
+        <a th:href="@{/eventos/listar}">Explorar Eventos</a>
       </div>
 
-      <div class="ingresso-header">
-        <span class="ingresso-pedido" th:text="'Pedido #' + ${ingresso.id}"></span>
-        <span class="ingresso-mais">• • •</span>
-      </div>
+      <div class="ingressos-grid" th:if="${!#lists.isEmpty(ingressos)}">
 
-      <h2 class="ingresso-nome" th:text="${ingresso.evento.nome}">Nome do Evento</h2>
+        <div class="ingresso-card" th:each="ingresso : ${ingressos}">
 
-      <div class="ingresso-meta">
-        <div class="ingresso-meta-item">
-          <span th:text="${#temporals.format(ingresso.evento.data, 'dd/MM/yyyy')}"></span>
-          <span th:text="${ingresso.evento.horario}"></span>
-        </div>
-        <div class="ingresso-meta-item">
-          <span th:text="${ingresso.evento.local}"></span>
-        </div>
-      </div>
-
-      <div class="ingresso-footer">
-
-        <div class="ingresso-footer-esq">
-          <p class="ingresso-qtd" th:text="${ingresso.quantidade} + ' Ingresso(s)'"></p>
-          <div class="ingresso-acoes">
-            <a th:href="@{/ingressos/{id}(id=${ingresso.id})}" class="acao-link acao-ver">VER PEDIDO</a>
-            <a th:href="@{/ingressos/cancelar/{id}(id=${ingresso.id})}" class="acao-link">CANCELAR PEDIDO</a>
-            <a th:href="@{/ingressos/transferir/{id}(id=${ingresso.id})}" class="acao-link">TRANSFERIR INGRESSO</a>
+          <div class="ingresso-banner">
+              <div class="ingresso-banner-placeholder">
+                  <span>VEM·<br>·PRA<br>ARENA<br>.</span>
+              </div>
           </div>
-        </div>
 
-        <div class="ingresso-qr">
-          <img src="/img/qrcode-padrao.png" alt="QR Code do Ingresso">
+          <div class="ingresso-body">
+            <div class="ingresso-header">
+              <span class="ingresso-pedido" th:text="'Pedido #' + ${ingresso.id}"></span>
+            </div>
+
+            <h2 class="ingresso-nome" th:text="${ingresso.evento.nome}"></h2>
+
+            <div class="ingresso-meta">
+              <div class="ingresso-meta-item data-hora">
+                <span><img src="../images/calendar-icon.svg" alt="Data" class="icon-img"> <span th:text="${#temporals.format(ingresso.evento.data, 'dd/MM/yyyy')}"></span></span>
+                <span><img src="../images/clock-icon.svg" alt="Horário" class="icon-img"> <span th:text="${ingresso.evento.horario} + ' - 19:00'"></span></span>
+              </div>
+              
+              <div class="ingresso-meta-item local">
+                <span class="destaque-local"><img src="../images/location-icon.svg" alt="Local" class="icon-img"> <span th:text="${ingresso.evento.local}"></span></span>
+                <span class="endereco-local">Avenida Deus é Fiel, 1 - Penedo, São Lourenço da Mata - PE</span>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
 
     </div>
-
-  </div>
-
-</div>
 
   </main>
 
