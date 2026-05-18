@@ -135,18 +135,18 @@
   padding: 0 2px;
 }
 
+.colecoes-nav-prev,
 .colecoes-nav-next {
   position: absolute;
-  right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 54.5px;
+  width: 34.192px;
+  height: 33px;
+  border-radius: 50%;
   background: var(--Branco, #F1F1F1);
   border: none;
   color: var(--primary-blue);
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
   display: grid;
@@ -156,6 +156,15 @@
   z-index: 10;
 }
 
+.colecoes-nav-prev {
+  left: 10px;
+}
+
+.colecoes-nav-next {
+  right: 10px;
+}
+
+.colecoes-nav-prev:hover,
 .colecoes-nav-next:hover {
   background: #FFFFFF;
   box-shadow: 0 1px 6px 3px rgba(0, 0, 0, 0.15);
