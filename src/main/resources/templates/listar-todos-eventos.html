@@ -2,22 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${categoria != null} ? 'Eventos - ' + ${categoria} : 'Eventos por Categoria'">Eventos por Categoria</title>
+    <title>Todos os Eventos - VEM·PRA·ARENA</title>
     <link rel="stylesheet" href="/css/global.css">
     <link rel="stylesheet" href="/css/layout.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/listar-eventos.css">
-    <link rel="stylesheet" href="/css/listar-eventos-categoria.css">
+    <link rel="stylesheet" href="/css/listar-todos-eventos.css">
 </head>
 <body>
 
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 
 <div class="eventos-page">
-    <h1 class="eventos-title" th:text="${categoria != null} ? 'Eventos: ' + ${categoria} : 'Eventos'">EVENTOS</h1>
+    <h1 class="eventos-title">TODOS OS EVENTOS</h1>
 
     <div class="eventos-empty" th:if="${#lists.isEmpty(eventos)}">
-        <p>Nenhum evento encontrado para esta categoria.</p>
+        <p>Nenhum evento disponível no momento.</p>
         <a th:href="@{/eventos/listar}" class="btn-nav">Voltar</a>
     </div>
 
@@ -46,3 +46,4 @@
 </div>
 </body>
 </html>
+

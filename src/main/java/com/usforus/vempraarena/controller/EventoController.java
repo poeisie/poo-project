@@ -66,6 +66,17 @@ public class EventoController {
         return "listar-eventos";
     }
 
+    @GetMapping("/listar/todos")
+    public String listarTodosEventos(Model model, Authentication authentication) {
+
+        Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
+
+        List<Evento> eventos =  eventoService.listarEventosAprovados();
+        model.addAttribute("eventos", eventos);
+
+        return "listar-todos-eventos";
+    }
+
     @GetMapping("/{eventoId}")
     public String visualizarEvento(@PathVariable Long eventoId, Model model) {
         Evento evento = eventoService.buscarPorId(eventoId);
