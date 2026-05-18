@@ -41,7 +41,7 @@
             <p th:text="${evento.descricao}"></p>
 
             <h2>Sobre o Produtor</h2>
-            <p th:text="${evento.produtor != null ? (evento.produtor.razaoSocial != null && !#strings.isEmpty(evento.produtor.razaoSocial) ? evento.produtor.razaoSocial : evento.produtor.name) : 'Produtor não informado'}"></p>
+            <p th:text="${evento.sobreProdutor != null && !#strings.isEmpty(evento.sobreProdutor) ? evento.sobreProdutor : 'Descrição do produtor não informada'}"></p>
 
             <h2>Localização</h2>
             <div class="evento-mapa">

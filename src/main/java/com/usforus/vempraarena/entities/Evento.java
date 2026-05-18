@@ -30,6 +30,9 @@ public class Evento {
     private String descricao;
 
     @Column(nullable = false)
+    private String sobreProdutor;
+
+    @Column(nullable = false)
     private String categorias;
 
     @Enumerated(EnumType.STRING)
@@ -120,6 +123,14 @@ public class Evento {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getSobreProdutor() {
+        return sobreProdutor;
+    }
+
+    public void setSobreProdutor(String sobreProdutor) {
+        this.sobreProdutor = sobreProdutor;
     }
 
     public String getCategorias() {

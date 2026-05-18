@@ -60,6 +60,7 @@ public class EventoService {
         novoEvento.setData(dto.getData());
         novoEvento.setHorario(dto.getHorario());
         novoEvento.setCategorias(dto.getCategorias());
+        novoEvento.setSobreProdutor(dto.getSobreProdutor());
 
         novoEvento.setProdutor(produtor);
 
