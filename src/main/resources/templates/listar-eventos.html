@@ -116,7 +116,10 @@
                     <div class="evento-card" th:each="evento : ${eventosSemana}">
                         <a th:href="@{/eventos/{id}(id=${evento.id})}" class="evento-link">
                             <div class="evento-img">
-                                <span class="evento-img-placeholder">VEM<br/>PRA<br/>ARENA</span>
+                                <div th:if="${evento.imagemPath}">
+                                    <img th:src="${evento.imagemPath}" alt="Banner do evento" />
+                                </div>
+                                <span class="evento-img-placeholder" th:if="${evento.imagemPath == null}">VEM<br/>PRA<br/>ARENA</span>
                             </div>
                             <div class="evento-body">
                                 <h3 class="evento-titulo" th:text="${evento.nome}">NOME DO EVENTO</h3>

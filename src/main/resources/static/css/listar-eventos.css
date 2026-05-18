@@ -265,6 +265,14 @@
   letter-spacing: 0.08em;
 }
 
+.evento-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
 .evento-body {
   display: flex;
   flex-direction: column;
