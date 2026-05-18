@@ -112,6 +112,7 @@
             <h2 class="secao-titulo">EVENTOS <span class="titulo-destaque">#ESSA SEMANA</span></h2>
 
             <div class="carrossel-wrapper" th:if="${not #lists.isEmpty(eventosSemana)}">
+                <button class="carrossel-nav-btn carrossel-nav-prev" id="nav-semana-prev" aria-label="Eventos anteriores">‹</button>
                 <div class="carrossel-scroll" id="carrossel-semana">
                     <div class="evento-card" th:each="evento : ${eventosSemana}">
                         <a th:href="@{/eventos/{id}(id=${evento.id})}" class="evento-link">
@@ -119,7 +120,7 @@
                                 <div th:if="${evento.imagemPath}">
                                     <img th:src="${evento.imagemPath}" alt="Banner do evento" />
                                 </div>
-                                <span class="evento-img-placeholder" th:if="${evento.imagemPath == null}">VEM<br/>PRA<br/>ARENA</span>
+                                <img class="evento-logo-placeholder" th:if="${evento.imagemPath == null}" src="/images/logo.reduzida.png" alt="VemPraArena" />
                             </div>
                             <div class="evento-body">
                                 <h3 class="evento-titulo" th:text="${evento.nome}">NOME DO EVENTO</h3>
@@ -132,7 +133,7 @@
                         </a>
                     </div>
                 </div>
-                <button class="carrossel-nav-btn" id="nav-semana-next" aria-label="Próximos eventos">›</button>
+                <button class="carrossel-nav-btn carrossel-nav-next" id="nav-semana-next" aria-label="Próximos eventos">›</button>
             </div>
 
             <div class="empty-state" th:if="${#lists.isEmpty(eventosSemana)}">
@@ -146,6 +147,7 @@
 
             <div th:if="${not #lists.isEmpty(eventosRecomendados)}">
                 <div class="carrossel-wrapper">
+                    <button class="carrossel-nav-btn carrossel-nav-prev" id="nav-todos-prev" aria-label="Eventos anteriores">‹</button>
                     <div class="carrossel-scroll" id="carrossel-todos">
                         <div class="evento-card" th:each="evento : ${eventosRecomendados}">
                             <a th:href="@{/eventos/{id}(id=${evento.id})}" class="evento-link">
@@ -163,7 +165,7 @@
                             </a>
                         </div>
                     </div>
-                    <button class="carrossel-nav-btn" id="nav-todos-next" aria-label="Próximos eventos">›</button>
+                    <button class="carrossel-nav-btn carrossel-nav-next" id="nav-todos-next" aria-label="Próximos eventos">›</button>
                 </div>
 
                 <div class="ver-mais-container">
@@ -201,8 +203,8 @@
     }
 
     // Setup carousels
-    setupCarrossel('carrossel-semana', 'nav-semana-next');
-    setupCarrossel('carrossel-todos', 'nav-todos-next');
+    setupCarrossel('carrossel-semana', 'nav-semana-next', 'nav-semana-prev');
+    setupCarrossel('carrossel-todos', 'nav-todos-next', 'nav-todos-prev');
     setupCarrossel('colecoes-grid', 'colecoes-next', 'colecoes-prev');
 </script>
 
