@@ -33,11 +33,17 @@
         <div class="ingresso-card" th:each="ingresso : ${ingressos}">
 
           <div class="ingresso-banner">
-              <div class="ingresso-banner-placeholder">
+              
+              <img th:if="${ingresso.evento.imagemPath != null}" 
+                   th:src="${ingresso.evento.imagemPath}" 
+                   alt="Banner do evento" 
+                   class="ingresso-banner-img" />
+
+              <div class="ingresso-banner-placeholder" th:if="${ingresso.evento.imagemPath == null}">
                   <span>VEM·<br>·PRA<br>ARENA<br>.</span>
               </div>
+              
           </div>
-
           <div class="ingresso-body">
             <div class="ingresso-header">
               <span class="ingresso-pedido" th:text="'Pedido #' + ${ingresso.id}"></span>

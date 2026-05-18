@@ -49,7 +49,6 @@ body.events-page {
   margin-bottom: 16px;
 }
 
-/* ── ESTADOS VAZIOS ── */
 .ingressos-empty {
   text-align: center;
   color: var(--color-text-secondary);
@@ -79,15 +78,13 @@ body.events-page {
   text-decoration: underline;
 }
 
-/* ── CONFIGURAÇÃO DO GRID ── */
 .ingressos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 230px); 
-  justify-content: start; /* Alinhado à esquerda como na foto */
+  justify-content: start; 
   gap: 20px;
 }
 
-/* ── CARD PRINCIPAL ── */
 .ingresso-card {
   background-color: #F4F4F4; 
   border-radius: 12px;
@@ -101,12 +98,18 @@ body.events-page {
   height: 247px; 
 }
 
-/* ── BANNER SUPERIOR ── */
 .ingresso-banner {
     width: 100%;
     background-color: #656565; 
     height: 90px; 
     flex-shrink: 0;    
+}
+
+.ingresso-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
 }
 
 .ingresso-banner-placeholder {
@@ -128,7 +131,6 @@ body.events-page {
     text-align: left;
 }
 
-/* ── CORPO DO CARD ── */
 .ingresso-body {
   padding: 12px 16px; 
   display: flex;
@@ -146,7 +148,6 @@ body.events-page {
   color: #2373B9;
 }
 
-/* ── TÍTULO DO EVENTO ── */
 .ingresso-nome {
   font-size: 15px; 
   font-weight: 600;
@@ -159,7 +160,6 @@ body.events-page {
   overflow: hidden;
 }
 
-/* ── METADADOS E LINHA DIVISÓRIA ── */
 .ingresso-meta {
   padding-top: 16px;
   border-top: 1px solid #E5E5E5;
@@ -222,11 +222,10 @@ body.events-page {
   align-items: center; 
 }
 
-/* ── RESPONSIVO ── */
 @media (max-width: 1300px) {
   .ingressos-grid {
     grid-template-columns: repeat(auto-fill, 230px); 
-    justify-content: center; /* Centraliza em telas menores */
+    justify-content: center; 
   }
 }
 
