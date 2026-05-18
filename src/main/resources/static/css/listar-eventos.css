@@ -26,14 +26,12 @@
 .events-container {
   position: relative;
   z-index: 1;
-  overflow-y: hidden;
 }
 
 .main {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 60px 26px;
-  overflow-y: hidden;
+  padding: 50px 20px;
 }
 
 /* ===== SEÇÃO TITLES ===== */
@@ -175,7 +173,7 @@
 
 /* ===== SEÇÕES DE EVENTOS ===== */
 .secao-eventos {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 /* ===== CARROSSEL ===== */
@@ -188,7 +186,7 @@
 
 .carrossel-scroll {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   overflow-x: auto;
   flex: 1;
   scroll-behavior: smooth;
@@ -226,12 +224,12 @@
 /* ===== EVENTO CARDS ===== */
 .evento-card {
   flex-shrink: 0;
-  width: 333px;
-  height: 266px;
+  width: 280px;
+  height: 240px;
   background: var(--Branco, #F1F1F1);
   border-radius: var(--border-radius-lg);
   box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  overflow: visible;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -250,10 +248,10 @@
 
 .evento-img {
   position: relative;
-  height: 143px;
+  height: 130px;
   background: #656565;
   border-radius: var(--border-radius-md);
-  margin: 14px 14px 0 14px;
+  margin: 12px 12px 0 12px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -359,42 +357,122 @@
   .evento-card {
     width: 280px;
   }
+  
+  .main {
+    padding: 40px 16px;
+  }
 }
 
 @media (max-width: 768px) {
   .main {
-    padding: 40px 16px;
+    padding: 30px 12px;
   }
 
   .secao-titulo {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 16px;
   }
 
   .colecoes-section {
-    padding: 15px;
+    padding: 12px;
+    margin-bottom: 30px;
   }
 
   .colecoes-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 10px;
+    gap: 8px;
   }
 
   .colecao-box {
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
+  }
+  
+  .colecao-label {
+    font-size: 9px;
   }
 
   .evento-card {
-    width: 240px;
-    height: 230px;
+    width: 200px;
+    height: 220px;
   }
 
   .evento-img {
-    height: 120px;
+    height: 110px;
+    margin: 10px 10px 0 10px;
   }
 
   .evento-titulo {
-    font-size: 13px;
+    font-size: 12px;
+  }
+  
+  .evento-info {
+    font-size: 9px;
+  }
+  
+  .evento-local {
+    font-size: 9px;
+  }
+  
+  .carrossel-wrapper {
+    gap: 10px;
+  }
+  
+  .carrossel-nav-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 20px 8px;
+  }
+  
+  .secao-titulo {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .colecoes-section {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .colecao-box {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .colecao-label {
+    font-size: 8px;
+  }
+  
+  .evento-card {
+    width: 160px;
+    height: 200px;
+  }
+  
+  .evento-img {
+    height: 90px;
+    margin: 8px 8px 0 8px;
+  }
+  
+  .evento-titulo {
+    font-size: 11px;
+  }
+  
+  .evento-body {
+    padding: 8px 10px 8px 10px;
+    gap: 2px;
+  }
+  
+  .ver-mais-container {
+    margin-top: 20px;
+  }
+  
+  .ver-mais-btn {
+    font-size: 12px;
   }
 }
 
