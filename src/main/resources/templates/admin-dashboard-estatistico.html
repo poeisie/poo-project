@@ -19,11 +19,11 @@
     <div class="cards-grid">
         <div class="stat-card">
             <h3>Total de Eventos Confirmados</h3>
-            <p class="stat-value" th:text="${totalEventos ?: 0}">0</p>
+            <p class="stat-value" th:text="${metricas != null ? metricas.totalEventosConfirmados : 0}">0</p>
         </div>
         <div class="stat-card">
             <h3>Total de Ingressos Vendidos</h3>
-            <p class="stat-value" th:text="${totalIngressos ?: 0}">0</p>
+            <p class="stat-value" th:text="${metricas != null ? metricas.totalIngressosVendidos : 0}">0</p>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
@@ -31,19 +31,19 @@
         </div>
         <div class="stat-card">
             <h3>Categoria Mais Frequente</h3>
-            <p class="stat-value" th:text="${categoriaMaisFrequente ?: 'N/A'}">E-sports</p>
+            <p class="stat-value" th:text="${metricas != null && metricas.modaCategoria != null ? metricas.modaCategoria : 'N/A'}">E-sports</p>
         </div>
         <div class="stat-card">
             <h3>Receita Total</h3>
-            <p class="stat-value" th:text="${'R$ ' + (receitaTotal ?: '0,00')}">R$ 200,00</p>
+            <p class="stat-value" th:text="${'R$ ' + #numbers.formatDecimal(metricas != null ? metricas.receitaTotal : 0, 1, 2)}">R$ 200,00</p>
         </div>
         <div class="stat-card">
             <h3>Média de Ingressos por Evento</h3>
-            <p class="stat-value" th:text="${mediaIngressos ?: '0,00'}">3,00</p>
+            <p class="stat-value" th:text="${#numbers.formatDecimal(metricas != null ? metricas.mediaIngressosPorEvento : 0, 1, 2)}">3,00</p>
         </div>
         <div class="stat-card">
             <h3>Desvio Padrão de Ingressos</h3>
-            <p class="stat-value" th:text="${desvioIngressos ?: '0,00'}">2,16</p>
+            <p class="stat-value" th:text="${#numbers.formatDecimal(metricas != null ? metricas.desvioPadraoIngressos : 0, 1, 2)}">2,16</p>
         </div>
     </div>
 </div>

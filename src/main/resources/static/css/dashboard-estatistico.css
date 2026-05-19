@@ -39,11 +39,11 @@ body {
 
 .dashboard-title {
     font-family: 'Sizmo', 'Segoe UI', Arial, sans-serif;
-    font-size: 25px;
+    font-size: 23px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     text-align: center;
     color: var(--color-text-primary);
 }
@@ -51,7 +51,7 @@ body {
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 30px;
+    gap: 24px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
@@ -59,11 +59,11 @@ body {
 
 .stat-card {
     width: 100%;
-    min-height: 210px;
-    border-radius: 25px;
+    min-height: 190px;
+    border-radius: 20px;
     background: var(--color-card);
     box-shadow: var(--shadow-card);
-    padding: 20px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -81,14 +81,14 @@ body {
 }
 
 .stat-card h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--color-text-muted);
     margin-bottom: 15px;
 }
 
 .stat-card .stat-value {
-    font-size: 70px;
+    font-size: 62px;
     font-weight: 500;
     color: var(--color-primary);
     margin: 10px 0;
