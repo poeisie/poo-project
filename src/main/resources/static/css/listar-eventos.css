@@ -7,6 +7,20 @@
     font-style: normal;
 }
 
+/* ===== RESET ===== */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+body.events-page {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
 /* ===== VARIABLES ===== */
 :root {
   --primary-blue: #2373B9;
@@ -35,7 +49,7 @@
 .events-container {
   position: relative;
   z-index: 1;
-  font-family: 'Inter', sans-serif; /* corpo global */
+  font-family: 'Inter', sans-serif;
 }
 
 .main {
@@ -47,7 +61,7 @@
 
 /* ===== SEÇÃO TITLES ===== */
 .secao-titulo {
-  font-family: 'Sizmo', 'Sizmo Pro', sans-serif; /* títulos de seção → Sizmo */
+  font-family: 'Sizmo', 'Sizmo Pro', sans-serif;
   font-size: 25px;
   font-weight: 600;
   text-transform: uppercase;
@@ -134,7 +148,7 @@
 }
 
 .colecao-label {
-  font-family: 'Inter', sans-serif; /* label das coleções → Inter */
+  font-family: 'Inter', sans-serif;
   font-size: 10px;
   font-weight: 700;
   color: var(--text-gray);
@@ -147,8 +161,6 @@
 .colecoes-nav-prev,
 .colecoes-nav-next {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   width: 34.192px;
   height: 33px;
   border-radius: 50%;
@@ -196,7 +208,6 @@
 .carrossel-scroll {
   display: flex;
   gap: 16px;
-  overflow-x: auto;
   flex: 1;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -207,6 +218,9 @@
   display: none;
 }
 
+/* FIX: setas centralizadas na área da imagem dos cards
+   card tem margin-top: 12px + image height: 130px → centro da imagem: 77px
+   botão tem 33px de altura → 77 - 16.5 ≈ 60px de margin-top */
 .carrossel-nav-btn {
   width: 34.192px;
   height: 33px;
@@ -222,6 +236,8 @@
   box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
   transition: all 0.2s ease;
+  align-self: flex-start;
+  margin-top: 100px;
 }
 
 .carrossel-nav-btn:hover {
@@ -231,6 +247,7 @@
 }
 
 /* ===== EVENTO CARDS ===== */
+/* FIX: overflow: hidden corrige as sombras/artefatos visuais causados por overflow: visible */
 .evento-card {
   flex-shrink: 0;
   width: 280px;
@@ -238,7 +255,7 @@
   background: var(--Branco, #F1F1F1);
   border-radius: var(--border-radius-lg);
   box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.15);
-  overflow: visible;
+  overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -294,7 +311,7 @@
 }
 
 .evento-titulo {
-  font-family: 'Inter', sans-serif; /* nome do evento → Inter */
+  font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 700;
   text-transform: uppercase;
@@ -309,7 +326,7 @@
   align-items: center;
   gap: 10px;
   font-size: 10px;
-  font-family: 'Inter', sans-serif; /* info do evento → Inter */
+  font-family: 'Inter', sans-serif;
   color: var(--text-light);
   margin-top: 2px;
 }
@@ -324,7 +341,7 @@
 
 .evento-local {
   font-size: 10px;
-  font-family: 'Inter', sans-serif; /* local → Inter */
+  font-family: 'Inter', sans-serif;
   color: var(--text-light);
   line-height: 1.2;
 }
@@ -341,7 +358,7 @@
   color: var(--primary-blue);
   font-size: 14px;
   font-weight: 700;
-  font-family: 'Inter', sans-serif; /* ver mais → Inter */
+  font-family: 'Inter', sans-serif;
   transition: opacity 0.2s ease;
 }
 
@@ -412,7 +429,7 @@
   .evento-card {
     width: 280px;
   }
-  
+
   .main {
     padding: 40px 16px;
   }
@@ -441,7 +458,7 @@
     width: 85px;
     height: 85px;
   }
-  
+
   .colecao-label {
     font-size: 9px;
   }
@@ -456,26 +473,29 @@
     margin: 10px 10px 0 10px;
   }
 
-  .evento-titulo {
-    font-size: 12px;
-  }
-  
-  .evento-info {
-    font-size: 9px;
-  }
-  
-  .evento-local {
-    font-size: 9px;
-  }
-  
-  .carrossel-wrapper {
-    gap: 10px;
-  }
-  
+  /* Reajusta margin-top das setas para cards menores no mobile
+     margin-top: 10px + 110px/2 - 33px/2 ≈ 55px */
   .carrossel-nav-btn {
+    margin-top: 55px;
     width: 28px;
     height: 28px;
     font-size: 16px;
+  }
+
+  .evento-titulo {
+    font-size: 12px;
+  }
+
+  .evento-info {
+    font-size: 9px;
+  }
+
+  .evento-local {
+    font-size: 9px;
+  }
+
+  .carrossel-wrapper {
+    gap: 10px;
   }
 }
 
@@ -483,49 +503,55 @@
   .main {
     padding: 20px 8px;
   }
-  
+
   .secao-titulo {
     font-size: 16px;
     margin-bottom: 12px;
   }
-  
+
   .colecoes-section {
     padding: 10px;
     margin-bottom: 20px;
   }
-  
+
   .colecao-box {
     width: 70px;
     height: 70px;
   }
-  
+
   .colecao-label {
     font-size: 8px;
   }
-  
+
   .evento-card {
     width: 160px;
     height: 200px;
   }
-  
+
   .evento-img {
     height: 90px;
     margin: 8px 8px 0 8px;
   }
-  
+
+  /* Reajusta margin-top das setas para cards menores em telas pequenas
+     margin-top: 8px + 90px/2 - 33px/2 ≈ 46px */
+  .carrossel-nav-btn {
+    margin-top: 46px;
+  }
+
   .evento-titulo {
     font-size: 11px;
   }
-  
+
   .evento-body {
     padding: 8px 10px 8px 10px;
     gap: 2px;
   }
-  
+
   .ver-mais-container {
     margin-top: 20px;
   }
-  
+
   .ver-mais-btn {
     font-size: 12px;
   }
