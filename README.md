@@ -185,3 +185,84 @@ docker compose down
 *Desenvolvido na [Cesar School](https://www.cesar.school) · Disciplina de POO*
 
 </div>
+
+<div>
+# 🚀🏟️ Rodando o projeto localmente
+
+Este projeto utiliza **Docker** para orquestrar a aplicação **Spring Boot** e o banco de dados **PostgreSQL**.
+
+Com isso, você não precisa instalar Java nem PostgreSQL localmente, pois o Docker sobe todos os serviços automaticamente e evita falhas ou erros de ambiente.
+
+---
+
+# 🛠️ Pré-requisitos
+
+Antes de começar, certifique-se de possuir instalado:
+
+- Docker Desktop
+- Java e Maven *(opcionais para execução via Docker, mas úteis para testes e comandos locais)*
+
+---
+
+# 📄 Criando o arquivo `.env`
+
+Faça uma cópia do arquivo `.env.example` e renomeie para `.env`.
+
+## Exemplo
+
+```env
+DB_USER=postgres
+DB_PASSWORD=admin
+DB_NAME=arenapernambuco
+```
+
+---
+
+# ▶️ Subindo a aplicação
+
+Com o Docker aberto, execute o comando abaixo na raiz do projeto:
+
+```bash
+docker compose up --build -d
+```
+
+## O que esse comando faz?
+
+- `up` → sobe os containers
+- `--build` → recompila a imagem da aplicação com o código mais recente
+- `-d` → executa os containers em segundo plano
+
+---
+
+# 🌐 Acessando os serviços
+
+Após os containers iniciarem, a aplicação estará disponível nos seguintes endereços:
+
+## Aplicação Web
+
+```txt
+http://localhost:8080
+```
+
+---
+
+# 🐘 Banco de Dados PostgreSQL
+
+Você pode acessar o banco utilizando ferramentas como:
+
+- DBeaver
+- pgAdmin
+- IntelliJ Database Tool
+
+## Configurações de conexão
+
+| Configuração | Valor |
+|---|---|
+| Host | localhost |
+| Porta | 5433 |
+| Database | arenapernambuco |
+| Usuário | valor definido no `.env` |
+| Senha | valor definido no `.env` |
+
+> A porta `5433` foi utilizada para evitar conflitos com instalações locais do PostgreSQL.
+</div>
