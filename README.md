@@ -94,30 +94,32 @@ Compra de ingressos, criação de eventos e painel de inteligência para gestore
 
 | Recurso | |
 |---|---|
-| 🎥 Screencast | [Assistir no YouTube →](https://youtu.be/LINK_ENTREGA_4) |
+| 🎥 Screencast | [Assistir no YouTube →](https://youtu.be/nya91LKVpAw) |
 | 🐞 Bug tracker | [Issues do GitHub →](https://github.com/poeisie/poo-project/issues) |
 
 **Print do bug tracker — Entrega 4:**
 
 📸 Issues abertas
-![Issues abertas – Entrega 4](https://placehold.co/900x400?text=Issues+Abertas+%E2%80%93+Entrega+4)
+![Issues abertas – Entrega 4](https://github.com/user-attachments/assets/b3027114-bc29-4625-bc3b-8283c805323f)
 
 📸 Issues concluídas
-![Issues concluídas – Entrega 4](https://placehold.co/900x400?text=Issues+Conclu%C3%ADdas+%E2%80%93+Entrega+4)
+![Issues concluídas – Entrega 4](https://github.com/user-attachments/assets/6ebdf82d-5ca2-429f-b12c-645d77cc7158)
 
 <br>
 
 
-- <div>
-# 🚀🏟️ Rodando o projeto localmente
+---
+
+## 🚀🏟️ Rodando o projeto localmente
 
 Este projeto utiliza **Docker** para orquestrar a aplicação **Spring Boot** e o banco de dados **PostgreSQL**.
-
 Com isso, você não precisa instalar Java nem PostgreSQL localmente, pois o Docker sobe todos os serviços automaticamente e evita falhas ou erros de ambiente.
+
+<br>
 
 ---
 
-# 🛠️ Pré-requisitos
+### 🛠️ Pré-requisitos
 
 Antes de começar, certifique-se de possuir instalado:
 
@@ -126,11 +128,11 @@ Antes de começar, certifique-se de possuir instalado:
 
 ---
 
-# 📄 Criando o arquivo `.env`
+### 📄 Criando o arquivo `.env`
 
 Faça uma cópia do arquivo `.env.example` e renomeie para `.env`.
 
-## Exemplo
+#### Exemplo
 
 ```env
 DB_USER=postgres
@@ -140,7 +142,7 @@ DB_NAME=arenapernambuco
 
 ---
 
-# ▶️ Subindo a aplicação
+### ▶️ Subindo a aplicação
 
 Com o Docker aberto, execute o comando abaixo na raiz do projeto:
 
@@ -148,7 +150,7 @@ Com o Docker aberto, execute o comando abaixo na raiz do projeto:
 docker compose up --build -d
 ```
 
-## O que esse comando faz?
+#### O que esse comando faz?
 
 - `up` → sobe os containers
 - `--build` → recompila a imagem da aplicação com o código mais recente
@@ -156,11 +158,11 @@ docker compose up --build -d
 
 ---
 
-# 🌐 Acessando os serviços
+### 🌐 Acessando os serviços
 
 Após os containers iniciarem, a aplicação estará disponível nos seguintes endereços:
 
-## Aplicação Web
+#### Aplicação Web
 
 ```txt
 http://localhost:8080
@@ -168,7 +170,7 @@ http://localhost:8080
 
 ---
 
-# 🐘 Banco de Dados PostgreSQL
+### 🐘 Banco de Dados PostgreSQL
 
 Você pode acessar o banco utilizando ferramentas como:
 
@@ -176,7 +178,7 @@ Você pode acessar o banco utilizando ferramentas como:
 - pgAdmin
 - IntelliJ Database Tool
 
-## Configurações de conexão
+#### Configurações de conexão
 
 | Configuração | Valor |
 |---|---|
@@ -187,10 +189,10 @@ Você pode acessar o banco utilizando ferramentas como:
 | Senha | valor definido no `.env` |
 
 > A porta `5433` foi utilizada para evitar conflitos com instalações locais do PostgreSQL.
+
+<br>
+
 </div>
-
-
-
 
 ---
 
