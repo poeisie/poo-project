@@ -108,31 +108,17 @@
 
   function sincronizarForm(inputAtivo) {
     const inputs = document.querySelectorAll('.ingresso-qtd input[type=number]');
-
-    if (parseInt(inputAtivo.value) > 0) {
-      inputs.forEach(i => { if (i !== inputAtivo) i.value = 0; });
-    }
-
-    let tipoSelecionado = '';
-    let qtdSelecionada = 0;
-    inputs.forEach(i => {
-      const qtd = parseInt(i.value) || 0;
-      if (qtd > 0) {
-        tipoSelecionado = i.dataset.tipo;
-        qtdSelecionada = qtd;
-      }
-    });
-
-    document.getElementById('tipoInput').value = tipoSelecionado;
-    document.getElementById('qtdInput').value = qtdSelecionada;
-    document.getElementById('btnComprar').disabled = qtdSelecionada === 0;
+    let total = 0;
+    inputs.forEach(i => { total += parseInt(i.value) || 0; });
+    document.getElementById('btnComprar').disabled = total === 0;
   }
 
   document.getElementById('formCompra').addEventListener('submit', function(e) {
     e.preventDefault();
-    const tipo = document.getElementById('tipoInput').value;
-    const qtd = document.getElementById('qtdInput').value;
-    window.location.href = '/ingressos/comprar/' + eventoId + '?tipo=' + tipo + '&quantidade=' + qtd;
+    const qtdInteira = parseInt(document.getElementById('qtd-INTEIRA')?.value) || 0;
+    const qtdMeia = parseInt(document.getElementById('qtd-MEIA')?.value) || 0;
+    window.location.href = '/ingressos/comprar/' + eventoId
+        + '?inteira=' + qtdInteira + '&meia=' + qtdMeia;
   });
 </script>
 
