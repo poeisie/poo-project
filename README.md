@@ -107,86 +107,8 @@ Compra de ingressos, criação de eventos e painel de inteligência para gestore
 
 <br>
 
----
 
-## 🚀 Como executar
-
-<br>
-
-### Pré-requisitos
-
-- **Git**
-- **Docker Desktop** com WSL 2 ativado (Windows) ou suporte nativo (macOS/Linux)
-
-<br>
-
-### Configuração
-
-```bash
-# 1. Clone o repositório
-git clone https://github.com/poeisie/poo-project.git
-cd poo-project
-
-# 2. Crie o arquivo de variáveis de ambiente
-echo "DB_USER=postgres"            > .env
-echo "DB_PASSWORD=sua_senha_aqui" >> .env
-echo "DB_NAME=arenapernambuco"    >> .env
-
-# 3. Suba os containers
-docker compose up -d --build
-```
-
-<br>
-
-### Páginas da aplicação
-
-| URL | Descrição |
-|---|---|
-| `http://localhost:8080` | 🏠 Página inicial |
-| `http://localhost:8080/login` | 🔐 Login |
-| `http://localhost:8080/cadastro` | 📝 Cadastro |
-| `http://localhost:8080/eventos/listar` | 📅 Lista de eventos |
-
-> [!TIP]
-> **Primeiro acesso:** o sistema cria automaticamente um administrador.
-> Use `admin@arena.com` / `admin123` para entrar.
-
-<br>
-
-### Parar a aplicação
-
-```bash
-docker compose down
-```
-
-<br>
-
----
-
-## 👥 Equipe
-
-<br>
-
-<div align="center">
-
-| Nome | GitHub |
-|---|---|
-| Aguinaldo Neto | [@netokemon](https://github.com/netokemon) |
-| Caliel Feijó | [@calielfeijo](https://github.com/calielfeijo) |
-| Elis Tenório | [@elistenorio](https://github.com/elistenorio) |
-| Eulália Albuquerque | [@eulaliaa](https://github.com/eulaliaa) |
-| Giulia Ferreira | [@giuliaferreira](https://github.com/giuliaferreira) |
-| Sarah Cyrne | [@sarahcyrne](https://github.com/sarahcyrne) |
-
-<br>
-
----
-
-*Desenvolvido na [Cesar School](https://www.cesar.school) · Disciplina de POO*
-
-</div>
-
-<div>
+- <div>
 # 🚀🏟️ Rodando o projeto localmente
 
 Este projeto utiliza **Docker** para orquestrar a aplicação **Spring Boot** e o banco de dados **PostgreSQL**.
@@ -265,4 +187,32 @@ Você pode acessar o banco utilizando ferramentas como:
 | Senha | valor definido no `.env` |
 
 > A porta `5433` foi utilizada para evitar conflitos com instalações locais do PostgreSQL.
+</div>
+
+
+
+
+---
+
+## 👥 Equipe
+
+<br>
+
+<div align="center">
+
+| Nome | GitHub |
+|---|---|
+| Aguinaldo Neto | [@netokemon](https://github.com/netokemon) |
+| Caliel Feijó | [@calielfeijo](https://github.com/calielfeijo) |
+| Elis Tenório | [@elistenorio](https://github.com/elistenorio) |
+| Eulália Albuquerque | [@eulaliaa](https://github.com/eulaliaa) |
+| Giulia Ferreira | [@giuliaferreira](https://github.com/giuliaferreira) |
+| Sarah Cyrne | [@sarahcyrne](https://github.com/sarahcyrne) |
+
+<br>
+
+---
+
+*Desenvolvido na [Cesar School](https://www.cesar.school) · Disciplina de POO*
+
 </div>
