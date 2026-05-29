@@ -205,7 +205,7 @@ Você pode acessar o banco utilizando ferramentas como:
 | Nome | GitHub |
 |---|---|
 | Aguinaldo Neto | [@netokemon](https://github.com/netokemon) |
-| Caliel Feijó | [@calielfeijo](https://github.com/poeisie) |
+| Caliel Feijó | [@poeisie](https://github.com/poeisie) |
 | Elis Tenório | [@elistenorio](https://github.com/elistenorio) |
 | Eulália Albuquerque | [@eulaliaa](https://github.com/eulaliaa) |
 | Giulia Ferreira | [@giuliaferreira](https://github.com/giuliaferreira) |
