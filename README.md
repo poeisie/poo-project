@@ -9,7 +9,7 @@
 [![Java](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk&logoColor=white)](https://adoptium.net/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-27.2.0-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Status](https://img.shields.io/badge/status-em%20desenvolvimento-f4a261?style=flat-square)](https://github.com/poeisie/poo-project)
+[![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-4CAF50?style=flat-square)](https://github.com/poeisie/poo-project)
 
 <br>
 
@@ -205,7 +205,7 @@ Você pode acessar o banco utilizando ferramentas como:
 | Nome | GitHub |
 |---|---|
 | Aguinaldo Neto | [@netokemon](https://github.com/netokemon) |
-| Caliel Feijó | [@calielfeijo](https://github.com/calielfeijo) |
+| Caliel Feijó | [@calielfeijo](https://github.com/poeisie) |
 | Elis Tenório | [@elistenorio](https://github.com/elistenorio) |
 | Eulália Albuquerque | [@eulaliaa](https://github.com/eulaliaa) |
 | Giulia Ferreira | [@giuliaferreira](https://github.com/giuliaferreira) |
