@@ -54,7 +54,7 @@
             <div class="ingresso-meta">
               <div class="ingresso-meta-item data-hora">
                 <span><img src="../images/calendar-icon.svg" alt="Data" class="icon-img"> <span th:text="${#temporals.format(ingresso.evento.data, 'dd/MM/yyyy')}"></span></span>
-                <span><img src="../images/clock-icon.svg" alt="Horário" class="icon-img"> <span th:text="${ingresso.evento.horario} + ' - 19:00'"></span></span>
+                <span><img src="../images/clock-icon.svg" alt="Horário" class="icon-img"> <span th:text="${ingresso.evento.horario}"></span></span>
               </div>
               
               <div class="ingresso-meta-item local">

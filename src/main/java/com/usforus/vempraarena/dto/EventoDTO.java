@@ -3,6 +3,7 @@ package com.usforus.vempraarena.dto;
 import com.usforus.vempraarena.entities.TipoIngresso;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Map;
@@ -17,6 +18,7 @@ public class EventoDTO {
     private String local;
 
     @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
+    @Size(max = 5000, message = "A descrição não pode exceder 5000 caracteres.")
     private String descricao;
 
     @NotNull(message = "Por favor, preencha todos os campos obrigatórios.")
@@ -32,6 +34,7 @@ public class EventoDTO {
 
     private Integer precoIngresso;
 
+    @Size(max = 5000, message = "A descrição do produtor não pode exceder 5000 caracteres.")
     private String sobreProdutor;
 
     private MultipartFile imagem;

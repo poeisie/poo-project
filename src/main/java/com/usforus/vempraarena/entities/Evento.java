@@ -26,10 +26,10 @@ public class Evento {
     @Column(nullable = false)
     private String local;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String descricao;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String sobreProdutor;
 
     @Column(nullable = false)

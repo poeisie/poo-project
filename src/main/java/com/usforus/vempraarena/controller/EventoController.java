@@ -56,12 +56,12 @@ public class EventoController {
         Usuario usuario = usuarioRepository.findByEmail(authentication.getName());
         model.addAttribute("nomeUsuario", usuario.getName());
 
+        List<Evento> eventosSemana = eventoService.listarEventosSemanaAprovados();
         List<Evento> eventos = eventoService.listarEventosAprovados();
-        List<Evento> eventosSemana = eventoService.listarEventosAprovados();
 
         model.addAttribute("eventos", eventos);
         model.addAttribute("eventosSemana", eventosSemana);
-        model.addAttribute("eventosRecomendados", eventos); // temporário
+        model.addAttribute("eventosRecomendados", eventos);
 
         return "listar-eventos";
     }

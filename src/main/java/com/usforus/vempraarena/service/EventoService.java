@@ -44,6 +44,16 @@ public class EventoService {
         return repository.findByDataBetweenOrderByDataAsc(inicioSemana, fimSemana);
     }
 
+    public List<Evento> listarEventosSemanaAprovados(){
+        LocalDate hoje = LocalDate.now();
+        LocalDate inicioSemana = hoje.with(DayOfWeek.MONDAY);
+        LocalDate fimSemana = hoje.with(DayOfWeek.SUNDAY);
+        List<Evento> eventosSemana = repository.findByDataBetweenOrderByDataAsc(inicioSemana, fimSemana);
+        return eventosSemana.stream()
+                .filter(evento -> evento.getStatus() == StatusEvento.CONFIRMADO)
+                .toList();
+    }
+
 
     public void criarEvento(EventoDTO dto, Usuario produtor) throws Exception{
         if(dto.getData().isBefore(LocalDate.now())){

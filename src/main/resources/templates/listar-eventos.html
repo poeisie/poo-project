@@ -127,7 +127,7 @@
                                 <h3 class="evento-titulo" th:text="${evento.nome}">NOME DO EVENTO</h3>
                                 <div class="evento-info">
                                     <span class="evento-data" th:text="${#temporals.format(evento.data, 'dd')} + ' de ' + ${#temporals.format(evento.data, 'MMM')} + ' de ' + ${#temporals.format(evento.data, 'yyyy')}">13 de Mar de 2026</span>
-                                    <span class="evento-horario" th:text="${#temporals.format(evento.horario, 'HH:mm')} + ' - 19:00'">17:00 - 19:00</span>
+                                    <span class="evento-horario" th:text="${#temporals.format(evento.horario, 'HH:mm')}">17:00</span>
                                 </div>
                                 <div class="evento-local" th:text="${evento.local}">Rua endereço, bairro, Recife/PE</div>
                             </div>
@@ -153,13 +153,16 @@
                         <div class="evento-card" th:each="evento : ${eventosRecomendados}">
                             <a th:href="@{/eventos/{id}(id=${evento.id})}" class="evento-link">
                                 <div class="evento-img">
-                                    <span class="evento-img-placeholder">VEM<br/>PRA<br/>ARENA</span>
+                                    <div th:if="${evento.imagemPath}">
+                                        <img th:src="${evento.imagemPath}" alt="Banner do evento" />
+                                    </div>
+                                    <img class="evento-logo-placeholder" th:if="${evento.imagemPath == null}" src="/images/logo.reduzida.png" alt="VemPraArena" />
                                 </div>
                                 <div class="evento-body">
                                     <h3 class="evento-titulo" th:text="${evento.nome}">NOME DO EVENTO</h3>
                                     <div class="evento-info">
                                         <span class="evento-data" th:text="${#temporals.format(evento.data, 'dd')} + ' de ' + ${#temporals.format(evento.data, 'MMM')} + ' de ' + ${#temporals.format(evento.data, 'yyyy')}">13 de Mar de 2026</span>
-                                        <span class="evento-horario" th:text="${#temporals.format(evento.horario, 'HH:mm')} + ' - 19:00'">17:00 - 19:00</span>
+                                        <span class="evento-horario" th:text="${#temporals.format(evento.horario, 'HH:mm')}">17:00</span>
                                     </div>
                                     <div class="evento-local" th:text="${evento.local}">Rua endereço, bairro, Recife/PE</div>
                                 </div>
@@ -187,9 +190,9 @@
         const scroll = document.getElementById(scrollId);
         const btnNext = document.getElementById(nextBtnId);
         const btnPrev = document.getElementById(prevBtnId);
-        
+
         if (!scroll || !btnNext) return;
-        
+
         if (btnNext) {
             btnNext.addEventListener('click', () => {
                 scroll.scrollBy({ left: 300, behavior: 'smooth' });

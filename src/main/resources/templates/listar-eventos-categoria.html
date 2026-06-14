@@ -14,7 +14,6 @@
 <div th:insert="~{fragments/navbar :: navbar}"></div>
 
 <div class="eventos-page">
-    <h1 class="eventos-title" th:text="${categoria != null} ? 'Eventos: ' + ${categoria} : 'Eventos'">EVENTOS</h1>
 
     <div class="eventos-empty" th:if="${#lists.isEmpty(eventos)}">
         <p>Nenhum evento encontrado para esta categoria.</p>
