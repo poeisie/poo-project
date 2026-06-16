@@ -1,0 +1,177 @@
+name: CI — Arena Pernambuco
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+
+  # ─────────────────────────────────────────
+  # JOB 1 — Build + Testes Unitários (TDD)
+  # ─────────────────────────────────────────
+  build-and-test:
+    name: Build & Testes de Domínio
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Cache das dependências Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build do projeto
+        run: mvn clean compile --no-transfer-progress
+
+      - name: Rodar testes unitários de domínio (TDD)
+        run: mvn test --no-transfer-progress
+        # Testes isolados — sem banco, sem Spring context
+        # Cobre: EventoTest (capacidade de setores)
+
+      - name: Publicar relatório de testes
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relatorio-testes-unitarios
+          path: target/surefire-reports/
+
+  # ─────────────────────────────────────────
+  # JOB 2 — BDD (Gherkin / Cucumber)
+  # Depende do build-and-test passar
+  # ─────────────────────────────────────────
+  bdd:
+    name: Testes BDD — Cenários Gherkin
+    runs-on: ubuntu-latest
+    needs: build-and-test
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Cache das dependências Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Rodar cenários BDD (Cucumber)
+        run: mvn verify -Dcucumber.filter.tags="@bdd" --no-transfer-progress
+        # Roda os 2 cenários de gestao_capacidade_evento.feature:
+        #   Cenário 1 (caminho feliz): adicionar setores dentro da capacidade
+        #   Cenário 2 (exceção): exceder lotação total → CAPACIDADE_EXCEDIDA
+        # ⚠️  Teste vermelho aqui = deploy NÃO acontece
+
+      - name: Publicar relatório BDD
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relatorio-bdd-cucumber
+          path: target/cucumber-reports/
+
+  # ─────────────────────────────────────────
+  # JOB 3 — Empacotamento (imagem Docker)
+  # Depende do BDD passar
+  # ─────────────────────────────────────────
+  package:
+    name: Gerar Imagem de Container
+    runs-on: ubuntu-latest
+    needs: bdd
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Cache das dependências Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Gerar JAR
+        run: mvn package -DskipTests --no-transfer-progress
+
+      - name: Build da imagem Docker
+        run: |
+          docker build -t vempraarena/ticketing-service:${{ github.sha }} .
+          docker tag vempraarena/ticketing-service:${{ github.sha }} \
+                     vempraarena/ticketing-service:latest
+
+      - name: Salvar imagem como artefato
+        run: docker save vempraarena/ticketing-service:latest | gzip > image.tar.gz
+
+      - name: Upload da imagem
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: image.tar.gz
+
+  # ─────────────────────────────────────────
+  # JOB 4 — Deploy em Staging
+  # Apenas na branch main, após package passar
+  # ─────────────────────────────────────────
+  deploy-staging:
+    name: Deploy — Ambiente de Staging
+    runs-on: ubuntu-latest
+    needs: package
+    if: github.ref == 'refs/heads/main'
+
+    environment:
+      name: staging
+      url: https://staging.vempraarena.com.br
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Download da imagem Docker
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+
+      - name: Login no Registry
+        run: |
+          echo "${{ secrets.REGISTRY_PASSWORD }}" | \
+          docker login ghcr.io -u ${{ secrets.REGISTRY_USER }} --password-stdin
+
+      - name: Push da imagem para o registry
+        run: |
+          docker load < image.tar.gz
+          docker tag vempraarena/ticketing-service:latest \
+                     ghcr.io/${{ github.repository }}/ticketing-service:${{ github.sha }}
+          docker push ghcr.io/${{ github.repository }}/ticketing-service:${{ github.sha }}
+
+      - name: Deploy no servidor de staging
+        run: |
+          echo "Deploy da imagem ${{ github.sha }} em staging concluído."
+          # Aqui entraria o comando real:
+          # kubectl set image deployment/ticketing-service \
+          #   ticketing-service=ghcr.io/.../ticketing-service:${{ github.sha }}
