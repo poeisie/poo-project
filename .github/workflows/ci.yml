@@ -19,25 +19,21 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Configurar JDK 21
+      - name: Configurar JDK 21 e cache Maven
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
+          cache: 'maven'
+          cache-dependency-path: '**/pom.xml'
 
-      - name: Cache das dependências Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Verificar Java e Maven
+        run: |
+          java -version
+          mvn -v
 
-      - name: Build do projeto
-        run: mvn clean compile --no-transfer-progress
-
-      - name: Rodar testes unitários de domínio (TDD)
-        run: mvn test --no-transfer-progress
+      - name: Build e rodar testes (unitários)
+        run: mvn -B -ntp clean verify --no-transfer-progress
         # Testes isolados — sem banco, sem Spring context
         # Cobre: EventoTest (capacidade de setores)
 
@@ -61,22 +57,21 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Configurar JDK 21
+      - name: Configurar JDK 21 e cache Maven
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
+          cache: 'maven'
+          cache-dependency-path: '**/pom.xml'
 
-      - name: Cache das dependências Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Verificar Java e Maven
+        run: |
+          java -version
+          mvn -v
 
       - name: Rodar cenários BDD (Cucumber)
-        run: mvn verify -Dcucumber.filter.tags="@bdd" --no-transfer-progress
+        run: mvn -B -ntp verify -Dcucumber.filter.tags="@bdd" --no-transfer-progress
         # Roda os 2 cenários de gestao_capacidade_evento.feature:
         #   Cenário 1 (caminho feliz): adicionar setores dentro da capacidade
         #   Cenário 2 (exceção): exceder lotação total → CAPACIDADE_EXCEDIDA
@@ -102,22 +97,21 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Configurar JDK 21
+      - name: Configurar JDK 21 e cache Maven
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
+          cache: 'maven'
+          cache-dependency-path: '**/pom.xml'
 
-      - name: Cache das dependências Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Verificar Java e Maven
+        run: |
+          java -version
+          mvn -v
 
       - name: Gerar JAR
-        run: mvn package -DskipTests --no-transfer-progress
+        run: mvn -B -ntp package -DskipTests --no-transfer-progress
 
       - name: Build da imagem Docker
         run: |
