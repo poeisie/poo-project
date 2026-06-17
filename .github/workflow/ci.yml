@@ -19,9 +19,6 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Dar permissão de execução ao mvnw
-        run: chmod +x ./mvnw
-
       - name: Configurar JDK 21
         uses: actions/setup-java@v4
         with:
@@ -30,7 +27,7 @@ jobs:
           cache: maven
 
       - name: Build + Testes unitários de domínio
-        run: ./mvnw test --no-transfer-progress
+        run: bash ./mvnw test --no-transfer-progress
         # Roda EventoTest — ciclo TDD sobre a invariante de capacidade
         # ⚠️ Teste vermelho = pipeline para aqui, deploy não acontece
 
@@ -54,9 +51,6 @@ jobs:
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Dar permissão de execução ao mvnw
-        run: chmod +x ./mvnw
-
       - name: Configurar JDK 21
         uses: actions/setup-java@v4
         with:
@@ -65,7 +59,7 @@ jobs:
           cache: maven
 
       - name: Gerar JAR (sem rodar testes novamente)
-        run: ./mvnw package -DskipTests --no-transfer-progress
+        run: bash ./mvnw package -DskipTests --no-transfer-progress
 
       - name: Guardar JAR como artefato
         uses: actions/upload-artifact@v4
