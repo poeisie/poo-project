@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumo da Compra - Arena</title>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/comprar-ingresso.css" />
+</head>
+<body class="events-page">
+
+<div class="events-container">
+
+  <div th:insert="~{fragments/navbar :: navbar}"></div>
+
+  <main class="main">
+
+    <form th:action="@{/ingressos/comprar}" th:object="${compraDto}" method="post">
+
+      <input type="hidden" th:field="*{eventoId}" />
+      <input type="hidden" th:field="*{quantidadeInteira}" />
+      <input type="hidden" th:field="*{quantidadeMeia}" />
+
+      <div class="compra-left">
+        <div class="compra-resumo">
+
+          <h1>Resumo da Compra</h1>
+
+          <div class="resumo-evento">
+            <h2 th:text="${evento.nome}">Nome do Evento</h2>
+            <p>Dia: <span th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}"></span></p>
+            <p>Horário: <span th:text="${evento.horario}"></span></p>
+            <p>Local: <span th:text="${evento.local}"></span></p>
+          </div>
+
+          <div class="resumo-ingressos">
+            <h2>Ingressos</h2>
+
+            <div class="erro" th:if="${erroCompra}" th:text="${erroCompra}"></div>
+
+            <div class="resumo-item" th:if="${compraDto.quantidadeInteiraOuZero > 0}">
+              <div class="resumo-item-info">
+                <p class="resumo-item-tipo">Inteira</p>
+                <p class="resumo-item-preco" th:text="'R$ ' + ${evento.precoIngresso}"></p>
+                <p class="resumo-item-desc">Ingresso para o evento selecionado.</p>
+              </div>
+              <div class="resumo-item-qtd">
+                <span th:text="${compraDto.quantidadeInteiraOuZero}">0</span>
+              </div>
+            </div>
+
+            <div class="resumo-item" th:if="${compraDto.quantidadeMeiaOuZero > 0}">
+              <div class="resumo-item-info">
+                <p class="resumo-item-tipo">Meia Entrada</p>
+                <p class="resumo-item-preco" th:text="'R$ ' + ${evento.precoIngresso / 2}"></p>
+                <p class="resumo-item-desc">Ingresso para o evento selecionado.</p>
+              </div>
+              <div class="resumo-item-qtd">
+                <span th:text="${compraDto.quantidadeMeiaOuZero}">0</span>
+              </div>
+            </div>
+
+            <div class="resumo-total">
+              <div class="resumo-item-info">
+                <p class="resumo-item-tipo">Total</p>
+                <p class="resumo-item-preco" id="valorTotal"
+                   th:text="${'R$ ' + (compraDto.quantidadeInteiraOuZero * evento.precoIngresso + compraDto.quantidadeMeiaOuZero * (evento.precoIngresso / 2))}"></p>
+              </div>
+              <div class="resumo-item-qtd">
+                <span id="qtdLabel" th:text="${compraDto.totalIngressos}">0</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="compra-right">
+        <div class="compra-pagamento">
+
+          <h1>Formas de Pagamento</h1>
+
+          <div class="pagamento-secao">
+            <h3>Pré-Cadastrados</h3>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Cartão Principal</p>
+                <p class="pagamento-detalhe">Cartão Crédito Mastercard 0555</p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="CARTAO_PRINCIPAL" />
+            </label>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Cartão Apelido</p>
+                <p class="pagamento-detalhe">Cartão Débito Visa 1097</p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="CARTAO_APELIDO" />
+            </label>
+
+            <a href="#" class="pagamento-novo">+ Cadastrar Novo Cartão</a>
+          </div>
+
+          <div class="pagamento-secao">
+            <h3>Outras formas</h3>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Pix</p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="PIX" />
+            </label>
+
+            <label class="pagamento-opcao">
+              <div class="pagamento-info">
+                <p class="pagamento-nome">Boleto</p>
+              </div>
+              <input type="radio" th:field="*{formaPagamento}" value="BOLETO" />
+            </label>
+
+          </div>
+
+          <button type="submit">Finalizar Compra</button>
+
+          <div style="text-align: center; margin-top: 15px;">
+            <a th:href="@{/eventos/listar}">Cancelar</a>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+    <div class="modal-overlay" id="modalSucesso" th:if="${compraRealizada}">
+      <div class="modal-content">
+        <button class="modal-close" onclick="fecharModal()">×</button>
+
+        <h2 class="modal-title">INGRESSOS COMPRADOS</h2>
+        <p class="modal-text">
+          Sua compra foi realizada com sucesso. Agora é só preparar a animação! Aguardamos você para viver essa experiência na Arena Pernambuco.
+        </p>
+
+        <div class="modal-actions">
+          <a th:href="@{/ingressos/meus}" class="modal-btn">Ver ingresso</a>
+          <a th:href="@{/eventos/listar}" class="modal-btn">Retornar ao Menu</a>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<script>
+  function fecharModal() {
+    const modal = document.getElementById('modalSucesso');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>

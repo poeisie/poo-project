@@ -21,12 +21,14 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model){
+        model.addAttribute("paginaAtual", "login");
         return "login";
     }
 
     @GetMapping("/cadastro")
     public String exibirFormularioCadastro(Model model){
+        model.addAttribute("paginaAtual", "cadastro");
         model.addAttribute("usuarioCadastroDTO", new UsuarioCadastroDTO());
         return "cadastro";
     }
@@ -50,10 +52,12 @@ public class AuthController {
     }
 
     @GetMapping("/home")
-    public String home(Principal principal, Model model){
-        Usuario usuario = usuarioService.buscarPorEmail(principal.getName());
-        model.addAttribute("nome", usuario.getName());
-        model.addAttribute("saldo", usuario.getSaldoMoedas());
-        return "home";
+    public String home(){
+        return "redirect:/eventos/listar";
+    }
+
+    @GetMapping("/")
+    public String paginaInicial() {
+        return "redirect:/eventos/listar";
     }
 }

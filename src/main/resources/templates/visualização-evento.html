@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${evento.nome}">Evento - Arena</title>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/visualização-evento.css" />
+</head>
+<body class="events-page">
+
+<div class="events-container">
+
+  <div th:insert="~{fragments/navbar :: navbar}"></div>
+
+  <main class="main">
+
+    <div class="evento-container">
+
+      <section class="evento-detalhes">
+
+        <div th:if="${evento.imagemPath}">
+          <div class="evento-banner">
+            <img th:src="${evento.imagemPath}" alt="Imagem do evento" />
+          </div>
+        </div>
+        <div th:if="${evento.imagemPath == null}" class="evento-banner" aria-hidden="true"></div>
+
+        <div class="evento-linha-conteudo">
+          <div class="evento-conteudo">
+            <h1 th:text="${evento.nome}"></h1>
+
+            <div class="evento-meta">
+              <span th:text="${#temporals.format(evento.data, 'dd ''de'' MMMM ''de'' yyyy')}"></span>
+              <span th:text="${evento.horario}"></span>
+              <span th:text="${evento.local}"></span>
+            </div>
+
+            <p th:text="${evento.descricao}"></p>
+
+            <h2>Sobre o Produtor</h2>
+            <p th:text="${evento.sobreProdutor != null && !#strings.isEmpty(evento.sobreProdutor) ? evento.sobreProdutor : 'Descrição do produtor não informada'}"></p>
+
+            <h2>Localização</h2>
+            <div class="evento-mapa">
+              <iframe
+                th:src="'https://maps.google.com/maps?q=' + ${#strings.replace(evento.local, ' ', '+')} + '&output=embed'"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+
+          <aside class="evento-compra">
+            <div class="ingresso-lista">
+              <div class="ingresso-item" th:each="entry : ${evento.ingressosDisponiveisPorTipo}">
+                <div class="ingresso-info">
+                  <p class="ingresso-tipo" th:text="${entry.key.name() == 'INTEIRA' ? 'Inteira' : 'Meia Entrada'}"></p>
+                  <p class="ingresso-preco" th:text="${'R$ ' + (entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2)}"></p>
+                  <p class="ingresso-desc" th:text="${entry.value} + ' disponíveis'"></p>
+                </div>
+                <div class="ingresso-qtd">
+                  <button type="button" onclick="alterarQtd(this, -1)">−</button>
+                  <label class="sr-only" for="qtd-ingresso" th:for="'qtd-' + ${entry.key.name()}">Quantidade de ingressos</label>
+                  <input type="number"
+                         id="qtd-ingresso"
+                         th:id="'qtd-' + ${entry.key.name()}"
+                         th:data-tipo="${entry.key.name()}"
+                         th:data-preco="${entry.key.name() == 'INTEIRA' ? evento.precoIngresso : evento.precoIngresso / 2}"
+                         th:max="${entry.value}"
+                         min="0" value="0"
+                         oninput="sincronizarForm(this)" />
+                  <button type="button" onclick="alterarQtd(this, 1)">+</button>
+                </div>
+              </div>
+            </div>
+
+            <form id="formCompra">
+              <input type="hidden" id="tipoInput" value="" />
+              <input type="hidden" id="qtdInput" value="0" />
+              <button type="submit" id="btnComprar" disabled>Comprar Ingressos</button>
+            </form>
+          </aside>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+</div>
+
+<script th:inline="javascript">
+  const eventoId = /*[[${evento.id}]]*/ null;
+
+  function alterarQtd(btn, delta) {
+    const input = btn.parentElement.querySelector('input[type=number]');
+    const max = parseInt(input.max) || 99;
+    input.value = Math.max(0, Math.min(max, (parseInt(input.value) || 0) + delta));
+    sincronizarForm(input);
+  }
+
+  function sincronizarForm(inputAtivo) {
+    const inputs = document.querySelectorAll('.ingresso-qtd input[type=number]');
+    let total = 0;
+    inputs.forEach(i => { total += parseInt(i.value) || 0; });
+    document.getElementById('btnComprar').disabled = total === 0;
+  }
+
+  document.getElementById('formCompra').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const qtdInteira = parseInt(document.getElementById('qtd-INTEIRA')?.value) || 0;
+    const qtdMeia = parseInt(document.getElementById('qtd-MEIA')?.value) || 0;
+    window.location.href = '/ingressos/comprar/' + eventoId
+        + '?inteira=' + qtdInteira + '&meia=' + qtdMeia;
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+@font-face {
+    font-family: 'Sizmo';
+    src: url('/fonts/SizmoPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.dashboard-page {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('/images/fundo-tela-dashboard.png');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 40px;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.management-card {
+    width: 480px; 
+    min-height: 420px;
+    background-color: #f7f7f7; 
+    border-radius: 16px;
+    padding: 40px 32px 30px 32px; 
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); 
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-image-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    height: 60%;
+}
+
+.management-card h2,
+.management-card .card-description,
+.card-actions {
+    position: relative;
+    z-index: 1;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.management-card h2 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: 12px;
+    font-family: 'Sizmo', sans-serif !important;
+}
+
+.management-card .card-description {
+    font-size: 13px;
+    color: #A4A4A4; 
+    line-height: 1.5;
+    margin-bottom: 32px;
+}
+
+.card-stadium-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    opacity: 0.6; 
+    display: block;
+}
+
+.card-actions .btn-nav {
+    font-size: 13px;
+    padding: 10px 18px;
+    width: 100%;
+}
+
+.card-spacing {
+    flex: 1;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${categoria != null} ? 'Eventos - ' + ${categoria} : 'Eventos por Categoria'">Eventos por Categoria</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/listar-eventos.css">
+    <link rel="stylesheet" href="/css/listar-eventos-categoria.css">
+</head>
+<body>
+
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+
+<div class="eventos-page">
+
+    <div class="eventos-empty" th:if="${#lists.isEmpty(eventos)}">
+        <p>Nenhum evento encontrado para esta categoria.</p>
+        <a th:href="@{/eventos/listar}" class="btn-nav">Voltar</a>
+    </div>
+
+    <div class="eventos-grid" th:unless="${#lists.isEmpty(eventos)}">
+        <div class="evento-card" th:each="evento : ${eventos}">
+            <a th:href="@{/eventos/{id}(id=${evento.id})}" class="evento-link">
+                <div class="evento-img">
+                    <div th:if="${evento.imagemPath}">
+                        <img th:src="${evento.imagemPath}" alt="Banner do evento" />
+                    </div>
+                    <span class="evento-img-placeholder" th:if="${evento.imagemPath == null}">VEM<br/>PRA<br/>ARENA</span>
+                </div>
+                <div class="evento-body">
+                    <h3 class="evento-titulo" th:text="${evento.nome}">NOME DO EVENTO</h3>
+                    <div class="evento-info">
+                        <span class="evento-data"
+                              th:text="${evento.data != null} ? ${#temporals.format(evento.data, 'dd')} + ' de ' + ${#temporals.format(evento.data, 'MMM')} + ' de ' + ${#temporals.format(evento.data, 'yyyy')} : ''">13 de Mar de 2026</span>
+                        <span class="evento-horario"
+                              th:text="${evento.horario != null} ? ${#temporals.format(evento.horario, 'HH:mm')} : ''">20:00</span>
+                    </div>
+                    <div class="evento-local" th:text="${evento.local}">Rua endereço, bairro, Recife/PE</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

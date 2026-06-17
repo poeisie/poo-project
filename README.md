@@ -1,57 +1,220 @@
+<div align="center">
+<br>
+
 # 🏟️ Vem pra Arena
 
-> **O Vem Pra Arena é uma plataforma digital integrada para a Arena Pernambuco, projetada para transformar a experiência do cidadão e otimizar a gestão administrativa do estádio. O ecossistema une a conveniência da compra de ingressos com um sistema de engajamento gamificado e inteligência de dados para os gestores.**
+<br>
+
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.4-6DB33F?style=flat-square&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-21-007396?style=flat-square&logo=openjdk&logoColor=white)](https://adoptium.net/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-4169E1?style=flat-square&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Docker](https://img.shields.io/badge/Docker-27.2.0-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-4CAF50?style=flat-square)](https://github.com/poeisie/poo-project)
+
+<br>
+
+**Plataforma digital integrada para a Arena Pernambuco.**  
+Compra de ingressos, criação de eventos e painel de inteligência para gestores — tudo em um só lugar.
+
+<br>
+
+[Funcionalidades](#-funcionalidades) · [Entregas](#-entregas) · [Como executar](#-como-executar) · [Equipe](#-equipe)
+
+<br>
+
+</div>
+
+---
+
+## ✨ Funcionalidades
+
+<br>
+
+| | Recurso | Descrição |
+|---|---|---|
+| 🎟️ | **Exploração de eventos** | Feed personalizado com filtros por categoria, data e disponibilidade |
+| 💳 | **Ticketing digital** | Compra via PIX ou cartão e carteira "Meus Eventos" |
+| 📊 | **Painel administrativo** | Ocupação em tempo real, análise de público e cadastro de eventos |
+
+<br>
+
+---
+
+## 📦 Entregas
+
+<br>
+
+### `01` · Protótipo e Histórias de Usuário
+
+> Definição do escopo, jornadas em BDD e protótipo navegável lo-fi.
+
+| Recurso | |
+|---|---|
+| 📄 Histórias de usuário (BDD) | [Abrir documento →](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing) |
+| 🎨 Protótipo lo-fi | [Ver no Figma →](https://www.figma.com/proto/HFs8QUM9Nmq6a6zGCh67uC/Projeto-POO?node-id=0-1&t=OqRyrlnG93pjeCVs-1) |
+| 🎥 Screencast | [Assistir no YouTube →](https://youtu.be/bCbvHcg8d_c) |
+
+<br>
+
+---
+
+### `02` · Primeiras Histórias Implementadas
+
+> **Histórias entregues:** Visualização e Filtros de Eventos · Cadastro de Novos Eventos (Admin)
+
+| Recurso | |
+|---|---|
+| 🎥 Screencast | [Assistir no YouTube →](https://youtu.be/-SNA-cdIQr8) |
+| 🐞 Bug tracker (VPA-1 a VPA-19) | [Ver planilha →](https://docs.google.com/spreadsheets/d/1F9LqVv9y9CrThgpUzaNE2ApuoM_dKlN1JgAWgZU_HiA/edit?usp=sharing) |
+
+<br>
+
+---
+
+### `03` · Jornada do Usuário Completa
+
+> **Histórias entregues:** Visualização do Evento · Compra do Ingresso · Meus Ingressos
+
+| Recurso | |
+|---|---|
+| 🎥 Screencast | [Assistir no YouTube →](https://youtu.be/LDaSQDC5Ia4) |
+| 🐞 Issues abertas | [Ver captura →](https://github.com/user-attachments/assets/acb53e06-bc84-45d7-a8f4-eef56549f5e6) |
+| 🐞 Issues concluídas | [Ver captura →](https://github.com/user-attachments/assets/3926ef2c-f772-4aa1-98d0-079e946e5ad9) |
+
+> [!NOTE]
+> O rastreamento de bugs foi migrado para as [Issues do GitHub](https://github.com/poeisie/poo-project/issues). Os registros VPA-1 a VPA-19 foram atualizados com os novos status.
+
+<br>
+
+---
+
+### `04` · Painel Administrativo e Segurança
+
+> **Implementado:** dashboard com estatísticas, pré-cadastro de admin e ajustes de segurança em rotas.
+
+| Recurso | |
+|---|---|
+| 🎥 Screencast | [Assistir no YouTube →](https://youtu.be/nya91LKVpAw) |
+| 🐞 Bug tracker | [Issues do GitHub →](https://github.com/poeisie/poo-project/issues) |
+
+**Print do bug tracker — Entrega 4:**
+
+📸 Issues abertas
+![Issues abertas – Entrega 4](https://github.com/user-attachments/assets/b3027114-bc29-4625-bc3b-8283c805323f)
+
+📸 Issues concluídas
+![Issues concluídas – Entrega 4](https://github.com/user-attachments/assets/6ebdf82d-5ca2-429f-b12c-645d77cc7158)
+
+<br>
 
 
-## ✨ Principais Funcionalidades
+---
 
-* **Exploração e Recomendação:** Feed personalizado de eventos baseado no perfil e histórico do usuário. Filtros por categoria, data e disponibilidade.
-* **Ticketing Digital:** Compra rápida de ingressos (PIX, Cartão) com geração de QR Code dinâmico para acesso. Carteira digital ("Meus Eventos") para organização.
-* **Gamificação e Apostas:** Sistema de recompensas onde o usuário ganha "Moedas Fictícias" que podem ser apostadas em resultados de jogos esportivos.
-* **Loja de Recompensas:** Troca de moedas acumuladas por benefícios reais (ingressos, tours, estacionamento).
-* **Dashboard Administrativo:** Painel exclusivo para gestores com estatísticas de ocupação, análise de público e ferramenta de cadastro de novos eventos.
+## 🚀🏟️ Rodando o projeto localmente
 
-# Entrega 1:
+Este projeto utiliza **Docker** para orquestrar a aplicação **Spring Boot** e o banco de dados **PostgreSQL**.
+Com isso, você não precisa instalar Java nem PostgreSQL localmente, pois o Docker sobe todos os serviços automaticamente e evita falhas ou erros de ambiente.
 
-* **[Histórias de Usuário](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing):** Documento detalhado contendo os cartões, regras de negócio e cenários de validação (BDD) do projeto.
+<br>
 
-* **[Visualização do Protótipo Lo-Fi](https://www.figma.com/proto/HFs8QUM9Nmq6a6zGCh67uC/Projeto-POO?node-id=0-1&t=OqRyrlnG93pjeCVs-1):** Acesso aos wireframes e fluxos de tela estruturados para a aplicação.
+---
 
-## 🎥 Screencast - Protótipo Lo-Fi
+### 🛠️ Pré-requisitos
 
-Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, onde explicamos o fluxo principal de cadastro, autenticação e jornada de compra de ingressos.
+Antes de começar, certifique-se de possuir instalado:
 
-[![Screencast - Vem pra Arena](https://img.youtube.com/vi/bCbvHcg8d_c/0.jpg)](https://youtu.be/bCbvHcg8d_c)
+- Docker Desktop
+- Java e Maven *(opcionais para execução via Docker, mas úteis para testes e comandos locais)*
 
-*Clique na imagem ou [aqui](https://youtu.be/bCbvHcg8d_c) para assistir ao vídeo no YouTube.*
+---
 
-# Entrega 2:
+### 📄 Criando o arquivo `.env`
 
-* **[Screencast do uso do sistema](https://docs.google.com/document/d/1gqw9K4x-y1uYNg8-NPAM1b8q1wjoDYq8w0iQstYzfc0/edit?usp=sharing):** No vídeo é apresentado o uso do sistema com duas histórias implementadas, sendo elas as histórias "3. Visualização e Filtros de Eventos" e "9. Cadastro de Novos Eventos (Admin)" descritas na documentação anexada na entrega 1.
+Faça uma cópia do arquivo `.env.example` e renomeie para `.env`.
 
-* **[Issue/Bug Tracker](https://docs.google.com/spreadsheets/d/1F9LqVv9y9CrThgpUzaNE2ApuoM_dKlN1JgAWgZU_HiA/edit?usp=sharing):** Acesso ao bug tracker, onde é apresentado o levantamento de bugs do sistema com vinte itens documentados, sendo eles as ocorrências VPA-1 a VPA-20 descritas na planilha anexada.
+#### Exemplo
 
-## 🎥 Screencast - Uso do Sistema
+```env
+DB_USER=postgres
+DB_PASSWORD=admin
+DB_NAME=arenapernambuco
+```
 
-Abaixo você encontra a demonstração do nosso protótipo de baixa fidelidade, onde explicamos o fluxo principal de cadastro, autenticação e jornada de compra de ingressos.
+---
 
-[![Screencast - Vem pra Arena](https://img.youtube.com/vi/bCbvHcg8d_c/0.jpg)](https://youtu.be/bCbvHcg8d_c)
+### ▶️ Subindo a aplicação
 
-*Clique na imagem ou [aqui](https://youtu.be/bCbvHcg8d_c) para assistir ao vídeo no YouTube.*
+Com o Docker aberto, execute o comando abaixo na raiz do projeto:
 
-## 🎥 Issue/Bug Tracker
+```bash
+docker compose up --build -d
+```
 
-Abaixo você encontra o uso do sistema com as histórias "3. Visualização e Filtros de Eventos" e "9. Cadastro de Novos Eventos (Admin)" implementadas.
+#### O que esse comando faz?
 
-![Bug Tracker - VemPraArena - Projeto POO - Sheet1](https://github.com/user-attachments/assets/1bb7dd9e-9f2e-4543-825b-d49ba4b4cbf4)
+- `up` → sobe os containers
+- `--build` → recompila a imagem da aplicação com o código mais recente
+- `-d` → executa os containers em segundo plano
 
-## 👥 Integrantes da Equipe
+---
 
-Este projeto foi desenvolvido por:
+### 🌐 Acessando os serviços
 
-* Aguinaldo Neto
-* Caliel Feijó
-* Elis Tenório
-* Eulália Albuquerque
-* Giulia Ferreira
-* Sarah Cyrne
+Após os containers iniciarem, a aplicação estará disponível nos seguintes endereços:
+
+#### Aplicação Web
+
+```txt
+http://localhost:8080
+```
+
+---
+
+### 🐘 Banco de Dados PostgreSQL
+
+Você pode acessar o banco utilizando ferramentas como:
+
+- DBeaver
+- pgAdmin
+- IntelliJ Database Tool
+
+#### Configurações de conexão
+
+| Configuração | Valor |
+|---|---|
+| Host | localhost |
+| Porta | 5433 |
+| Database | arenapernambuco |
+| Usuário | valor definido no `.env` |
+| Senha | valor definido no `.env` |
+
+> A porta `5433` foi utilizada para evitar conflitos com instalações locais do PostgreSQL.
+
+<br>
+
+</div>
+
+---
+
+## 👥 Equipe
+
+<br>
+
+<div align="center">
+
+| Nome | GitHub |
+|---|---|
+| Aguinaldo Neto | [@netokemon](https://github.com/netokemon) |
+| Caliel Feijó | [@poeisie](https://github.com/poeisie) |
+| Elis Tenório | [@elistenorio](https://github.com/elistenorio) |
+| Eulália Albuquerque | [@eulaliaa](https://github.com/eulaliaa) |
+| Giulia Ferreira | [@giuliaferreira](https://github.com/giuliaferreira) |
+| Sarah Cyrne | [@sarahcyrne](https://github.com/sarahcyrne) |
+
+<br>
+
+---
+
+*Desenvolvido na [Cesar School](https://www.cesar.school) · Disciplina de POO*
+
+</div>

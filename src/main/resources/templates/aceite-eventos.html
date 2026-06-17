@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+
+<head>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/aceite-eventos.css">
+    <meta charset="UTF-8">
+    <title>VEM·PRA·ARENA. — Aceite dos Eventos</title>
+</head>
+<body>
+
+<main class="main">
+
+    <div th:insert="~{fragments/navbar :: navbar}"></div>
+
+    <h1 class="content-box__title">ACEITE DOS EVENTOS</h1>
+
+    <div th:if="${sucesso}" class="erro" style="background-color: #edf7ed; color: var(--color-success); border-color: var(--color-success); margin-bottom: 20px;" th:text="${sucesso}"></div>
+    <div th:if="${erro}" class="erro" style="margin-bottom: 20px;" th:text="${erro}"></div>
+
+    <div th:if="${#lists.isEmpty(eventosPendentes)}" style="background: white; padding: 40px; text-align: center; border-radius: 8px; color: var(--color-text-secondary);">
+        🎉 <strong>Tudo limpo!</strong> Não há nenhum evento aguardando moderação no momento.
+    </div>
+
+    <ul class="event-list" th:unless="${#lists.isEmpty(eventosPendentes)}">
+        <li class="event-row" th:each="evento : ${eventosPendentes}">
+
+            <span class="event-row__name" th:text="${evento.nome}">Nome do Evento</span>
+
+            <span class="event-row__divider"></span>
+            <span class="event-row__category" th:text="${evento.categorias != null ? evento.categorias : 'Geral'}">Esporte</span>
+
+            <span class="event-row__divider"></span>
+            <span class="event-row__organizer" th:text="${evento.local}">Arena Pernambuco</span>
+
+            <span class="event-row__divider"></span>
+            <span class="event-row__date" th:text="${#temporals.format(evento.data, 'dd/MM/yyyy')}">05/04/2026</span>
+
+            <span class="event-row__divider"></span>
+            <span class="event-row__time" th:text="${evento.horario}">17:00</span>
+
+            <span class="event-row__divider"></span>
+            <a th:href="@{/eventos/{id}(id=${evento.id})}" class="event-row__link" target="_blank">Ver detalhes <span>›</span></a>
+            <span class="event-row__divider"></span>
+
+            <div class="event-row__actions" style="display: flex; gap: 8px;">
+                <form th:action="@{/admin/eventos/aprovar/{id}(id=${evento.id})}" method="post">
+                    <button type="submit" class="btn-action btn-action--accept" style="cursor: pointer;">Aceitar</button>
+                </form>
+
+                <form th:action="@{/admin/eventos/rejeitar/{id}(id=${evento.id})}" method="post">
+                    <button type="submit" class="btn-action btn-action--refuse" style="cursor: pointer;" onclick="return confirm('Tem certeza que deseja recusar este evento?')">Recusar</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</main>
+
+</body>
+</html>

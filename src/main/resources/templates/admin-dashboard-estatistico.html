@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Estatístico</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/dashboard-estatistico.css">
+</head>
+<body>
+
+<div th:insert="~{fragments/navbar :: navbar}"></div>
+
+<div class="dashboard-container">
+    <h1 class="dashboard-title">Dashboard</h1>
+
+    <div class="cards-grid">
+        <div class="stat-card">
+            <h3>Total de Eventos Confirmados</h3>
+            <p class="stat-value" th:text="${metricas != null ? metricas.totalEventosConfirmados : 0}">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Total de Ingressos Vendidos</h3>
+            <p class="stat-value" th:text="${metricas != null ? metricas.totalIngressosVendidos : 0}">0</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <span class="progress-text">9/50</span>
+        </div>
+        <div class="stat-card">
+            <h3>Categoria Mais Frequente</h3>
+            <p class="stat-value" th:text="${metricas != null && metricas.modaCategoria != null ? metricas.modaCategoria : 'N/A'}">E-sports</p>
+        </div>
+        <div class="stat-card">
+            <h3>Receita Total</h3>
+            <p class="stat-value" th:text="${'R$ ' + #numbers.formatDecimal(metricas != null ? metricas.receitaTotal : 0, 1, 2)}">R$ 200,00</p>
+        </div>
+        <div class="stat-card">
+            <h3>Média de Ingressos por Evento</h3>
+            <p class="stat-value" th:text="${#numbers.formatDecimal(metricas != null ? metricas.mediaIngressosPorEvento : 0, 1, 2)}">3,00</p>
+        </div>
+        <div class="stat-card">
+            <h3>Desvio Padrão de Ingressos</h3>
+            <p class="stat-value" th:text="${#numbers.formatDecimal(metricas != null ? metricas.desvioPadraoIngressos : 0, 1, 2)}">2,16</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,8 +1,13 @@
 package com.usforus.vempraarena.dto;
 
+import com.usforus.vempraarena.entities.TipoIngresso;
 import jakarta.validation.constraints.NotBlank;
-import java.time.LocalTime;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
 
 public class EventoDTO {
 
@@ -13,19 +18,27 @@ public class EventoDTO {
     private String local;
 
     @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
+    @Size(max = 5000, message = "A descrição não pode exceder 5000 caracteres.")
     private String descricao;
 
-    @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
+    @NotNull(message = "Por favor, preencha todos os campos obrigatórios.")
     private LocalDate data;
 
-    @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
+    @NotNull(message = "Por favor, preencha todos os campos obrigatórios.")
     private LocalTime horario;
 
     @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
-    private int capacidadeMaximaParticipantes;
-
-    @NotBlank(message = "Por favor, preencha todos os campos obrigatórios.")
     private String categorias;
+
+    private Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo;
+
+    private Integer precoIngresso;
+
+    @Size(max = 5000, message = "A descrição do produtor não pode exceder 5000 caracteres.")
+    private String sobreProdutor;
+
+    private MultipartFile imagem;
+
 
 
     public String getNome() {
@@ -60,14 +73,6 @@ public class EventoDTO {
         this.horario = horario;
     }
 
-    public int getCapacidadeMaximaParticipantes() {
-        return capacidadeMaximaParticipantes;
-    }
-
-    public void setCapacidadeMaximaParticipantes(int capacidadeMaximaParticipantes) {
-        this.capacidadeMaximaParticipantes = capacidadeMaximaParticipantes;
-    }
-
     public String getLocal() {
         return local;
     }
@@ -82,6 +87,31 @@ public class EventoDTO {
 
     public void setCategorias(String categorias) {
         this.categorias = categorias;
+    }
+
+    public Map<TipoIngresso, Integer> getIngressosDisponiveisPorTipo() {
+        return ingressosDisponiveisPorTipo;
+    }
+
+    public void setIngressosDisponiveisPorTipo(Map<TipoIngresso, Integer> ingressosDisponiveisPorTipo) {
+        this.ingressosDisponiveisPorTipo = ingressosDisponiveisPorTipo;
+    }
+
+    public Integer getPrecoIngresso() { return precoIngresso; }
+    public void setPrecoIngresso(Integer precoIngresso) { this.precoIngresso = precoIngresso; 
+    }
+
+
+
+    public String getSobreProdutor() { return sobreProdutor; }
+    public void setSobreProdutor(String sobreProdutor) { this.sobreProdutor = sobreProdutor; }
+
+    public MultipartFile getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(MultipartFile imagem) {
+        this.imagem = imagem;
     }
 
 }

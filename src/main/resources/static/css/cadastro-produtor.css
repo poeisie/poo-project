@@ -1,0 +1,108 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Sizmo';
+    src: url('/fonts/SizmoPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.cadastro-produtor-page {
+    min-height: calc(100vh - 60px);
+    width: 100%;
+    background-image: url('/images/cadastro-produtor-background.gif');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 40px;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #111;
+    color: #fff;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 610px;
+    overflow: hidden;
+}
+
+.seats-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 14px;
+    padding: 20px;
+}
+
+.seat-block {
+    background-color: rgba(59, 130, 246, 0.5);
+    border-radius: 18px;
+}
+
+.hero-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 340px;
+    background-color: rgba(245, 245, 245, 0.97);
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+.hero-card h2 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #111;
+    margin-bottom: 12px;
+    font-family: 'Sizmo', sans-serif !important;
+}
+
+.hero-card p {
+    font-size: 13px;
+    color: #A4A4A4;
+    line-height: 1.65;
+    margin-bottom: 28px;
+}
+
+.btn-card {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    background-color: #656565;
+    color: #fff;
+    /* transition: background-color 0.2s, transform 0.1s; */
+    margin-bottom: 10px;
+}
+
+.btn-card:last-child { margin-bottom: 0; }
+.btn-card:hover      { background-color: #3b82f6; }
+.btn-card:active     { transform: scale(0.98); }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meus Ingressos</title>
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/meus-ingressos.css" />
+</head>
+<body class="events-page">
+
+<div class="events-container">
+
+  <div th:insert="~{fragments/navbar :: navbar}"></div>
+
+  <main class="main">
+
+    <div class="ingressos-container">
+
+      <h1>Seus Ingressos</h1>
+
+      <div class="sucesso" th:if="${sucesso}" th:text="${sucesso}"></div>
+
+      <div class="ingressos-empty" th:if="${#lists.isEmpty(ingressos)}">
+        <h3>Você ainda não comprou nenhum ingresso.</h3>
+        <p>Vá até a aba de eventos e garanta o seu lugar!</p>
+        <a th:href="@{/eventos/listar}">Explorar Eventos</a>
+      </div>
+
+      <div class="ingressos-grid" th:if="${!#lists.isEmpty(ingressos)}">
+
+        <div class="ingresso-card" th:each="ingresso : ${ingressos}">
+
+          <div class="ingresso-banner">
+              
+              <img th:if="${ingresso.evento.imagemPath != null}" 
+                   th:src="${ingresso.evento.imagemPath}" 
+                   alt="Banner do evento" 
+                   class="ingresso-banner-img" />
+
+              <div class="ingresso-banner-placeholder" th:if="${ingresso.evento.imagemPath == null}">
+                  <span>VEM·<br>·PRA<br>ARENA<br>.</span>
+              </div>
+              
+          </div>
+          <div class="ingresso-body">
+            <div class="ingresso-header">
+              <span class="ingresso-pedido" th:text="'Pedido #' + ${ingresso.id}"></span>
+            </div>
+
+            <h2 class="ingresso-nome" th:text="${ingresso.evento.nome}"></h2>
+
+            <div class="ingresso-meta">
+              <div class="ingresso-meta-item data-hora">
+                <span><img src="../images/calendar-icon.svg" alt="Data" class="icon-img"> <span th:text="${#temporals.format(ingresso.evento.data, 'dd/MM/yyyy')}"></span></span>
+                <span><img src="../images/clock-icon.svg" alt="Horário" class="icon-img"> <span th:text="${ingresso.evento.horario}"></span></span>
+              </div>
+              
+              <div class="ingresso-meta-item local">
+                <span class="destaque-local"><img src="../images/location-icon.svg" alt="Local" class="icon-img"> <span th:text="${ingresso.evento.local}"></span></span>
+                <span class="endereco-local">Avenida Deus é Fiel, 1 - Penedo, São Lourenço da Mata - PE</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+</body>
+</html>

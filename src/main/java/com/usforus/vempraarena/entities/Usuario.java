@@ -1,9 +1,16 @@
 package com.usforus.vempraarena.entities;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,8 +21,14 @@ public class Usuario {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = true)
     private String cpf;
+
+    @Column(unique = true, nullable = true)
+    private String cnpj;
+
+    @Column(unique = true, nullable = true)
+    private String razaoSocial;
 
     @Column(nullable = false)
     private String password;
@@ -23,6 +36,37 @@ public class Usuario {
     private Integer saldoMoedas = 0;
 
     private String role = "USER";
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.role));
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 
     public Long getId() {
@@ -53,6 +97,21 @@ public class Usuario {
         this.cpf = cpf;
     }
 
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -77,4 +136,17 @@ public class Usuario {
     public String getPassword() {
         return password;
     }
+
+    public String getInitiais() {
+        if (name == null || name.isEmpty()) {
+            return "";
+        }
+        String[] palavras = name.trim().split("\\s+");
+        if (palavras.length >= 2) {
+            return (palavras[0].charAt(0) + "" + palavras[palavras.length - 1].charAt(0)).toUpperCase();
+        } else {
+            return (palavras[0].charAt(0) + "").toUpperCase();
+        }
+    }
+
 }

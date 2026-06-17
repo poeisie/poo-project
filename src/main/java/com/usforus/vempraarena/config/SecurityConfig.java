@@ -12,31 +12,39 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        // 1. A MÁGICA ACONTECE AQUI: Liberando as rotas públicas
-                        .requestMatchers("/login", "/cadastro", "/eventos/listar", "/css/**", "/js/**", "/images/**", "/error").permitAll()
-
-                        // 2. Qualquer outra rota (como /home) vai exigir login
+                        .requestMatchers("/login", "/cadastro", "/eventos/listar", "/css/**", "/js/**", "/images/**", "/fonts/**", "/error").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login") // Diz ao Spring que temos uma tela customizada de login
-                        .defaultSuccessUrl("/home", true) // Pra onde ir depois de logar com sucesso
-                        .permitAll() // Libera a própria tela de login para todos
+                        .loginPage("/login")
+                        .successHandler((request, response, authentication) -> {
+                            boolean isAdmin = authentication.getAuthorities().stream()
+                                    .anyMatch(authority -> "ROLE_ADMIN".equals(authority.getAuthority()));
+
+                            if (isAdmin) {
+                                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
+                            } else {
+                                response.sendRedirect(request.getContextPath() + "/home");
+                            }
+                        })
+                        .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll()
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
                 );
 
         return http.build();
     }
 
-    // Configuração do codificador de senhas (BCrypt)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

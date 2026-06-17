@@ -1,0 +1,453 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@font-face {
+    font-family: 'Sizmo';
+    src: url('/fonts/SizmoPro-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* ── Trava scroll da página ── */
+body.events-page {
+  overflow: hidden;
+}
+
+.events-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+/* ── Main: dois lados lado a lado ── */
+.main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.main > form {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── LADO ESQUERDO: imagem de fundo, alinhado ao topo ── */
+.compra-left {
+  flex: 1;
+  background-image: url('/images/fundotela.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  margin-bottom: 24px;
+}
+
+/* ── LADO DIREITO: fundo branco, centralizado ── */
+.compra-right {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  margin-bottom: 24px;
+}
+
+/* ── Painel direito com padding simétrico ── */
+.compra-pagamento {
+  width: 100%;
+  max-width: 460px;
+  padding: 48px 40px;
+}
+
+/* ── Painel esquerdo com padding maior no topo ── */
+.compra-resumo {
+  width: 100%;
+  max-width: 460px;
+  padding: 48px 40px;
+  margin-bottom: 133.7px;
+}
+
+/* ── Títulos com fonte Sizmo ── */
+.compra-resumo h1,
+.compra-pagamento h1 {
+  font-family: 'Sizmo', 'Segoe UI', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-primary);
+  margin-bottom: 36px;
+}
+
+/* ── Tipografia Inter no resumo ── */
+.compra-resumo,
+.compra-resumo p,
+.compra-resumo h2,
+.compra-resumo label,
+.compra-resumo select,
+.compra-resumo span {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* ── Tipografia Inter no pagamento ── */
+.compra-pagamento,
+.compra-pagamento p,
+.compra-pagamento label,
+.compra-pagamento h3,
+.compra-pagamento a,
+.compra-pagamento button {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* ── Resumo do evento ── */
+.resumo-evento {
+  margin-bottom: 28px;
+}
+
+.resumo-evento h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+
+.resumo-evento p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+  line-height: 1.6;
+}
+
+.resumo-ingressos h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+/* ── Mensagem de erro ── */
+.erro {
+  background-color: #fdecea;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  border-radius: var(--border-radius-md);
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+/* ── Item de ingresso ── */
+.resumo-item {
+  display: flex;
+  align-items: flex-start;     /* badge alinha ao topo, não ao centro */
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-input-border);
+  gap: 12px;
+}
+
+.resumo-item-tipo {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.resumo-item-preco {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+/* Descrição abaixo do preço */
+.resumo-item-desc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+.resumo-item-qtd {
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+
+/* ── Linha de total ── */
+.resumo-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 4px;
+}
+
+.resumo-total .resumo-item-tipo {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.resumo-total .resumo-item-preco {
+  font-size: 14px;
+}
+
+/* ── Seções de pagamento ── */
+.pagamento-secao {
+  margin-bottom: 32px;
+}
+
+.pagamento-secao h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 10px;
+}
+
+.pagamento-opcao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-input-border);
+  cursor: pointer;
+}
+
+.pagamento-info {
+  flex: 1;
+}
+
+.pagamento-nome {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 1px;
+}
+
+.pagamento-detalhe {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* ── Radio estilizado como quadrado ── */
+.pagamento-opcao input[type=radio] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-input-border);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+  position: relative;
+}
+
+.pagamento-opcao input[type=radio]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.pagamento-opcao input[type=radio]:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 4px;
+  height: 8px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* ── Link "Cadastrar Novo Cartão" em azul ── */
+.pagamento-novo {
+  display: block;
+  font-size: 12px;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.pagamento-novo:hover {
+  text-decoration: underline;
+}
+
+/* ── Botão finalizar ── */
+.compra-pagamento button[type=submit] {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--color-primary);
+  color: var(--color-text-white);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.compra-pagamento button[type=submit]:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* ── Link cancelar ── */
+.compra-pagamento > div > a {
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.compra-pagamento > div > a:hover {
+  text-decoration: underline;
+}
+
+/* ── Overlay que cobre a tela toda e desfoca o fundo ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0; /* Preenche topo, baixo, esquerda, direita */
+  background-color: rgba(255, 255, 255, 0.4); /* Fundo claro semi-transparente */
+  backdrop-filter: blur(4px); /* Efeito de desfoque (como no print) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Garante que fique por cima de tudo */
+}
+
+/* ── Caixa branca do Modal ── */
+.modal-content {
+  background-color: #F4F4F4; /* Cor levemente cinza do seu print */
+  border-radius: 20px;
+  padding: 40px 32px;
+  width: 90%;
+  max-width: 480px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+  font-family: "Inter", sans-serif;
+}
+
+/* ── Botão Fechar (X) ── */
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-primary); /* Se não tiver essa var, troque por #2373B9 */
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.modal-close:hover {
+  transform: scale(1.05);
+}
+
+/* ── Título (Sizmo) ── */
+.modal-title {
+  font-family: 'Sizmo', sans-serif;
+  font-size: 24px;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  margin-top: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Texto explicativo ── */
+.modal-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 32px;
+  padding: 0 10px;
+}
+
+/* ── Container dos botões ── */
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* ── Estilo dos botões ── */
+.modal-btn {
+  background-color: var(--color-primary); /* #2373B9 */
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
+}
+
+.modal-btn:hover {
+  background-color: var(--color-primary-hover);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Ajuste para Mobile ── */
+@media (max-width: 500px) {
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+
+/* ── Responsivo ── */
+@media (max-width: 700px) {
+  .main > form {
+    flex-direction: column;
+  }
+
+  .compra-left,
+  .compra-right {
+    overflow-y: visible;
+  }
+
+  .compra-resumo,
+  .compra-pagamento {
+    padding: 32px 20px;
+  }
+
+  .compra-right {
+    flex: none;
+  }
+}
