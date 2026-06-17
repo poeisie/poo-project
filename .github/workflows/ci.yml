@@ -24,16 +24,10 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-
-      - name: Cache Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-
+          cache: maven
 
       - name: Build + Testes unitários de domínio
-        run: ./mvnw test --no-transfer-progress
+        run: mvn test --no-transfer-progress
         # Roda EventoTest — ciclo TDD sobre a invariante de capacidade
         # ⚠️ Teste vermelho = pipeline para aqui, deploy não acontece
 
@@ -62,16 +56,10 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-
-      - name: Cache Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-maven-
+          cache: maven
 
       - name: Gerar JAR (sem rodar testes novamente)
-        run: ./mvnw package -DskipTests --no-transfer-progress
+        run: mvn package -DskipTests --no-transfer-progress
 
       - name: Guardar JAR como artefato
         uses: actions/upload-artifact@v4
