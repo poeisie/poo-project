@@ -41,7 +41,7 @@ jobs:
   # ─────────────────────────────────────
   # JOB 2 — Empacotamento (JAR)
   # Só roda se os testes passarem
-  # ─────────────────────────────────────
+  # ─────────────────────────────────────teste
   package:
     name: Gerar JAR
     runs-on: ubuntu-latest
